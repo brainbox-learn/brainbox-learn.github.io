@@ -91,7 +91,8 @@ const FrenchQuiz = () => {
 		createProfile,
 		deleteProfile,
 		switchProfile,
-		setCurrentProfileId
+		setCurrentProfileId,
+		importProfile,
 	} = useProfiles();
 
 	const handleAnswer = (answer) => {
@@ -204,6 +205,7 @@ const FrenchQuiz = () => {
 				onSelectProfile={switchProfile}
 				onCreateProfile={createProfile}
 				onDeleteProfile={deleteProfile}
+				onImportProfile={importProfile}
 				wordsByCategory={WORDS_BY_CATEGORY}
 			/>
 		);
