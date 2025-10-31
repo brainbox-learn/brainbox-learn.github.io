@@ -20,7 +20,7 @@ const QuestionCard = ({
                 <p className="text-gray-600 text-xl mb-4 font-medium">What does this mean?</p>
                 
                 <div className="flex items-center justify-center gap-4 mb-6">
-                    <h2 className="text-6xl font-bold text-grade1-700">{questionText}</h2>
+                    <h2 className="text-3xl sm:text-6xl font-bold text-grade1-700">{questionText}</h2>
                     <div className="transform hover:scale-110 transition-transform">
                         <SpeakerIcon text={questionText} />
                     </div>
@@ -47,7 +47,7 @@ const QuestionCard = ({
                             key={index} 
                             onClick={() => !showResult && onAnswer(choice)} 
                             disabled={showResult} 
-                            className={`w-full p-6 rounded-2xl text-2xl font-bold transition-all transform hover:scale-105 border-4 shadow-lg
+                            className={`w-full p-3 sm:p-6 rounded-2xl text-2xl font-bold transition-all transform hover:scale-105 border-4 shadow-lg
                                 ${showCorrect ? 'bg-gradient-to-r from-success-500 to-success-600 text-white border-success-700 scale-105 animate-wiggle' : ''}
                                 ${showWrong ? 'bg-gradient-to-r from-error-400 to-error-500 text-white border-error-600 animate-wiggle' : ''}
                                 ${!showResult ? 'bg-white border-grade1-200 hover:bg-grade1-50 hover:border-grade1-400 text-grade1-800' : ''}
