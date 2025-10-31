@@ -20,7 +20,8 @@ export const useProfiles = () => {
             ...prev,
             [currentProfileId]: {
                 ...prev[currentProfileId],
-                stats: newStats
+                stats: newStats,
+                lastModified: Date.now() // Track when stats were last updated
             }
         }));
     };
@@ -31,7 +32,8 @@ export const useProfiles = () => {
             id: profileId,
             name,
             stats: {},
-            createdAt: Date.now()
+            createdAt: Date.now(),
+            lastModified: Date.now()
         };
         setProfiles(prev => ({
             ...prev,
@@ -65,6 +67,69 @@ export const useProfiles = () => {
         setCurrentProfileId(profileId);
     };
 
+    // NEW: Import profile with smart merge logic
+    const importProfile = (importedProfile) => {
+        // Check if profile already exists locally
+        const existingProfile = profiles[importedProfile.id];
+        
+        if (existingProfile) {
+            // Profile exists - merge stats (take max values)
+            const mergedStats = mergeStats(existingProfile.stats, importedProfile.stats);
+            
+            const updatedProfile = {
+                ...importedProfile,
+                stats: mergedStats,
+                lastModified: Math.max(
+                    existingProfile.lastModified || 0,
+                    importedProfile.lastModified || 0
+                )
+            };
+            
+            setProfiles(prev => ({
+                ...prev,
+                [importedProfile.id]: updatedProfile
+            }));
+            
+            return importedProfile.id;
+        } else {
+            // New profile - just add it
+            setProfiles(prev => ({
+                ...prev,
+                [importedProfile.id]: {
+                    ...importedProfile,
+                    lastModified: importedProfile.lastModified || Date.now()
+                }
+            }));
+            
+            return importedProfile.id;
+        }
+    };
+
+    // Helper: Merge stats by taking max values for each word
+    const mergeStats = (localStats, importedStats) => {
+        const merged = { ...localStats };
+        
+        Object.keys(importedStats).forEach(wordId => {
+            const localStat = localStats[wordId];
+            const importedStat = importedStats[wordId];
+            
+            if (!localStat) {
+                // Word only exists in imported data
+                merged[wordId] = importedStat;
+            } else {
+                // Word exists in both - take max values
+                merged[wordId] = {
+                    attempts: Math.max(localStat.attempts, importedStat.attempts),
+                    correct: Math.max(localStat.correct, importedStat.correct),
+                    incorrect: Math.max(localStat.incorrect, importedStat.incorrect),
+                    category: importedStat.category || localStat.category
+                };
+            }
+        });
+        
+        return merged;
+    };
+
     return {
         profiles,
         currentProfileId,
@@ -74,6 +139,7 @@ export const useProfiles = () => {
         createProfile,
         deleteProfile,
         switchProfile,
-        setCurrentProfileId
+        setCurrentProfileId,
+        importProfile // NEW: Export import function
     };
 };
