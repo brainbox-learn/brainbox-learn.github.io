@@ -1,0 +1,138 @@
+{
+	"grade": 1,
+	"categories": [
+	  {
+		"id": "essential-1",
+		"name": "Mots Essentiels",
+		"nameEnglish": "Essential Words",
+		"icon": "BookOpen",
+		"unlocked": true,
+		"unlockRequirement": null,
+		"words": [
+		  { "id": 1, "french": "un", "english": "one" },
+		  { "id": 2, "french": "une", "english": "one" },
+		  { "id": 3, "french": "elle", "english": "she" },
+		  { "id": 4, "french": "il y a", "english": "there is" },
+		  { "id": 5, "french": "et", "english": "and" },
+		  { "id": 6, "french": "j'ai", "english": "I have" },
+		  { "id": 7, "french": "j'aime", "english": "I like" },
+		  { "id": 8, "french": "les", "english": "the" },
+		  { "id": 9, "french": "des", "english": "some" },
+		  { "id": 10, "french": "avec", "english": "with" },
+		  { "id": 11, "french": "c'est", "english": "it is" },
+		  { "id": 12, "french": "est", "english": "is" },
+		  { "id": 13, "french": "qui", "english": "who" },
+		  { "id": 14, "french": "que", "english": "that" },
+		  { "id": 15, "french": "oui", "english": "yes" },
+		  { "id": 16, "french": "ici", "english": "here" },
+		  { "id": 17, "french": "voici", "english": "here is" },
+		  { "id": 18, "french": "chez", "english": "at" },
+		  { "id": 19, "french": "aussi", "english": "also" },
+		  { "id": 20, "french": "dans", "english": "in" },
+		  { "id": 21, "french": "mange", "english": "eat" },
+		  { "id": 22, "french": "je fais", "english": "I do" },
+		  { "id": 23, "french": "je vois", "english": "I see" },
+		  { "id": 24, "french": "je peux", "english": "I can" },
+		  { "id": 25, "french": "je veux", "english": "I want" },
+		  { "id": 26, "french": "je viens", "english": "I come" },
+		  { "id": 27, "french": "je suis", "english": "I am" },
+		  { "id": 28, "french": "est-ce que", "english": "question word" },
+		  { "id": 29, "french": "parce-que", "english": "because" },
+		  { "id": 30, "french": "beaucoup", "english": "a lot" },
+		  { "id": 31, "french": "merci", "english": "thank you" },
+		  { "id": 32, "french": "regarde", "english": "look" }
+		]
+	  },
+	  {
+		"id": "colors-1",
+		"name": "Les Couleurs",
+		"nameEnglish": "Colors",
+		"icon": "Palette",
+		"unlocked": true,
+		"unlockRequirement": null,
+		"words": [
+		  { "id": 100, "french": "rouge", "english": "red" },
+		  { "id": 101, "french": "bleu", "english": "blue" },
+		  { "id": 102, "french": "jaune", "english": "yellow" },
+		  { "id": 103, "french": "vert", "english": "green" },
+		  { "id": 104, "french": "orange", "english": "orange" },
+		  { "id": 105, "french": "rose", "english": "pink" },
+		  { "id": 106, "french": "blanc", "english": "white" },
+		  { "id": 107, "french": "noir", "english": "black" },
+		  { "id": 108, "french": "gris", "english": "gray" },
+		  { "id": 109, "french": "brun", "english": "brown" },
+		  { "id": 110, "french": "violet", "english": "purple" },
+		  { "id": 111, "french": "beige", "english": "beige" }
+		]
+	  },
+	  {
+		"id": "numbers-1",
+		"name": "Les Nombres 1-10",
+		"nameEnglish": "Numbers 1-10",
+		"icon": "Hash",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "colors-1",
+		  "accuracy": 70
+		},
+		"words": [
+		  { "id": 120, "french": "un", "english": "one" },
+		  { "id": 121, "french": "deux", "english": "two" },
+		  { "id": 122, "french": "trois", "english": "three" },
+		  { "id": 123, "french": "quatre", "english": "four" },
+		  { "id": 124, "french": "cinq", "english": "five" },
+		  { "id": 125, "french": "six", "english": "six" },
+		  { "id": 126, "french": "sept", "english": "seven" },
+		  { "id": 127, "french": "huit", "english": "eight" },
+		  { "id": 128, "french": "neuf", "english": "nine" },
+		  { "id": 129, "french": "dix", "english": "ten" }
+		]
+	  },
+	  {
+		"id": "animals-1",
+		"name": "Les Animaux Domestiques",
+		"nameEnglish": "Pets",
+		"icon": "Dog",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "numbers-1",
+		  "accuracy": 70
+		},
+		"words": [
+		  { "id": 140, "french": "le chat", "english": "the cat" },
+		  { "id": 141, "french": "le chien", "english": "the dog" },
+		  { "id": 142, "french": "le lapin", "english": "the rabbit" },
+		  { "id": 143, "french": "le poisson", "english": "the fish" },
+		  { "id": 144, "french": "l'oiseau", "english": "the bird" },
+		  { "id": 145, "french": "le hamster", "english": "the hamster" },
+		  { "id": 146, "french": "la tortue", "english": "the turtle" },
+		  { "id": 147, "french": "la souris", "english": "the mouse" },
+		  { "id": 148, "french": "le perroquet", "english": "the parrot" },
+		  { "id": 149, "french": "le canari", "english": "the canary" }
+		]
+	  },
+	  {
+		"id": "food-1",
+		"name": "La Nourriture Simple",
+		"nameEnglish": "Basic Food",
+		"icon": "Apple",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "animals-1",
+		  "accuracy": 70
+		},
+		"words": [
+		  { "id": 160, "french": "la pomme", "english": "the apple" },
+		  { "id": 161, "french": "la banane", "english": "the banana" },
+		  { "id": 162, "french": "le pain", "english": "the bread" },
+		  { "id": 163, "french": "le lait", "english": "the milk" },
+		  { "id": 164, "french": "l'eau", "english": "the water" },
+		  { "id": 165, "french": "le fromage", "english": "the cheese" },
+		  { "id": 166, "french": "le beurre", "english": "the butter" },
+		  { "id": 167, "french": "l'œuf", "english": "the egg" },
+		  { "id": 168, "french": "le gâteau", "english": "the cake" },
+		  { "id": 169, "french": "la fraise", "english": "the strawberry" }
+		]
+	  }
+	]
+  }

@@ -1,0 +1,474 @@
+{
+  "grade": 3,
+  "categories": [
+    {
+      "id": "essential-3",
+      "name": "Mots Essentiels",
+      "nameEnglish": "Essential Words",
+      "icon": "BookOpen",
+      "unlocked": true,
+      "unlockRequirement": null,
+      "words": [
+        {
+          "id": 400,
+          "french": "à propos",
+          "english": "about"
+        },
+        {
+          "id": 401,
+          "french": "à travers",
+          "english": "through"
+        },
+        {
+          "id": 402,
+          "french": "au dessus",
+          "english": "above"
+        },
+        {
+          "id": 403,
+          "french": "au dessous",
+          "english": "below"
+        },
+        {
+          "id": 404,
+          "french": "aussitôt",
+          "english": "immediately"
+        },
+        {
+          "id": 405,
+          "french": "automne",
+          "english": "autumn"
+        },
+        {
+          "id": 406,
+          "french": "besoin",
+          "english": "need"
+        },
+        {
+          "id": 407,
+          "french": "bientôt",
+          "english": "soon"
+        },
+        {
+          "id": 408,
+          "french": "chacun",
+          "english": "each"
+        },
+        {
+          "id": 409,
+          "french": "combien",
+          "english": "how many"
+        },
+        {
+          "id": 410,
+          "french": "comment",
+          "english": "how"
+        },
+        {
+          "id": 411,
+          "french": "devant",
+          "english": "in front"
+        },
+        {
+          "id": 412,
+          "french": "en arrière",
+          "english": "behind"
+        },
+        {
+          "id": 413,
+          "french": "ensuite",
+          "english": "then"
+        },
+        {
+          "id": 414,
+          "french": "jamais",
+          "english": "never"
+        },
+        {
+          "id": 415,
+          "french": "long",
+          "english": "long"
+        },
+        {
+          "id": 416,
+          "french": "longtemps",
+          "english": "a long time"
+        },
+        {
+          "id": 417,
+          "french": "lorsque",
+          "english": "when"
+        },
+        {
+          "id": 418,
+          "french": "monsieur",
+          "english": "mister"
+        },
+        {
+          "id": 419,
+          "french": "parfois",
+          "english": "sometimes"
+        },
+        {
+          "id": 420,
+          "french": "partout",
+          "english": "everywhere"
+        },
+        {
+          "id": 421,
+          "french": "pendant",
+          "english": "during"
+        },
+        {
+          "id": 422,
+          "french": "personne",
+          "english": "nobody"
+        },
+        {
+          "id": 423,
+          "french": "peut-être",
+          "english": "maybe"
+        },
+        {
+          "id": 424,
+          "french": "plusieurs",
+          "english": "several"
+        },
+        {
+          "id": 425,
+          "french": "seulement",
+          "english": "only"
+        },
+        {
+          "id": 426,
+          "french": "souvent",
+          "english": "often"
+        },
+        {
+          "id": 427,
+          "french": "temps",
+          "english": "time"
+        },
+        {
+          "id": 428,
+          "french": "vraiment",
+          "english": "really"
+        },
+        {
+          "id": 429,
+          "french": "elles montrent",
+          "english": "they show"
+        },
+        {
+          "id": 430,
+          "french": "ils choisissent",
+          "english": "they choose"
+        },
+        {
+          "id": 431,
+          "french": "nous sommes",
+          "english": "we are"
+        },
+        {
+          "id": 432,
+          "french": "elles prennent",
+          "english": "they take"
+        },
+        {
+          "id": 433,
+          "french": "ils étaient",
+          "english": "they were"
+        }
+      ]
+    },
+    {
+      "id": "animals-3",
+      "name": "Les Animaux Sauvages",
+      "nameEnglish": "Wild Animals",
+      "icon": "PawPrint",
+      "unlocked": true,
+      "unlockRequirement": null,
+      "words": [
+        {
+          "id": 450,
+          "french": "le lion",
+          "english": "the lion"
+        },
+        {
+          "id": 451,
+          "french": "l'éléphant",
+          "english": "the elephant"
+        },
+        {
+          "id": 452,
+          "french": "la girafe",
+          "english": "the giraffe"
+        },
+        {
+          "id": 453,
+          "french": "le singe",
+          "english": "the monkey"
+        },
+        {
+          "id": 454,
+          "french": "le tigre",
+          "english": "the tiger"
+        },
+        {
+          "id": 455,
+          "french": "l'ours",
+          "english": "the bear"
+        },
+        {
+          "id": 456,
+          "french": "le loup",
+          "english": "the wolf"
+        },
+        {
+          "id": 457,
+          "french": "le renard",
+          "english": "the fox"
+        },
+        {
+          "id": 458,
+          "french": "le cerf",
+          "english": "the deer"
+        },
+        {
+          "id": 459,
+          "french": "l'écureuil",
+          "english": "the squirrel"
+        },
+        {
+          "id": 460,
+          "french": "le hibou",
+          "english": "the owl"
+        },
+        {
+          "id": 461,
+          "french": "le serpent",
+          "english": "the snake"
+        }
+      ]
+    },
+    {
+      "id": "body-3",
+      "name": "Le Corps",
+      "nameEnglish": "Body Parts",
+      "icon": "User",
+      "unlocked": false,
+      "unlockRequirement": {
+        "categoryId": "animals-3",
+        "accuracy": 70
+      },
+      "words": [
+        {
+          "id": 470,
+          "french": "la tête",
+          "english": "the head"
+        },
+        {
+          "id": 471,
+          "french": "les cheveux",
+          "english": "the hair"
+        },
+        {
+          "id": 472,
+          "french": "le visage",
+          "english": "the face"
+        },
+        {
+          "id": 473,
+          "french": "le nez",
+          "english": "the nose"
+        },
+        {
+          "id": 474,
+          "french": "la bouche",
+          "english": "the mouth"
+        },
+        {
+          "id": 475,
+          "french": "l'oreille",
+          "english": "the ear"
+        },
+        {
+          "id": 476,
+          "french": "le bras",
+          "english": "the arm"
+        },
+        {
+          "id": 477,
+          "french": "la main",
+          "english": "the hand"
+        },
+        {
+          "id": 478,
+          "french": "le doigt",
+          "english": "the finger"
+        },
+        {
+          "id": 479,
+          "french": "la jambe",
+          "english": "the leg"
+        },
+        {
+          "id": 480,
+          "french": "le pied",
+          "english": "the foot"
+        },
+        {
+          "id": 481,
+          "french": "le genou",
+          "english": "the knee"
+        }
+      ]
+    },
+    {
+      "id": "food-3",
+      "name": "La Nourriture et la Cuisine",
+      "nameEnglish": "Food & Cooking",
+      "icon": "ChefHat",
+      "unlocked": false,
+      "unlockRequirement": {
+        "categoryId": "body-3",
+        "accuracy": 70
+      },
+      "words": [
+        {
+          "id": 490,
+          "french": "les légumes",
+          "english": "the vegetables"
+        },
+        {
+          "id": 491,
+          "french": "les fruits",
+          "english": "the fruits"
+        },
+        {
+          "id": 492,
+          "french": "la salade",
+          "english": "the salad"
+        },
+        {
+          "id": 493,
+          "french": "le sandwich",
+          "english": "the sandwich"
+        },
+        {
+          "id": 494,
+          "french": "la viande",
+          "english": "the meat"
+        },
+        {
+          "id": 495,
+          "french": "le poisson",
+          "english": "the fish"
+        },
+        {
+          "id": 496,
+          "french": "le petit déjeuner",
+          "english": "the breakfast"
+        },
+        {
+          "id": 497,
+          "french": "le déjeuner",
+          "english": "the lunch"
+        },
+        {
+          "id": 498,
+          "french": "le dîner",
+          "english": "the dinner"
+        },
+        {
+          "id": 499,
+          "french": "le dessert",
+          "english": "the dessert"
+        },
+        {
+          "id": 500,
+          "french": "la fourchette",
+          "english": "the fork"
+        },
+        {
+          "id": 501,
+          "french": "le couteau",
+          "english": "the knife"
+        }
+      ]
+    },
+    {
+      "id": "school-3",
+      "name": "L'École",
+      "nameEnglish": "School",
+      "icon": "Backpack",
+      "unlocked": false,
+      "unlockRequirement": {
+        "categoryId": "food-3",
+        "accuracy": 70
+      },
+      "words": [
+        {
+          "id": 510,
+          "french": "l'école",
+          "english": "the school"
+        },
+        {
+          "id": 511,
+          "french": "la classe",
+          "english": "the class"
+        },
+        {
+          "id": 512,
+          "french": "le professeur",
+          "english": "the teacher"
+        },
+        {
+          "id": 513,
+          "french": "l'étudiant",
+          "english": "the student"
+        },
+        {
+          "id": 514,
+          "french": "le livre",
+          "english": "the book"
+        },
+        {
+          "id": 515,
+          "french": "le cahier",
+          "english": "the notebook"
+        },
+        {
+          "id": 516,
+          "french": "le crayon",
+          "english": "the pencil"
+        },
+        {
+          "id": 517,
+          "french": "le stylo",
+          "english": "the pen"
+        },
+        {
+          "id": 518,
+          "french": "la gomme",
+          "english": "the eraser"
+        },
+        {
+          "id": 519,
+          "french": "le bureau",
+          "english": "the desk"
+        },
+        {
+          "id": 520,
+          "french": "la chaise",
+          "english": "the chair"
+        },
+        {
+          "id": 521,
+          "french": "le tableau",
+          "english": "the board"
+        }
+      ]
+    }
+  ]
+}

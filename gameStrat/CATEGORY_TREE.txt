@@ -1,0 +1,127 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                 FRENCH LEARNING APP - VOCABULARY TREE                       ║
+║                          282 Words | 15 Categories                         ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📚 GRADE 1 (64 words) ✓ UNLOCKED
+│
+├─ 📖 Mots Essentiels (32 words) ✓ ALWAYS UNLOCKED
+│   └─ Teacher's original "words by heart" list
+│       un, une, elle, il y a, et, j'ai, j'aime, les, des, avec...
+│
+├─ 🎨 Les Couleurs (12 words) ✓ ALWAYS UNLOCKED
+│   └─ Basic colors
+│       rouge, bleu, jaune, vert, orange, rose, blanc, noir, gris, brun...
+│
+├─ 🔢 Les Nombres 1-10 (10 words) 🔒 → Unlocks at 70% Colors
+│   └─ Numbers one through ten
+│       un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix
+│
+├─ 🐕 Les Animaux Domestiques (10 words) 🔒 → Unlocks at 70% Numbers
+│   └─ Common pets
+│       le chat, le chien, le lapin, le poisson, l'oiseau, le hamster...
+│
+└─ 🍎 La Nourriture Simple (10 words) 🔒 → Unlocks at 70% Animals
+    └─ Basic food items
+        la pomme, la banane, le pain, le lait, l'eau, le fromage...
+
+═══════════════════════════════════════════════════════════════════════════
+
+📚 GRADE 2 (62 words) 🔒 → Unlocks at 70% Grade 1 Overall
+│
+├─ 📖 Mots Essentiels (31 words) ✓ UNLOCKED WHEN GRADE UNLOCKS
+│   └─ Teacher's Grade 2 list
+│       six, dix, sept, huit, quatre, cinq, combien, dehors, aujourd'hui...
+│
+├─ 🎨 Les Couleurs Avancées (8 words) ✓ UNLOCKED WHEN GRADE UNLOCKS
+│   └─ Light/dark variations
+│       bleu clair, bleu foncé, vert clair, vert foncé, marron...
+│
+├─ 🔢 Les Nombres 11-20 (10 words) 🔒 → Unlocks at 70% Colors Advanced
+│   └─ Numbers eleven through twenty
+│       onze, douze, treize, quatorze, quinze, seize, dix-sept...
+│
+├─ 🐴 Les Animaux de la Ferme (10 words) 🔒 → Unlocks at 70% Numbers
+│   └─ Farm animals
+│       le cheval, la vache, le cochon, le mouton, la poule, le coq...
+│
+└─ 🍽️ La Nourriture et les Repas (12 words) 🔒 → Unlocks at 70% Farm Animals
+    └─ Food and meals
+        l'orange, la poire, la carotte, le poulet, le riz, les pâtes...
+
+═══════════════════════════════════════════════════════════════════════════
+
+📚 GRADE 3 (70 words) 🔒 → Unlocks at 70% Grade 2 Overall
+│
+├─ 📖 Mots Essentiels (34 words) ✓ UNLOCKED WHEN GRADE UNLOCKS
+│   └─ Teacher's Grade 3 list
+│       à propos, à travers, au dessus, aussitôt, automne, besoin...
+│
+├─ 🦁 Les Animaux Sauvages (12 words) ✓ UNLOCKED WHEN GRADE UNLOCKS
+│   └─ Wild animals
+│       le lion, l'éléphant, la girafe, le singe, le tigre, l'ours...
+│
+├─ 👤 Le Corps (12 words) 🔒 → Unlocks at 70% Wild Animals
+│   └─ Body parts
+│       la tête, les cheveux, le visage, le nez, la bouche, l'oreille...
+│
+├─ 🍳 La Nourriture et la Cuisine (12 words) 🔒 → Unlocks at 70% Body
+│   └─ Food and cooking
+│       les légumes, les fruits, la viande, le poisson, le petit déjeuner...
+│
+└─ 🎒 L'École (12 words) 🔒 → Unlocks at 70% Food & Cooking
+    └─ School vocabulary
+        l'école, la classe, le professeur, le livre, le cahier, le crayon...
+
+═══════════════════════════════════════════════════════════════════════════
+
+PROGRESSION SUMMARY:
+
+Grade 1: 5 categories → Sequential unlock based on accuracy
+├─ 2 categories always unlocked (Essential + Colors)
+└─ 3 categories unlock progressively (Numbers → Animals → Food)
+
+Grade 2: 5 categories → Unlocks as complete unit at 70% Grade 1
+├─ 2 categories unlocked immediately (Essential + Colors Advanced)
+└─ 3 categories unlock progressively
+
+Grade 3: 5 categories → Unlocks as complete unit at 70% Grade 2
+├─ 2 categories unlocked immediately (Essential + Wild Animals)
+└─ 3 categories unlock progressively
+
+═══════════════════════════════════════════════════════════════════════════
+
+LEARNING PATH EXAMPLE (Fast Learner):
+
+Week 1: Grade 1 Essential + Colors (44 words)
+Week 2: Grade 1 Numbers + Animals (20 words) ✓ Unlocks
+Week 3: Grade 1 Food (10 words) ✓ Grade 2 Unlocks
+Week 4: Grade 2 Essential + Colors (39 words)
+Week 5: Grade 2 Numbers + Farm Animals (20 words) ✓ Unlocks
+Week 6: Grade 2 Food & Meals (12 words) ✓ Grade 3 Unlocks
+Week 7: Grade 3 Essential + Wild Animals (46 words)
+Week 8: Grade 3 Body + Food & Cooking (24 words) ✓ Unlocks
+Week 9: Grade 3 School (12 words) ✓ ALL COMPLETE 🎉
+
+Total: ~9 weeks to master all 282 words (with daily practice)
+
+═══════════════════════════════════════════════════════════════════════════
+
+ICON LEGEND:
+
+📖 Essential Words (BookOpen)
+🎨 Colors (Palette)
+🔢 Numbers (Hash)
+🐕 Pets (Dog)
+🍎 Basic Food (Apple)
+🐴 Farm Animals (Horse)
+🍽️ Food & Meals (ForkKnife)
+🦁 Wild Animals (PawPrint)
+👤 Body Parts (User)
+🍳 Food & Cooking (ChefHat)
+🎒 School (Backpack)
+
+✓ = Unlocked
+🔒 = Locked (shows requirement)
+
+═══════════════════════════════════════════════════════════════════════════
