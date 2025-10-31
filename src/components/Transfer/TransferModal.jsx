@@ -3,11 +3,19 @@ import { Copy, Check, X, ArrowsClockwise, SignIn } from '@phosphor-icons/react';
 import { useTransfer } from '../../hooks/useTransfer';
 
 const TransferModal = ({ isOpen, onClose, profile, onProfileImported }) => {
-  const [activeTab, setActiveTab] = useState('generate');
+  // If no profile provided, default to "enter" tab (import-only mode)
+  const [activeTab, setActiveTab] = useState(profile ? 'generate' : 'enter');
   const [transferCode, setTransferCode] = useState(null);
   const [enteredCode, setEnteredCode] = useState('');
   const [copied, setCopied] = useState(false);
   const { createTransferCode, redeemTransferCode, loading, error } = useTransfer();
+  
+  // Reset tab when modal opens/profile changes
+  React.useEffect(() => {
+    if (isOpen) {
+      setActiveTab(profile ? 'generate' : 'enter');
+    }
+  }, [isOpen, profile]);
   
   if (!isOpen) return null;
   
@@ -44,12 +52,17 @@ const TransferModal = ({ isOpen, onClose, profile, onProfileImported }) => {
     onClose();
   };
   
+  // Import-only mode (no profile selected)
+  const isImportOnly = !profile;
+  
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex justify-between items-center p-6 border-b border-gray-200">
-          <h2 className="text-2xl font-bold text-gray-800">Transfer Profile</h2>
+          <h2 className="text-2xl font-bold text-gray-800">
+            {isImportOnly ? 'Import Profile' : 'Transfer Profile'}
+          </h2>
           <button
             onClick={handleClose}
             className="p-2 hover:bg-gray-100 rounded-xl transition-colors"
@@ -58,39 +71,41 @@ const TransferModal = ({ isOpen, onClose, profile, onProfileImported }) => {
           </button>
         </div>
         
-        {/* Tabs */}
-        <div className="flex border-b border-gray-200">
-          <button
-            onClick={() => setActiveTab('generate')}
-            className={`flex-1 py-4 px-6 font-semibold transition-colors ${
-              activeTab === 'generate'
-                ? 'text-blue-600 border-b-4 border-blue-600'
-                : 'text-gray-500 hover:text-gray-700'
-            }`}
-          >
-            <div className="flex items-center justify-center gap-2">
-              <ArrowsClockwise size={20} />
-              <span>Generate Code</span>
-            </div>
-          </button>
-          <button
-            onClick={() => setActiveTab('enter')}
-            className={`flex-1 py-4 px-6 font-semibold transition-colors ${
-              activeTab === 'enter'
-                ? 'text-blue-600 border-b-4 border-blue-600'
-                : 'text-gray-500 hover:text-gray-700'
-            }`}
-          >
-            <div className="flex items-center justify-center gap-2">
-              <SignIn size={20} />
-              <span>Enter Code</span>
-            </div>
-          </button>
-        </div>
+        {/* Tabs (only show if profile exists) */}
+        {!isImportOnly && (
+          <div className="flex border-b border-gray-200">
+            <button
+              onClick={() => setActiveTab('generate')}
+              className={`flex-1 py-4 px-6 font-semibold transition-colors ${
+                activeTab === 'generate'
+                  ? 'text-blue-600 border-b-4 border-blue-600'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              <div className="flex items-center justify-center gap-2">
+                <ArrowsClockwise size={20} />
+                <span>Generate Code</span>
+              </div>
+            </button>
+            <button
+              onClick={() => setActiveTab('enter')}
+              className={`flex-1 py-4 px-6 font-semibold transition-colors ${
+                activeTab === 'enter'
+                  ? 'text-blue-600 border-b-4 border-blue-600'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              <div className="flex items-center justify-center gap-2">
+                <SignIn size={20} />
+                <span>Enter Code</span>
+              </div>
+            </button>
+          </div>
+        )}
         
         {/* Tab Content */}
         <div className="p-6">
-          {activeTab === 'generate' ? (
+          {activeTab === 'generate' && !isImportOnly ? (
             <div className="space-y-4">
               <p className="text-gray-600">
                 Generate a one-time code to transfer <strong>{profile?.name}'s</strong> progress to another device.
@@ -141,7 +156,10 @@ const TransferModal = ({ isOpen, onClose, profile, onProfileImported }) => {
           ) : (
             <div className="space-y-4">
               <p className="text-gray-600">
-                Enter the transfer code from your other device to import a profile.
+                {isImportOnly 
+                  ? 'Enter the transfer code from your other device to import a profile.'
+                  : 'Enter a transfer code to import another profile to this device.'
+                }
               </p>
               
               <input
