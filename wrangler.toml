@@ -1,0 +1,26 @@
+name = "brainbox-learn"
+compatibility_date = "2025-01-01"
+
+# This ensures Wrangler recognizes you're deploying Pages Functions
+pages_build_output_dir = "dist"
+
+# === KV Namespace for rate limiting ===
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "bcc39320ba5146a083ea25bf7d910f31"
+# Replace with the actual Namespace ID from your Cloudflare Dashboard
+
+# === Environment variables (optional for local dev) ===
+# When deployed via Pages, the dashboard variables/secrets override these.
+[vars]
+SUPABASE_URL = "https://yogpbssfqhkfidspxzrj.supabase.co"
+SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlvZ3Bic3NmcWhrZmlkc3B4enJqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE4NzAzOTgsImV4cCI6MjA3NzQ0NjM5OH0.JyXvFG0yofx3WZwAjd0OefOXwwPotP25QNIvD9oPwsA"
+
+# === Optional: Durable Object (if you move to accurate rate limiting later) ===
+# [[durable_objects.bindings]]
+# name = "RATE_LIMITER"
+# class_name = "RateLimiter"
+# 
+# [[migrations]]
+# tag = "v1"
+# new_classes = ["RateLimiter"]
