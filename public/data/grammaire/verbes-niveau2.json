@@ -1,0 +1,334 @@
+{
+	"level": {
+	  "id": "verbes-niveau2",
+	  "name": "Verbes - Niveau 2",
+	  "nameEnglish": "Verbs - Level 2",
+	  "difficulty": "intermédiaire",
+	  "difficultyEnglish": "intermediate",
+	  "metadata": {
+		"estimatedVerbs": 15,
+		"tenses": ["présent"],
+		"curriculum": "BC Grade 3-4 Core French"
+	  }
+	},
+	"categories": [
+	  {
+		"id": "verbes-er",
+		"name": "Verbes en -ER",
+		"nameEnglish": "ER Verbs",
+		"icon": "Lightning",
+		"contentType": "verb",
+		"unlocked": true,
+		"unlockRequirement": null,
+		"supportedModes": ["flashcard", "multipleChoice", "conjugationFill"],
+		"description": "Verbes réguliers du premier groupe",
+		"descriptionEnglish": "Regular first group verbs",
+		"items": [
+		  {
+			"id": 710,
+			"type": "verb",
+			"infinitive": "parler",
+			"english": "to speak / to talk",
+			"group": "regular-er",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "parle",
+				"tu": "parles",
+				"il/elle/on": "parle",
+				"nous": "parlons",
+				"vous": "parlez",
+				"ils/elles": "parlent"
+			  }
+			}
+		  },
+		  {
+			"id": 711,
+			"type": "verb",
+			"infinitive": "aimer",
+			"english": "to like / to love",
+			"group": "regular-er",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "aime",
+				"tu": "aimes",
+				"il/elle/on": "aime",
+				"nous": "aimons",
+				"vous": "aimez",
+				"ils/elles": "aiment"
+			  }
+			}
+		  },
+		  {
+			"id": 712,
+			"type": "verb",
+			"infinitive": "donner",
+			"english": "to give",
+			"group": "regular-er",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "donne",
+				"tu": "donnes",
+				"il/elle/on": "donne",
+				"nous": "donnons",
+				"vous": "donnez",
+				"ils/elles": "donnent"
+			  }
+			}
+		  },
+		  {
+			"id": 713,
+			"type": "verb",
+			"infinitive": "chercher",
+			"english": "to look for / to search",
+			"group": "regular-er",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "cherche",
+				"tu": "cherches",
+				"il/elle/on": "cherche",
+				"nous": "cherchons",
+				"vous": "cherchez",
+				"ils/elles": "cherchent"
+			  }
+			}
+		  },
+		  {
+			"id": 714,
+			"type": "verb",
+			"infinitive": "trouver",
+			"english": "to find",
+			"group": "regular-er",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "trouve",
+				"tu": "trouves",
+				"il/elle/on": "trouve",
+				"nous": "trouvons",
+				"vous": "trouvez",
+				"ils/elles": "trouvent"
+			  }
+			}
+		  }
+		]
+	  },
+	  {
+		"id": "verbes-ir",
+		"name": "Verbes en -IR",
+		"nameEnglish": "IR Verbs",
+		"icon": "Lightning",
+		"contentType": "verb",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "verbes-er",
+		  "accuracy": 70
+		},
+		"supportedModes": ["flashcard", "multipleChoice", "conjugationFill"],
+		"description": "Verbes réguliers du deuxième groupe",
+		"descriptionEnglish": "Regular second group verbs",
+		"items": [
+		  {
+			"id": 720,
+			"type": "verb",
+			"infinitive": "finir",
+			"english": "to finish",
+			"group": "regular-ir",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "finis",
+				"tu": "finis",
+				"il/elle/on": "finit",
+				"nous": "finissons",
+				"vous": "finissez",
+				"ils/elles": "finissent"
+			  }
+			}
+		  },
+		  {
+			"id": 721,
+			"type": "verb",
+			"infinitive": "choisir",
+			"english": "to choose",
+			"group": "regular-ir",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "choisis",
+				"tu": "choisis",
+				"il/elle/on": "choisit",
+				"nous": "choisissons",
+				"vous": "choisissez",
+				"ils/elles": "choisissent"
+			  }
+			}
+		  },
+		  {
+			"id": 722,
+			"type": "verb",
+			"infinitive": "réussir",
+			"english": "to succeed",
+			"group": "regular-ir",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "réussis",
+				"tu": "réussis",
+				"il/elle/on": "réussit",
+				"nous": "réussissons",
+				"vous": "réussissez",
+				"ils/elles": "réussissent"
+			  }
+			}
+		  },
+		  {
+			"id": 723,
+			"type": "verb",
+			"infinitive": "obéir",
+			"english": "to obey",
+			"group": "regular-ir",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "obéis",
+				"tu": "obéis",
+				"il/elle/on": "obéit",
+				"nous": "obéissons",
+				"vous": "obéissez",
+				"ils/elles": "obéissent"
+			  }
+			}
+		  },
+		  {
+			"id": 724,
+			"type": "verb",
+			"infinitive": "remplir",
+			"english": "to fill",
+			"group": "regular-ir",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "remplis",
+				"tu": "remplis",
+				"il/elle/on": "remplit",
+				"nous": "remplissons",
+				"vous": "remplissez",
+				"ils/elles": "remplissent"
+			  }
+			}
+		  }
+		]
+	  },
+	  {
+		"id": "verbes-re",
+		"name": "Verbes en -RE",
+		"nameEnglish": "RE Verbs",
+		"icon": "Lightning",
+		"contentType": "verb",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "verbes-ir",
+		  "accuracy": 70
+		},
+		"supportedModes": ["flashcard", "multipleChoice", "conjugationFill"],
+		"description": "Verbes réguliers du troisième groupe",
+		"descriptionEnglish": "Regular third group verbs",
+		"items": [
+		  {
+			"id": 730,
+			"type": "verb",
+			"infinitive": "vendre",
+			"english": "to sell",
+			"group": "regular-re",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "vends",
+				"tu": "vends",
+				"il/elle/on": "vend",
+				"nous": "vendons",
+				"vous": "vendez",
+				"ils/elles": "vendent"
+			  }
+			}
+		  },
+		  {
+			"id": 731,
+			"type": "verb",
+			"infinitive": "attendre",
+			"english": "to wait",
+			"group": "regular-re",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "attends",
+				"tu": "attends",
+				"il/elle/on": "attend",
+				"nous": "attendons",
+				"vous": "attendez",
+				"ils/elles": "attendent"
+			  }
+			}
+		  },
+		  {
+			"id": 732,
+			"type": "verb",
+			"infinitive": "répondre",
+			"english": "to answer",
+			"group": "regular-re",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "réponds",
+				"tu": "réponds",
+				"il/elle/on": "répond",
+				"nous": "répondons",
+				"vous": "répondez",
+				"ils/elles": "répondent"
+			  }
+			}
+		  },
+		  {
+			"id": 733,
+			"type": "verb",
+			"infinitive": "entendre",
+			"english": "to hear",
+			"group": "regular-re",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "entends",
+				"tu": "entends",
+				"il/elle/on": "entend",
+				"nous": "entendons",
+				"vous": "entendez",
+				"ils/elles": "entendent"
+			  }
+			}
+		  },
+		  {
+			"id": 734,
+			"type": "verb",
+			"infinitive": "perdre",
+			"english": "to lose",
+			"group": "regular-re",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "perds",
+				"tu": "perds",
+				"il/elle/on": "perd",
+				"nous": "perdons",
+				"vous": "perdez",
+				"ils/elles": "perdent"
+			  }
+			}
+		  }
+		]
+	  }
+	]
+  }

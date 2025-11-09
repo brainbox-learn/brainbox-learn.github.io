@@ -1,0 +1,327 @@
+{
+	"version": "2.0",
+	"description": "BrainBox French Learning App - Domain Configuration",
+	"lastUpdated": "2025-01-15",
+	
+	"domains": [
+	  {
+		"id": "vocabulaire",
+		"name": "Vocabulaire",
+		"nameEnglish": "Vocabulary",
+		"icon": "BookOpen",
+		"color": "#3B82F6",
+		"gradient": "from-blue-500 to-blue-600",
+		"description": "Apprenez des mots français par thème",
+		"descriptionEnglish": "Learn French words by theme",
+		"enabled": true,
+		"organizationType": "level-based",
+		"dataSource": "vocabulaire/",
+		"levels": [
+		  {
+			"id": "niveau1",
+			"name": "Niveau 1",
+			"nameEnglish": "Level 1",
+			"difficulty": "débutant",
+			"difficultyEnglish": "beginner",
+			"displayName": "Niveau 1 - Débutant",
+			"displayNameEnglish": "Level 1 - Beginner",
+			"icon": "Leaf",
+			"stars": 1,
+			"color": "#10B981",
+			"gradient": "from-green-500 to-green-600",
+			"theme": "nature",
+			"dataFile": "vocabulaire/niveau1.json",
+			"estimatedWords": 150,
+			"description": "Les mots essentiels pour commencer",
+			"descriptionEnglish": "Essential words to get started"
+		  },
+		  {
+			"id": "niveau2",
+			"name": "Niveau 2",
+			"nameEnglish": "Level 2",
+			"difficulty": "intermédiaire",
+			"difficultyEnglish": "intermediate",
+			"displayName": "Niveau 2 - Intermédiaire",
+			"displayNameEnglish": "Level 2 - Intermediate",
+			"icon": "TreePalm",
+			"stars": 2,
+			"color": "#3B82F6",
+			"gradient": "from-blue-500 to-blue-600",
+			"theme": "sky",
+			"dataFile": "vocabulaire/niveau2.json",
+			"estimatedWords": 300,
+			"description": "Vocabulaire pour la vie quotidienne",
+			"descriptionEnglish": "Vocabulary for daily life"
+		  },
+		  {
+			"id": "niveau3",
+			"name": "Niveau 3",
+			"nameEnglish": "Level 3",
+			"difficulty": "avancé",
+			"difficultyEnglish": "advanced",
+			"displayName": "Niveau 3 - Avancé",
+			"displayNameEnglish": "Level 3 - Advanced",
+			"icon": "Tree",
+			"stars": 3,
+			"color": "#8B5CF6",
+			"gradient": "from-purple-500 to-purple-600",
+			"theme": "magic",
+			"dataFile": "vocabulaire/niveau3.json",
+			"estimatedWords": 400,
+			"description": "Vocabulaire avancé et spécialisé",
+			"descriptionEnglish": "Advanced and specialized vocabulary"
+		  }
+		],
+		"supportedModes": [
+		  "multipleChoice",
+		  "flashcard"
+		],
+		"progressMetric": "wordsLearned",
+		"unlockStrategy": "sequential-soft"
+	  },
+	  
+	  {
+		"id": "grammaire",
+		"name": "Grammaire",
+		"nameEnglish": "Grammar",
+		"icon": "Article",
+		"color": "#8B5CF6",
+		"gradient": "from-purple-500 to-purple-600",
+		"description": "Maîtrisez les verbes et les expressions",
+		"descriptionEnglish": "Master verbs and expressions",
+		"enabled": true,
+		"organizationType": "topic-based",
+		"dataSource": "grammaire/",
+		"sections": [
+		  {
+			"id": "verbes",
+			"name": "Les Verbes",
+			"nameEnglish": "Verbs",
+			"icon": "Lightning",
+			"description": "Conjugaisons et verbes essentiels",
+			"descriptionEnglish": "Conjugations and essential verbs",
+			"levels": [
+			  {
+				"id": "niveau1",
+				"name": "Niveau 1",
+				"nameEnglish": "Level 1",
+				"difficulty": "débutant",
+				"difficultyEnglish": "beginner",
+				"displayName": "Niveau 1 - Verbes Essentiels",
+				"displayNameEnglish": "Level 1 - Essential Verbs",
+				"stars": 1,
+				"dataFile": "grammaire/verbes-niveau1.json",
+				"estimatedVerbs": 10
+			  },
+			  {
+				"id": "niveau2",
+				"name": "Niveau 2",
+				"nameEnglish": "Level 2",
+				"difficulty": "intermédiaire",
+				"difficultyEnglish": "intermediate",
+				"displayName": "Niveau 2 - Verbes Réguliers",
+				"displayNameEnglish": "Level 2 - Regular Verbs",
+				"stars": 2,
+				"dataFile": "grammaire/verbes-niveau2.json",
+				"estimatedVerbs": 30
+			  },
+			  {
+				"id": "niveau3",
+				"name": "Niveau 3",
+				"nameEnglish": "Level 3",
+				"difficulty": "avancé",
+				"difficultyEnglish": "advanced",
+				"displayName": "Niveau 3 - Verbes Avancés",
+				"displayNameEnglish": "Level 3 - Advanced Verbs",
+				"stars": 3,
+				"dataFile": "grammaire/verbes-niveau3.json",
+				"estimatedVerbs": 50
+			  }
+			]
+		  },
+		  {
+			"id": "expressions",
+			"name": "Les Expressions",
+			"nameEnglish": "Expressions",
+			"icon": "ChatCircle",
+			"description": "Expressions idiomatiques françaises",
+			"descriptionEnglish": "French idiomatic expressions",
+			"levels": [
+			  {
+				"id": "niveau1",
+				"name": "Niveau 1",
+				"nameEnglish": "Level 1",
+				"difficulty": "débutant",
+				"difficultyEnglish": "beginner",
+				"displayName": "Niveau 1 - Expressions de Base",
+				"displayNameEnglish": "Level 1 - Basic Expressions",
+				"stars": 1,
+				"dataFile": "grammaire/expressions-niveau1.json",
+				"estimatedExpressions": 20
+			  },
+			  {
+				"id": "niveau2",
+				"name": "Niveau 2",
+				"nameEnglish": "Level 2",
+				"difficulty": "intermédiaire",
+				"difficultyEnglish": "intermediate",
+				"displayName": "Niveau 2 - Expressions Courantes",
+				"displayNameEnglish": "Level 2 - Common Expressions",
+				"stars": 2,
+				"dataFile": "grammaire/expressions-niveau2.json",
+				"estimatedExpressions": 40
+			  }
+			]
+		  },
+		  {
+			"id": "devoirs",
+			"name": "Devoirs",
+			"nameEnglish": "Homework",
+			"icon": "Exam",
+			"description": "Pratique des devoirs scolaires",
+			"descriptionEnglish": "School homework practice",
+			"dataFile": "grammaire/homework-sets.json",
+			"curriculum": "BC Grade 3 Core French",
+			"optional": true,
+			"visibilityToggle": true
+		  }
+		],
+		"supportedModes": [
+		  "multipleChoice",
+		  "flashcard",
+		  "conjugationFill",
+		  "phraseBuilder",
+		  "conjugationTable"
+		],
+		"progressMetric": "conceptsMastered",
+		"unlockStrategy": "sequential-soft"
+	  },
+	  
+	  {
+		"id": "prononciation",
+		"name": "Prononciation",
+		"nameEnglish": "Pronunciation",
+		"icon": "SpeakerHigh",
+		"color": "#F59E0B",
+		"gradient": "from-amber-500 to-amber-600",
+		"description": "Pratiquez les sons français",
+		"descriptionEnglish": "Practice French sounds",
+		"enabled": false,
+		"comingSoon": true,
+		"organizationType": "skill-based",
+		"dataSource": "prononciation/",
+		"sections": [
+		  {
+			"id": "sons",
+			"name": "Les Sons",
+			"nameEnglish": "Sounds",
+			"icon": "Waveform",
+			"description": "Sons individuels du français",
+			"descriptionEnglish": "Individual French sounds",
+			"dataFile": "prononciation/sons.json"
+		  },
+		  {
+			"id": "mots",
+			"name": "Les Mots",
+			"nameEnglish": "Words",
+			"icon": "Article",
+			"description": "Pratique de mots difficiles",
+			"descriptionEnglish": "Practice difficult words",
+			"dataFile": "prononciation/mots.json"
+		  },
+		  {
+			"id": "phrases",
+			"name": "Les Phrases",
+			"nameEnglish": "Phrases",
+			"icon": "Quotes",
+			"description": "Phrases complètes",
+			"descriptionEnglish": "Complete phrases",
+			"dataFile": "prononciation/phrases.json"
+		  }
+		],
+		"supportedModes": [
+		  "listen",
+		  "repeat",
+		  "compare"
+		],
+		"progressMetric": "soundsMastered",
+		"requiresAudio": true
+	  }
+	],
+	
+	"settings": {
+	  "defaultLanguage": "bilingual",
+	  "supportedLanguages": ["en", "fr", "bilingual"],
+	  "unlockStrategy": {
+		"type": "sequential-soft",
+		"accuracyThreshold": 70,
+		"description": "Categories unlock after 70% accuracy, but recommendations are soft (not enforced)"
+	  },
+	  "progressTracking": {
+		"enabled": true,
+		"metrics": [
+		  "accuracy",
+		  "attempts",
+		  "correct",
+		  "incorrect",
+		  "wordsLearned",
+		  "conceptsMastered",
+		  "lastPracticed"
+		]
+	  },
+	  "gamification": {
+		"achievements": {
+		  "enabled": true,
+		  "comingSoon": true
+		},
+		"streaks": {
+		  "enabled": true,
+		  "comingSoon": true
+		},
+		"challenges": {
+		  "enabled": true,
+		  "comingSoon": true
+		}
+	  }
+	},
+	
+	"metadata": {
+	  "curriculumAlignment": {
+		"bc": {
+		  "name": "British Columbia Core French",
+		  "grades": [1, 2, 3, 4, 5, 6, 7],
+		  "vocabulaireMapping": {
+			"niveau1": "Grade 1-2",
+			"niveau2": "Grade 2-3",
+			"niveau3": "Grade 3-5"
+		  },
+		  "grammaireMapping": {
+			"verbes-niveau1": "Grade 3",
+			"expressions-niveau1": "Grade 3"
+		  }
+		},
+		"ontario": {
+		  "name": "Ontario French Immersion",
+		  "grades": [1, 2, 3, 4, 5, 6, 7, 8],
+		  "note": "Curriculum mapping to be added"
+		},
+		"quebec": {
+		  "name": "Quebec Français Langue Seconde",
+		  "grades": ["Primaire 1", "Primaire 2", "Primaire 3"],
+		  "note": "Curriculum mapping to be added"
+		}
+	  },
+	  "cefrAlignment": {
+		"vocabulaire": {
+		  "niveau1": "A1",
+		  "niveau2": "A1-A2",
+		  "niveau3": "A2"
+		},
+		"grammaire": {
+		  "niveau1": "A1",
+		  "niveau2": "A1-A2",
+		  "niveau3": "A2"
+		}
+	  }
+	}
+  }

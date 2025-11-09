@@ -1,0 +1,337 @@
+{
+	"level": {
+	  "id": "expressions-niveau1",
+	  "name": "Expressions - Niveau 1",
+	  "nameEnglish": "Expressions - Level 1",
+	  "difficulty": "débutant",
+	  "difficultyEnglish": "beginner",
+	  "metadata": {
+		"estimatedExpressions": 32,
+		"baseVerbs": ["avoir", "être", "aller", "faire"],
+		"curriculum": "BC Grade 3 Core French"
+	  }
+	},
+	"categories": [
+	  {
+		"id": "expressions-avoir",
+		"name": "Expressions avec AVOIR",
+		"nameEnglish": "Expressions with AVOIR",
+		"icon": "ChatCircle",
+		"contentType": "expression",
+		"unlocked": true,
+		"unlockRequirement": null,
+		"supportedModes": ["flashcard", "multipleChoice", "phraseBuilder"],
+		"description": "Expressions idiomatiques utilisant le verbe avoir",
+		"descriptionEnglish": "Idiomatic expressions using the verb avoir",
+		"items": [
+		  {
+			"id": 800,
+			"type": "expression",
+			"french": "avoir faim",
+			"english": "to be hungry",
+			"baseVerb": "avoir",
+			"category": "feelings-needs"
+		  },
+		  {
+			"id": 801,
+			"type": "expression",
+			"french": "avoir soif",
+			"english": "to be thirsty",
+			"baseVerb": "avoir",
+			"category": "feelings-needs"
+		  },
+		  {
+			"id": 802,
+			"type": "expression",
+			"french": "avoir chaud",
+			"english": "to be hot",
+			"baseVerb": "avoir",
+			"category": "feelings-needs"
+		  },
+		  {
+			"id": 803,
+			"type": "expression",
+			"french": "avoir froid",
+			"english": "to be cold",
+			"baseVerb": "avoir",
+			"category": "feelings-needs"
+		  },
+		  {
+			"id": 804,
+			"type": "expression",
+			"french": "avoir peur",
+			"english": "to be scared",
+			"baseVerb": "avoir",
+			"category": "feelings-needs"
+		  },
+		  {
+			"id": 805,
+			"type": "expression",
+			"french": "avoir raison",
+			"english": "to be right",
+			"baseVerb": "avoir",
+			"category": "feelings-needs"
+		  },
+		  {
+			"id": 806,
+			"type": "expression",
+			"french": "avoir tort",
+			"english": "to be wrong",
+			"baseVerb": "avoir",
+			"category": "feelings-needs"
+		  },
+		  {
+			"id": 807,
+			"type": "expression",
+			"french": "avoir sommeil",
+			"english": "to be sleepy",
+			"baseVerb": "avoir",
+			"category": "feelings-needs"
+		  },
+		  {
+			"id": 808,
+			"type": "expression",
+			"french": "avoir de la chance",
+			"english": "to be lucky",
+			"baseVerb": "avoir",
+			"category": "feelings-needs"
+		  }
+		]
+	  },
+	  {
+		"id": "expressions-etre",
+		"name": "Expressions avec ÊTRE",
+		"nameEnglish": "Expressions with ÊTRE",
+		"icon": "ChatCircle",
+		"contentType": "expression",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "expressions-avoir",
+		  "accuracy": 70
+		},
+		"supportedModes": ["flashcard", "multipleChoice", "phraseBuilder"],
+		"description": "Expressions utilisant le verbe être",
+		"descriptionEnglish": "Expressions using the verb être",
+		"items": [
+		  {
+			"id": 810,
+			"type": "expression",
+			"french": "être content",
+			"english": "to be happy",
+			"baseVerb": "être",
+			"category": "emotions"
+		  },
+		  {
+			"id": 811,
+			"type": "expression",
+			"french": "être triste",
+			"english": "to be sad",
+			"baseVerb": "être",
+			"category": "emotions"
+		  },
+		  {
+			"id": 812,
+			"type": "expression",
+			"french": "être fatigué",
+			"english": "to be tired",
+			"baseVerb": "être",
+			"category": "emotions"
+		  },
+		  {
+			"id": 813,
+			"type": "expression",
+			"french": "être en colère",
+			"english": "to be angry",
+			"baseVerb": "être",
+			"category": "emotions"
+		  },
+		  {
+			"id": 814,
+			"type": "expression",
+			"french": "être malade",
+			"english": "to be sick",
+			"baseVerb": "être",
+			"category": "emotions"
+		  },
+		  {
+			"id": 815,
+			"type": "expression",
+			"french": "être d'accord",
+			"english": "to agree",
+			"baseVerb": "être",
+			"category": "emotions"
+		  },
+		  {
+			"id": 816,
+			"type": "expression",
+			"french": "être en retard",
+			"english": "to be late",
+			"baseVerb": "être",
+			"category": "emotions"
+		  }
+		]
+	  },
+	  {
+		"id": "expressions-aller",
+		"name": "Expressions avec ALLER",
+		"nameEnglish": "Expressions with ALLER",
+		"icon": "ChatCircle",
+		"contentType": "expression",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "expressions-etre",
+		  "accuracy": 70
+		},
+		"supportedModes": ["flashcard", "multipleChoice", "phraseBuilder"],
+		"description": "Destinations et expressions avec aller",
+		"descriptionEnglish": "Destinations and expressions with aller",
+		"items": [
+		  {
+			"id": 820,
+			"type": "expression",
+			"french": "aller à l'école",
+			"english": "to go to school",
+			"baseVerb": "aller",
+			"category": "destinations"
+		  },
+		  {
+			"id": 821,
+			"type": "expression",
+			"french": "aller à la piscine",
+			"english": "to go to the pool",
+			"baseVerb": "aller",
+			"category": "destinations"
+		  },
+		  {
+			"id": 822,
+			"type": "expression",
+			"french": "aller au parc",
+			"english": "to go to the park",
+			"baseVerb": "aller",
+			"category": "destinations"
+		  },
+		  {
+			"id": 823,
+			"type": "expression",
+			"french": "aller chez le médecin",
+			"english": "to go to the doctor",
+			"baseVerb": "aller",
+			"category": "destinations"
+		  },
+		  {
+			"id": 824,
+			"type": "expression",
+			"french": "aller au lit",
+			"english": "to go to bed",
+			"baseVerb": "aller",
+			"category": "destinations"
+		  },
+		  {
+			"id": 825,
+			"type": "expression",
+			"french": "aller au magasin",
+			"english": "to go to the store",
+			"baseVerb": "aller",
+			"category": "destinations"
+		  }
+		]
+	  },
+	  {
+		"id": "expressions-faire",
+		"name": "Expressions avec FAIRE",
+		"nameEnglish": "Expressions with FAIRE",
+		"icon": "ChatCircle",
+		"contentType": "expression",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "expressions-aller",
+		  "accuracy": 70
+		},
+		"supportedModes": ["flashcard", "multipleChoice", "phraseBuilder"],
+		"description": "Activités et expressions avec faire",
+		"descriptionEnglish": "Activities and expressions with faire",
+		"items": [
+		  {
+			"id": 830,
+			"type": "expression",
+			"french": "faire du vélo",
+			"english": "to ride a bike",
+			"baseVerb": "faire",
+			"category": "activities"
+		  },
+		  {
+			"id": 831,
+			"type": "expression",
+			"french": "faire du sport",
+			"english": "to play sports",
+			"baseVerb": "faire",
+			"category": "activities"
+		  },
+		  {
+			"id": 832,
+			"type": "expression",
+			"french": "faire la vaisselle",
+			"english": "to do the dishes",
+			"baseVerb": "faire",
+			"category": "activities"
+		  },
+		  {
+			"id": 833,
+			"type": "expression",
+			"french": "faire le ménage",
+			"english": "to do housework",
+			"baseVerb": "faire",
+			"category": "activities"
+		  },
+		  {
+			"id": 834,
+			"type": "expression",
+			"french": "faire les devoirs",
+			"english": "to do homework",
+			"baseVerb": "faire",
+			"category": "activities"
+		  },
+		  {
+			"id": 835,
+			"type": "expression",
+			"french": "faire attention",
+			"english": "to pay attention",
+			"baseVerb": "faire",
+			"category": "activities"
+		  },
+		  {
+			"id": 836,
+			"type": "expression",
+			"french": "faire du ski",
+			"english": "to ski",
+			"baseVerb": "faire",
+			"category": "activities"
+		  },
+		  {
+			"id": 837,
+			"type": "expression",
+			"french": "faire de la natation",
+			"english": "to swim",
+			"baseVerb": "faire",
+			"category": "activities"
+		  },
+		  {
+			"id": 838,
+			"type": "expression",
+			"french": "faire du camping",
+			"english": "to go camping",
+			"baseVerb": "faire",
+			"category": "activities"
+		  },
+		  {
+			"id": 839,
+			"type": "expression",
+			"french": "faire une promenade",
+			"english": "to take a walk",
+			"baseVerb": "faire",
+			"category": "activities"
+		  }
+		]
+	  }
+	]
+  }

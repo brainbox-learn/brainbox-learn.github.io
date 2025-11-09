@@ -1,0 +1,100 @@
+{
+	"level": {
+	  "id": "verbes-niveau1",
+	  "name": "Verbes - Niveau 1",
+	  "nameEnglish": "Verbs - Level 1",
+	  "difficulty": "débutant",
+	  "difficultyEnglish": "beginner",
+	  "metadata": {
+		"estimatedVerbs": 4,
+		"tenses": ["présent"],
+		"curriculum": "BC Grade 3 Core French"
+	  }
+	},
+	"categories": [
+	  {
+		"id": "verbes-essentiels",
+		"name": "Verbes Essentiels",
+		"nameEnglish": "Essential Verbs",
+		"icon": "Lightning",
+		"contentType": "verb",
+		"unlocked": true,
+		"unlockRequirement": null,
+		"supportedModes": ["flashcard", "multipleChoice", "conjugationFill"],
+		"items": [
+		  {
+			"id": 700,
+			"type": "verb",
+			"infinitive": "être",
+			"english": "to be",
+			"group": "irregular",
+			"frequency": "essential",
+			"conjugations": {
+			  "présent": {
+				"je": "suis",
+				"tu": "es",
+				"il/elle/on": "est",
+				"nous": "sommes",
+				"vous": "êtes",
+				"ils/elles": "sont"
+			  }
+			}
+		  },
+		  {
+			"id": 701,
+			"type": "verb",
+			"infinitive": "avoir",
+			"english": "to have",
+			"group": "irregular",
+			"frequency": "essential",
+			"conjugations": {
+			  "présent": {
+				"je": "ai",
+				"tu": "as",
+				"il/elle/on": "a",
+				"nous": "avons",
+				"vous": "avez",
+				"ils/elles": "ont"
+			  }
+			}
+		  },
+		  {
+			"id": 702,
+			"type": "verb",
+			"infinitive": "aller",
+			"english": "to go",
+			"group": "irregular",
+			"frequency": "essential",
+			"conjugations": {
+			  "présent": {
+				"je": "vais",
+				"tu": "vas",
+				"il/elle/on": "va",
+				"nous": "allons",
+				"vous": "allez",
+				"ils/elles": "vont"
+			  }
+			}
+		  },
+		  {
+			"id": 703,
+			"type": "verb",
+			"infinitive": "faire",
+			"english": "to do / to make",
+			"group": "irregular",
+			"frequency": "essential",
+			"conjugations": {
+			  "présent": {
+				"je": "fais",
+				"tu": "fais",
+				"il/elle/on": "fait",
+				"nous": "faisons",
+				"vous": "faites",
+				"ils/elles": "font"
+			  }
+			}
+		  }
+		]
+	  }
+	]
+  }

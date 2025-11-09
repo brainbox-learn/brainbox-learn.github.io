@@ -1,0 +1,305 @@
+{
+	"level": {
+	  "id": "expressions-niveau2",
+	  "name": "Expressions - Niveau 2",
+	  "nameEnglish": "Expressions - Level 2",
+	  "difficulty": "intermédiaire",
+	  "difficultyEnglish": "intermediate",
+	  "metadata": {
+		"estimatedExpressions": 28,
+		"baseVerbs": ["avoir", "être", "aller", "faire", "prendre", "mettre"],
+		"curriculum": "BC Grade 4-5 Core French"
+	  }
+	},
+	"categories": [
+	  {
+		"id": "expressions-avoir-avancees",
+		"name": "Expressions AVOIR Avancées",
+		"nameEnglish": "Advanced AVOIR Expressions",
+		"icon": "ChatCircle",
+		"contentType": "expression",
+		"unlocked": true,
+		"unlockRequirement": null,
+		"supportedModes": ["flashcard", "multipleChoice", "phraseBuilder"],
+		"description": "Expressions idiomatiques plus complexes avec avoir",
+		"descriptionEnglish": "More complex idiomatic expressions with avoir",
+		"items": [
+		  {
+			"id": 850,
+			"type": "expression",
+			"french": "avoir besoin de",
+			"english": "to need",
+			"baseVerb": "avoir",
+			"category": "needs"
+		  },
+		  {
+			"id": 851,
+			"type": "expression",
+			"french": "avoir envie de",
+			"english": "to feel like / to want",
+			"baseVerb": "avoir",
+			"category": "needs"
+		  },
+		  {
+			"id": 852,
+			"type": "expression",
+			"french": "avoir l'air",
+			"english": "to seem / to look like",
+			"baseVerb": "avoir",
+			"category": "appearance"
+		  },
+		  {
+			"id": 853,
+			"type": "expression",
+			"french": "avoir hâte de",
+			"english": "to look forward to",
+			"baseVerb": "avoir",
+			"category": "feelings"
+		  },
+		  {
+			"id": 854,
+			"type": "expression",
+			"french": "avoir du mal à",
+			"english": "to have difficulty",
+			"baseVerb": "avoir",
+			"category": "challenges"
+		  },
+		  {
+			"id": 855,
+			"type": "expression",
+			"french": "avoir lieu",
+			"english": "to take place",
+			"baseVerb": "avoir",
+			"category": "events"
+		  }
+		]
+	  },
+	  {
+		"id": "expressions-etre-avancees",
+		"name": "Expressions ÊTRE Avancées",
+		"nameEnglish": "Advanced ÊTRE Expressions",
+		"icon": "ChatCircle",
+		"contentType": "expression",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "expressions-avoir-avancees",
+		  "accuracy": 70
+		},
+		"supportedModes": ["flashcard", "multipleChoice", "phraseBuilder"],
+		"description": "Expressions plus avancées avec être",
+		"descriptionEnglish": "More advanced expressions with être",
+		"items": [
+		  {
+			"id": 860,
+			"type": "expression",
+			"french": "être en train de",
+			"english": "to be in the process of",
+			"baseVerb": "être",
+			"category": "actions"
+		  },
+		  {
+			"id": 861,
+			"type": "expression",
+			"french": "être sur le point de",
+			"english": "to be about to",
+			"baseVerb": "être",
+			"category": "actions"
+		  },
+		  {
+			"id": 862,
+			"type": "expression",
+			"french": "être de bonne humeur",
+			"english": "to be in a good mood",
+			"baseVerb": "être",
+			"category": "emotions"
+		  },
+		  {
+			"id": 863,
+			"type": "expression",
+			"french": "être de mauvaise humeur",
+			"english": "to be in a bad mood",
+			"baseVerb": "être",
+			"category": "emotions"
+		  },
+		  {
+			"id": 864,
+			"type": "expression",
+			"french": "être en forme",
+			"english": "to be in shape / to feel good",
+			"baseVerb": "être",
+			"category": "health"
+		  },
+		  {
+			"id": 865,
+			"type": "expression",
+			"french": "être à l'heure",
+			"english": "to be on time",
+			"baseVerb": "être",
+			"category": "time"
+		  }
+		]
+	  },
+	  {
+		"id": "expressions-faire-avancees",
+		"name": "Expressions FAIRE Avancées",
+		"nameEnglish": "Advanced FAIRE Expressions",
+		"icon": "ChatCircle",
+		"contentType": "expression",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "expressions-etre-avancees",
+		  "accuracy": 70
+		},
+		"supportedModes": ["flashcard", "multipleChoice", "phraseBuilder"],
+		"description": "Activités et expressions avancées avec faire",
+		"descriptionEnglish": "Advanced activities and expressions with faire",
+		"items": [
+		  {
+			"id": 870,
+			"type": "expression",
+			"french": "faire de la musique",
+			"english": "to play music",
+			"baseVerb": "faire",
+			"category": "hobbies"
+		  },
+		  {
+			"id": 871,
+			"type": "expression",
+			"french": "faire de la danse",
+			"english": "to dance",
+			"baseVerb": "faire",
+			"category": "hobbies"
+		  },
+		  {
+			"id": 872,
+			"type": "expression",
+			"french": "faire du théâtre",
+			"english": "to do theater",
+			"baseVerb": "faire",
+			"category": "hobbies"
+		  },
+		  {
+			"id": 873,
+			"type": "expression",
+			"french": "faire la cuisine",
+			"english": "to cook",
+			"baseVerb": "faire",
+			"category": "activities"
+		  },
+		  {
+			"id": 874,
+			"type": "expression",
+			"french": "faire la queue",
+			"english": "to wait in line",
+			"baseVerb": "faire",
+			"category": "activities"
+		  },
+		  {
+			"id": 875,
+			"type": "expression",
+			"french": "faire des courses",
+			"english": "to go shopping / to run errands",
+			"baseVerb": "faire",
+			"category": "activities"
+		  },
+		  {
+			"id": 876,
+			"type": "expression",
+			"french": "faire un voyage",
+			"english": "to take a trip",
+			"baseVerb": "faire",
+			"category": "travel"
+		  },
+		  {
+			"id": 877,
+			"type": "expression",
+			"french": "faire des progrès",
+			"english": "to make progress",
+			"baseVerb": "faire",
+			"category": "achievement"
+		  }
+		]
+	  },
+	  {
+		"id": "expressions-autres-verbes",
+		"name": "Expressions avec Autres Verbes",
+		"nameEnglish": "Expressions with Other Verbs",
+		"icon": "ChatCircle",
+		"contentType": "expression",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "expressions-faire-avancees",
+		  "accuracy": 70
+		},
+		"supportedModes": ["flashcard", "multipleChoice", "phraseBuilder"],
+		"description": "Expressions utilisant d'autres verbes",
+		"descriptionEnglish": "Expressions using other verbs",
+		"items": [
+		  {
+			"id": 880,
+			"type": "expression",
+			"french": "prendre le petit déjeuner",
+			"english": "to have breakfast",
+			"baseVerb": "prendre",
+			"category": "meals"
+		  },
+		  {
+			"id": 881,
+			"type": "expression",
+			"french": "prendre une douche",
+			"english": "to take a shower",
+			"baseVerb": "prendre",
+			"category": "routine"
+		  },
+		  {
+			"id": 882,
+			"type": "expression",
+			"french": "prendre son temps",
+			"english": "to take one's time",
+			"baseVerb": "prendre",
+			"category": "time"
+		  },
+		  {
+			"id": 883,
+			"type": "expression",
+			"french": "prendre une décision",
+			"english": "to make a decision",
+			"baseVerb": "prendre",
+			"category": "decisions"
+		  },
+		  {
+			"id": 884,
+			"type": "expression",
+			"french": "mettre la table",
+			"english": "to set the table",
+			"baseVerb": "mettre",
+			"category": "routine"
+		  },
+		  {
+			"id": 885,
+			"type": "expression",
+			"french": "mettre des vêtements",
+			"english": "to put on clothes",
+			"baseVerb": "mettre",
+			"category": "routine"
+		  },
+		  {
+			"id": 886,
+			"type": "expression",
+			"french": "se mettre en colère",
+			"english": "to get angry",
+			"baseVerb": "mettre",
+			"category": "emotions"
+		  },
+		  {
+			"id": 887,
+			"type": "expression",
+			"french": "se mettre d'accord",
+			"english": "to agree / to come to an agreement",
+			"baseVerb": "mettre",
+			"category": "communication"
+		  }
+		]
+	  }
+	]
+  }

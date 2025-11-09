@@ -1,0 +1,299 @@
+{
+	"level": {
+	  "id": "verbes-niveau3",
+	  "name": "Verbes - Niveau 3",
+	  "nameEnglish": "Verbs - Level 3",
+	  "difficulty": "avancé",
+	  "difficultyEnglish": "advanced",
+	  "metadata": {
+		"estimatedVerbs": 14,
+		"tenses": ["présent"],
+		"curriculum": "BC Grade 4-5 Core French"
+	  }
+	},
+	"categories": [
+		{
+			"id": "verbes-irreguliers-communs",
+			"name": "Verbes Irréguliers Communs",
+			"nameEnglish": "Common Irregular Verbs",
+			"icon": "Lightning",
+			"contentType": "verb",
+			"unlocked": true,
+			"unlockRequirement": null,
+			"supportedModes": ["flashcard", "multipleChoice", "conjugationFill"],
+			"description": "Verbes irréguliers fréquemment utilisés",
+			"descriptionEnglish": "Frequently used irregular verbs",
+			"items": [
+			  {
+				"id": 740,
+				"type": "verb",
+				"infinitive": "venir",
+				"english": "to come",
+				"group": "irregular",
+				"frequency": "common",
+				"conjugations": {
+				  "présent": {
+					"je": "viens",
+					"tu": "viens",
+					"il/elle/on": "vient",
+					"nous": "venons",
+					"vous": "venez",
+					"ils/elles": "viennent"
+				  }
+				}
+			  },
+			  {
+				"id": 741,
+				"type": "verb",
+				"infinitive": "tenir",
+				"english": "to hold",
+				"group": "irregular",
+				"frequency": "common",
+				"conjugations": {
+				  "présent": {
+					"je": "tiens",
+					"tu": "tiens",
+					"il/elle/on": "tient",
+					"nous": "tenons",
+					"vous": "tenez",
+					"ils/elles": "tiennent"
+				  }
+				}
+			  },
+			  {
+				"id": 742,
+				"type": "verb",
+				"infinitive": "prendre",
+				"english": "to take",
+				"group": "irregular",
+				"frequency": "common",
+				"conjugations": {
+				  "présent": {
+					"je": "prends",
+					"tu": "prends",
+					"il/elle/on": "prend",
+					"nous": "prenons",
+					"vous": "prenez",
+					"ils/elles": "prennent"
+				  }
+				}
+			  },
+			  {
+				"id": 743,
+				"type": "verb",
+				"infinitive": "mettre",
+				"english": "to put / to place",
+				"group": "irregular",
+				"frequency": "common",
+				"conjugations": {
+				  "présent": {
+					"je": "mets",
+					"tu": "mets",
+					"il/elle/on": "met",
+					"nous": "mettons",
+					"vous": "mettez",
+					"ils/elles": "mettent"
+				  }
+				}
+			  },
+			  {
+				"id": 744,
+				"type": "verb",
+				"infinitive": "sortir",
+				"english": "to go out / to leave",
+				"group": "irregular",
+				"frequency": "common",
+				"conjugations": {
+				  "présent": {
+					"je": "sors",
+					"tu": "sors",
+					"il/elle/on": "sort",
+					"nous": "sortons",
+					"vous": "sortez",
+					"ils/elles": "sortent"
+				  }
+				}
+			  },
+			  {
+				"id": 745,
+				"type": "verb",
+				"infinitive": "partir",
+				"english": "to leave / to depart",
+				"group": "irregular",
+				"frequency": "common",
+				"conjugations": {
+				  "présent": {
+					"je": "pars",
+					"tu": "pars",
+					"il/elle/on": "part",
+					"nous": "partons",
+					"vous": "partez",
+					"ils/elles": "partent"
+				  }
+				}
+			  },
+			  {
+				"id": 746,
+				"type": "verb",
+				"infinitive": "pouvoir",
+				"english": "can / to be able to",
+				"group": "irregular",
+				"frequency": "essential",
+				"conjugations": {
+				  "présent": {
+					"je": "peux",
+					"tu": "peux",
+					"il/elle/on": "peut",
+					"nous": "pouvons",
+					"vous": "pouvez",
+					"ils/elles": "peuvent"
+				  }
+				}
+			  },
+			  {
+				"id": 747,
+				"type": "verb",
+				"infinitive": "vouloir",
+				"english": "to want",
+				"group": "irregular",
+				"frequency": "essential",
+				"conjugations": {
+				  "présent": {
+					"je": "veux",
+					"tu": "veux",
+					"il/elle/on": "veut",
+					"nous": "voulons",
+					"vous": "voulez",
+					"ils/elles": "veulent"
+				  }
+				}
+			  }
+			]
+		  },
+	  {
+		"id": "verbes-irreguliers-avances",
+		"name": "Verbes Irréguliers Avancés",
+		"nameEnglish": "Advanced Irregular Verbs",
+		"icon": "Lightning",
+		"contentType": "verb",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "verbes-irreguliers-communs",
+		  "accuracy": 70
+		},
+		"supportedModes": ["flashcard", "multipleChoice", "conjugationFill"],
+		"description": "Verbes irréguliers plus complexes",
+		"descriptionEnglish": "More complex irregular verbs",
+		"items": [
+		  {
+			"id": 750,
+			"type": "verb",
+			"infinitive": "voir",
+			"english": "to see",
+			"group": "irregular",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "vois",
+				"tu": "vois",
+				"il/elle/on": "voit",
+				"nous": "voyons",
+				"vous": "voyez",
+				"ils/elles": "voient"
+			  }
+			}
+		  },
+		  {
+			"id": 751,
+			"type": "verb",
+			"infinitive": "savoir",
+			"english": "to know",
+			"group": "irregular",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "sais",
+				"tu": "sais",
+				"il/elle/on": "sait",
+				"nous": "savons",
+				"vous": "savez",
+				"ils/elles": "savent"
+			  }
+			}
+		  },
+		  {
+			"id": 752,
+			"type": "verb",
+			"infinitive": "devoir",
+			"english": "must / to have to",
+			"group": "irregular",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "dois",
+				"tu": "dois",
+				"il/elle/on": "doit",
+				"nous": "devons",
+				"vous": "devez",
+				"ils/elles": "doivent"
+			  }
+			}
+		  },
+		  {
+			"id": 753,
+			"type": "verb",
+			"infinitive": "dire",
+			"english": "to say / to tell",
+			"group": "irregular",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "dis",
+				"tu": "dis",
+				"il/elle/on": "dit",
+				"nous": "disons",
+				"vous": "dites",
+				"ils/elles": "disent"
+			  }
+			}
+		  },
+		  {
+			"id": 754,
+			"type": "verb",
+			"infinitive": "lire",
+			"english": "to read",
+			"group": "irregular",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "lis",
+				"tu": "lis",
+				"il/elle/on": "lit",
+				"nous": "lisons",
+				"vous": "lisez",
+				"ils/elles": "lisent"
+			  }
+			}
+		  },
+		  {
+			"id": 755,
+			"type": "verb",
+			"infinitive": "écrire",
+			"english": "to write",
+			"group": "irregular",
+			"frequency": "common",
+			"conjugations": {
+			  "présent": {
+				"je": "écris",
+				"tu": "écris",
+				"il/elle/on": "écrit",
+				"nous": "écrivons",
+				"vous": "écrivez",
+				"ils/elles": "écrivent"
+			  }
+			}
+		  }
+		]
+	  }
+	]
+  }

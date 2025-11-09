@@ -1,0 +1,148 @@
+{
+	"homework": {
+	  "description": "Structured homework assignments based on BC Core French curriculum",
+	  "descriptionEnglish": "Structured homework assignments based on BC Core French curriculum",
+	  "sets": [
+		{
+		  "id": "pretest-1",
+		  "name": "Pré-test 1",
+		  "nameEnglish": "Pre-test 1",
+		  "description": "Verbes essentiels et réguliers (ER/IR/RE)",
+		  "descriptionEnglish": "Essential and regular verbs (ER/IR/RE)",
+		  "curriculum": "BC Grade 3 Core French",
+		  "format": "conjugationTable",
+		  "difficulty": "débutant",
+		  "difficultyEnglish": "beginner",
+		  "verbIds": [
+			700, 701, 702, 703,
+			710, 711, 712, 713, 714,
+			720, 721, 722, 723, 724,
+			730, 731, 732, 733, 734
+		  ],
+		  "metadata": {
+			"totalVerbs": 19,
+			"verbGroups": {
+			  "essential": [700, 701, 702, 703],
+			  "er": [710, 711, 712, 713, 714],
+			  "ir": [720, 721, 722, 723, 724],
+			  "re": [730, 731, 732, 733, 734]
+			},
+			"estimatedTime": "45 minutes",
+			"focuses": ["verb patterns", "regular conjugations", "essential verbs"]
+		  }
+		},
+		{
+		  "id": "pretest-2",
+		  "name": "Pré-test 2",
+		  "nameEnglish": "Pre-test 2",
+		  "description": "Verbes irréguliers courants",
+		  "descriptionEnglish": "Common irregular verbs",
+		  "curriculum": "BC Grade 3 Core French",
+		  "format": "conjugationTable",
+		  "difficulty": "intermédiaire",
+		  "difficultyEnglish": "intermediate",
+		  "verbIds": [
+			740, 741, 742, 743, 744, 745,
+			753, 754, 755
+		  ],
+		  "metadata": {
+			"totalVerbs": 9,
+			"verbGroups": {
+			  "movement": [740, 744, 745],
+			  "action": [741, 742, 743],
+			  "communication": [753, 754, 755]
+			},
+			"estimatedTime": "30 minutes",
+			"focuses": ["irregular patterns", "common irregulars", "practical usage"]
+		  }
+		},
+		{
+		  "id": "pretest-3",
+		  "name": "Pré-test 3",
+		  "nameEnglish": "Pre-test 3",
+		  "description": "Révision complète - tous les verbes",
+		  "descriptionEnglish": "Complete review - all verbs",
+		  "curriculum": "BC Grade 3 Core French",
+		  "format": "conjugationTable",
+		  "difficulty": "avancé",
+		  "difficultyEnglish": "advanced",
+		  "verbIds": [
+			700, 701, 702, 703,
+			710, 711, 712, 720, 721, 730, 731,
+			740, 741, 742, 743, 744, 745,
+			746, 747, 750, 751, 752, 753, 754, 755
+		  ],
+		  "metadata": {
+			"totalVerbs": 25,
+			"verbGroups": {
+			  "essential": [700, 701, 702, 703],
+			  "regular": [710, 711, 712, 720, 721, 730, 731],
+			  "irregular-common": [740, 741, 742, 743, 744, 745, 746, 747],
+			  "irregular-advanced": [750, 751, 752, 753, 754, 755]
+			},
+			"estimatedTime": "60 minutes",
+			"focuses": ["comprehensive review", "all verb types", "mastery assessment"]
+		  }
+		}
+	  ],
+	  "expressionSets": [
+		{
+		  "id": "expressions-homework-1",
+		  "name": "Expressions - Devoir 1",
+		  "nameEnglish": "Expressions - Homework 1",
+		  "description": "Expressions avec avoir et être",
+		  "descriptionEnglish": "Expressions with avoir and être",
+		  "curriculum": "BC Grade 3 Core French",
+		  "format": "phraseBuilder",
+		  "difficulty": "débutant",
+		  "difficultyEnglish": "beginner",
+		  "expressionIds": [
+			800, 801, 802, 803, 804, 805, 806, 807, 808,
+			810, 811, 812, 813, 814, 815, 816
+		  ],
+		  "metadata": {
+			"totalExpressions": 16,
+			"expressionGroups": {
+			  "avoir": [800, 801, 802, 803, 804, 805, 806, 807, 808],
+			  "être": [810, 811, 812, 813, 814, 815, 816]
+			},
+			"estimatedTime": "30 minutes",
+			"focuses": ["common expressions", "daily usage", "feelings and states"]
+		  }
+		},
+		{
+		  "id": "expressions-homework-2",
+		  "name": "Expressions - Devoir 2",
+		  "nameEnglish": "Expressions - Homework 2",
+		  "description": "Expressions avec aller et faire",
+		  "descriptionEnglish": "Expressions with aller and faire",
+		  "curriculum": "BC Grade 3 Core French",
+		  "format": "phraseBuilder",
+		  "difficulty": "débutant",
+		  "difficultyEnglish": "beginner",
+		  "expressionIds": [
+			820, 821, 822, 823, 824, 825,
+			830, 831, 832, 833, 834, 835, 836, 837, 838, 839
+		  ],
+		  "metadata": {
+			"totalExpressions": 16,
+			"expressionGroups": {
+			  "aller": [820, 821, 822, 823, 824, 825],
+			  "faire": [830, 831, 832, 833, 834, 835, 836, 837, 838, 839]
+			},
+			"estimatedTime": "30 minutes",
+			"focuses": ["destinations", "activities", "daily routines"]
+		  }
+		}
+	  ],
+	  "settings": {
+		"visibilityToggle": true,
+		"optional": true,
+		"teacherMode": {
+		  "enabled": true,
+		  "allowCustomSets": true,
+		  "trackProgress": true
+		}
+	  }
+	}
+  }
