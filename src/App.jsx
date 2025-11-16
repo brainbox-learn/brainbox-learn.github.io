@@ -1,4 +1,4 @@
-import { loadAllWords, WORDS_BY_CATEGORY, getWordsForCategory } from './data/words';
+import { loadAllWords, loadAllContent, WORDS_BY_CATEGORY, DOMAINS_CONFIG, CONTENT_BY_DOMAIN, getWordsForCategory } from './data/words';
 import React, { useState, useEffect, useMemo } from 'react';
 import { playSound } from './utils/sounds';
 import { checkAnswer } from './utils/questionGenerator';
@@ -14,6 +14,9 @@ import QuestionCard from './components/Quiz/QuestionCard';
 import FlashCard from './components/Quiz/FlashCard';
 import AnimalFooter from './components/UI/AnimalFooter';
 import CongratsModal from './components/Quiz/CongratsModal';
+import DomainSelection from './components/Navigation/DomainSelection';
+import SectionSelection from './components/Navigation/SectionSelection';
+import LevelSelection from './components/Navigation/LevelSelection';
 
 // Hooks
 import { useProfiles } from './hooks/useProfiles';
@@ -21,51 +24,99 @@ import { useQuizState } from './hooks/useQuizState';
 
 const FrenchQuiz = () => {
 	const [wordsLoaded, setWordsLoaded] = useState(false);
+	
+	// NEW: Domain-based state
+	const [domains, setDomains] = useState(null);
+	const [contentData, setContentData] = useState(null);
+	const [selectedDomain, setSelectedDomain] = useState(null); // 'vocabulaire' | 'grammaire' | null
+	const [selectedSection, setSelectedSection] = useState(null); // 'verbes' | 'expressions' | null (grammaire only)
+	const [selectedLevel, setSelectedLevel] = useState(null); // 'niveau1' | 'niveau2' | 'niveau3' | null
+	
+	
+	// LEGACY: Grade-based state (kept for backward compatibility)
 	const firstCategory = Object.keys(WORDS_BY_CATEGORY)[0] || 'grade1';
 	const [selectedGrade, setSelectedGrade] = useState(firstCategory); // "grade1", "grade2", "grade3"
 	const [selectedCategory, setSelectedCategory] = useState(null);    // null or category ID like "essential-1"
+	
+	// Common state
 	const [practiceMode, setPracticeMode] = useState(null);
 	const [showProgress, setShowProgress] = useState(false);
 	const [showProfileDropdown, setShowProfileDropdown] = useState(false);
 	const [soundEnabled, setSoundEnabled] = useState(true);
 	const [currentMode, setCurrentMode] = useState('quiz'); // 'quiz' or 'flashcard'
 	
-	// Load words on mount
+	
+	// Load all content on mount
 	useEffect(() => {
-		const initializeWords = async () => {
-			await loadAllWords();
+		const initializeContent = async () => {
+			const result = await loadAllContent();
+			
+			if (result.domains) {
+				// New domain-based structure loaded
+				console.log('✅ Domain-based structure loaded');
+				setDomains(result.domains);
+				setContentData(result.content);
+				
+				// Auto-select vocabulaire > niveau1 as default
+				setSelectedDomain('vocabulaire');
+				setSelectedLevel('niveau1');
+			} else {
+				// Legacy structure loaded
+				console.log('✅ Legacy structure loaded');
+			}
+			
 			setWordsLoaded(true);
 		};
-		initializeWords();
+		initializeContent();
 	}, []);
 
 	// Get current word pool based on category filter
-	const getCurrentWords = () => {
-		if (selectedCategory) {
-			return getWordsForCategory(selectedGrade, selectedCategory);
+// Get current word pool based on domain/section/level/category
+const getCurrentWords = () => {
+	if (!selectedDomain || !selectedLevel) return [];
+	
+	if (selectedCategory) {
+		// Get words/items for specific category
+		if (selectedDomain === 'vocabulaire') {
+			const levelData = CONTENT_BY_DOMAIN.vocabulaire?.[selectedLevel];
+			const category = levelData?.categories.find(cat => cat.id === selectedCategory);
+			return category?.words || [];
+		} else if (selectedDomain === 'grammaire' && selectedSection) {
+			const levelData = CONTENT_BY_DOMAIN.grammaire?.[selectedSection]?.[selectedLevel];
+			const category = levelData?.categories.find(cat => cat.id === selectedCategory);
+			return category?.items || [];
 		}
-		return WORDS_BY_CATEGORY[selectedGrade] || [];
-	};
+	}
+	
+	// No category selected - return all for this level
+	if (selectedDomain === 'vocabulaire') {
+		return CONTENT_BY_DOMAIN.vocabulaire?.[selectedLevel]?.words || [];
+	} else if (selectedDomain === 'grammaire' && selectedSection) {
+		return CONTENT_BY_DOMAIN.grammaire?.[selectedSection]?.[selectedLevel]?.items || [];
+	}
+	
+	return [];
+};
 
-	// Build wordsByCategory object for useQuizState - memoized so it updates reactively
-	const wordsByCategory = useMemo(() => {
-		// Don't compute until words are loaded
-		if (!wordsLoaded || Object.keys(WORDS_BY_CATEGORY).length === 0) {
-			return {};
-		}
-		
-		if (selectedCategory) {
-			// When filtering by category, pass only those words
-			const filteredWords = getCurrentWords();
-			if (!filteredWords || filteredWords.length === 0) {
-				console.warn('No words found for category:', selectedCategory);
-				return WORDS_BY_CATEGORY; // Fallback to all words
+		// Build wordsByCategory object for useQuizState - memoized so it updates reactively
+		const wordsByCategory = useMemo(() => {
+			if (!wordsLoaded || !selectedDomain || !selectedLevel) {
+				return { [selectedGrade]: [] }; // Return empty array, not empty object
 			}
-			return { [selectedGrade]: filteredWords };
-		}
-		// When no category filter, pass all words
-		return WORDS_BY_CATEGORY;
-	}, [selectedCategory, selectedGrade, wordsLoaded]);
+			
+			// SAFETY: If grammaire but no section yet, return empty array (still loading)
+			if (selectedDomain === 'grammaire' && !selectedSection) {
+				return { [selectedGrade]: [] }; // Return empty array, not empty object
+			}
+			
+			const currentWords = getCurrentWords();
+			if (!currentWords || currentWords.length === 0) {
+				console.warn('No words found for:', { selectedDomain, selectedSection, selectedLevel, selectedCategory });
+				return { [selectedGrade]: [] }; // Return empty array, not empty object
+			}
+			
+			return { [selectedGrade]: currentWords };
+		}, [selectedDomain, selectedSection, selectedLevel, selectedCategory, selectedGrade, wordsLoaded]);
 
 	const {
 		currentQuestion,
@@ -121,12 +172,92 @@ const FrenchQuiz = () => {
 			return;
 		}
 		setSelectedCategory(categoryId);
+		// setSessionComplete(false);
+		
+		// NOW start the quiz with this category
+		const levelToGradeMap = {
+			'niveau1': 'grade1',
+			'niveau2': 'grade2',
+			'niveau3': 'grade3'
+		};
+		const gradeKey = levelToGradeMap[selectedLevel] || 'grade1';
+		resetAndRestart(gradeKey);
 	};
 
 	// NEW: Clear category filter and return to all words
 	const handleClearCategoryFilter = () => {
 		setSelectedCategory(null);
 		resetAndRestart(selectedGrade);
+	};
+
+	// NEW: Domain navigation handlers
+	const handleDomainSelection = (domainId) => {
+
+		if (domainId === selectedDomain) {
+			return;
+		}
+		
+		console.log('🎯 Domain selected:', domainId);
+		setSelectedDomain(domainId);
+		setSelectedSection(null);
+		setSelectedCategory(null); // No filter
+		// setSessionComplete(false);
+		
+		if (domainId === 'vocabulaire') {
+			setSelectedLevel('niveau1');
+			setSelectedGrade('grade1');
+			// resetAndRestart('grade1');
+		}
+	};
+
+	const handleSectionSelection = (sectionId) => {
+		console.log('📑 Section selected:', sectionId);
+		setSelectedDomain('grammaire');
+		setSelectedSection(sectionId);
+		setSelectedCategory(null); // No filter
+		// setSessionComplete(false);
+		
+		setSelectedLevel('niveau1');
+		setSelectedGrade('grade1');
+		// resetAndRestart('grade1'); // Start quiz with ALL niveau1 items
+	};
+
+	const handleLevelSelection = (levelId) => {
+		console.log('📊 Level selected:', levelId);
+		setSelectedLevel(levelId);
+		setSelectedCategory(null); // Clear filter
+		// setSessionComplete(false);
+		
+		const levelToGradeMap = {
+			'niveau1': 'grade1',
+			'niveau2': 'grade2',
+			'niveau3': 'grade3'
+		};
+		if (levelToGradeMap[levelId]) {
+			setSelectedGrade(levelToGradeMap[levelId]);
+			// resetAndRestart(levelToGradeMap[levelId]); // Start quiz with ALL words from this level
+		}
+	};
+
+	const handleBackToDomains = () => {
+		console.log('⬅️ Back to domains');
+		setSelectedDomain(null);
+		setSelectedSection(null);
+		setSelectedLevel(null);
+		setSelectedCategory(null);
+	};
+
+	const handleBackToSections = () => {
+		console.log('⬅️ Back to sections');
+		setSelectedSection(null);
+		setSelectedLevel(null);
+		setSelectedCategory(null);
+	};
+
+	const handleBackToLevels = () => {
+		console.log('⬅️ Back to levels');
+		setSelectedLevel(null);
+		setSelectedCategory(null);
 	};
     
 	const handleModeChange = (mode) => {
@@ -184,6 +315,33 @@ const FrenchQuiz = () => {
 		}
 	}, [selectedCategory]);
 
+	useEffect(() => {
+		if (wordsLoaded) {
+			const navigationState = {
+				selectedDomain,
+				selectedSection,
+				selectedLevel,
+				selectedCategory
+			};
+			localStorage.setItem('brainbox-navigation', JSON.stringify(navigationState));
+		}
+	}, [selectedDomain, selectedSection, selectedLevel, selectedCategory, wordsLoaded]);
+
+// Restart quiz when domain/section/level changes AND words are available
+useEffect(() => {
+	if (currentProfileId && wordsLoaded && selectedDomain && selectedLevel) {
+		// For grammaire, wait until section is set
+		if (selectedDomain === 'grammaire' && !selectedSection) {
+			return;
+		}
+		// Check if we actually have words
+		const words = getCurrentWords();
+		if (words && words.length > 0) {
+			resetAndRestart(selectedGrade);
+		}
+	}
+}, [selectedDomain, selectedSection, selectedLevel, wordsLoaded, currentProfileId]);
+	
 	// Add loading screen BEFORE profile selection
 	if (!wordsLoaded) {
 		return (
@@ -245,6 +403,9 @@ const FrenchQuiz = () => {
 					soundEnabled={soundEnabled}
 					onToggleSound={() => setSoundEnabled(!soundEnabled)}
 					onShowProgress={() => setShowProgress(true)}
+					onSelectDomain={handleDomainSelection}
+					onSelectSection={handleSectionSelection}
+					onClose={() => {}} // Menu closes itself
 				/>
 
 				<PracticeModeBanner 
@@ -253,14 +414,16 @@ const FrenchQuiz = () => {
 				/>
 				
 				<div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-[minmax(150px,350px)_minmax(450px,1fr)] gap-3">
-					<CategoryTabs
-						selectedGrade={selectedGrade}
-						onSelectGrade={handleGradeChange}
-						selectedCategory={selectedCategory}
-						onSelectCategory={handleCategoryChange}
-						onClearCategory={handleClearCategoryFilter}
-						practiceMode={practiceMode}
-					/>
+				<CategoryTabs
+					selectedDomain={selectedDomain}
+					selectedSection={selectedSection}
+					selectedLevel={selectedLevel}
+					onSelectLevel={handleLevelSelection}
+					selectedCategory={selectedCategory}
+					onSelectCategory={handleCategoryChange}
+					onClearCategory={handleClearCategoryFilter}
+					practiceMode={practiceMode}
+				/>
 
 					<div className="px-4">
 						{currentQuestion && currentMode === 'quiz' && (

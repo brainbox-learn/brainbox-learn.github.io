@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Hamburger, ClipboardText, SpeakerHigh, SpeakerSimpleSlash, Cards, ChartBar, PlusSquare, PencilLine, PersonSimpleRun, X, Brain } from '@phosphor-icons/react';
+import { Hamburger, ClipboardText, SpeakerHigh, SpeakerSimpleSlash, Cards, ChartBar, PlusSquare, PencilLine, PersonSimpleRun, X, Brain, BookOpen, Article } from '@phosphor-icons/react';
 
 const QuizHeader = ({ 
     currentProfile, 
@@ -11,7 +11,10 @@ const QuizHeader = ({
     onAddNewProfile,
     soundEnabled, 
     onToggleSound, 
-    onShowProgress 
+    onShowProgress,
+	onSelectDomain,
+	onSelectSection,
+	onClose
 }) => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
@@ -27,7 +30,23 @@ const QuizHeader = ({
         setShowProfileDropdown(false);
     };
 
+    const handleDomainClick = (domainId) => {
+		setShowMobileMenu(false);
+        onSelectDomain(domainId);
+        onClose();
+    };
+
+    const handleSectionClick = (domainId, sectionId) => {
+		setShowMobileMenu(false);
+
+        onSelectDomain(domainId);
+        onSelectSection(sectionId);
+        onClose();
+    };
+
     const handleModeClick = (mode) => {
+		setShowMobileMenu(false);
+
         if (mode === currentMode) return;
         onModeChange(mode);
         setShowMobileMenu(false);
@@ -39,7 +58,7 @@ const QuizHeader = ({
                 <div className="relative flex h-20 items-center justify-between">
                     
                     {/* Mobile menu button - LEFT SIDE */}
-                    <div className="flex items-center sm:hidden">
+                    <div className="flex items-center">
                         <button 
                             type="button" 
                             onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -56,7 +75,7 @@ const QuizHeader = ({
                     </div>
 
                     {/* Logo Section - CENTER on mobile, LEFT on desktop */}
-                    <div className="flex flex-1 items-center justify-center sm:justify-start">
+                    <div className="flex flex-1 items-center justify-center sm:justify-start z-10 top-0 left-0">
                         <div className="flex items-center gap-2 sm:gap-3">
                             <div className="bg-white/90 p-2 sm:p-2.5 rounded-2xl shadow-lg transform hover:scale-110 transition-transform">
                                 <Brain size={32} weight="duotone" className="text-grade2-600 sm:w-10 sm:h-10" />
@@ -202,11 +221,12 @@ const QuizHeader = ({
 
             {/* Mobile Menu */}
             {showMobileMenu && (
-                <div className="sm:hidden border-t border-white/20">
-                    <div className="space-y-2 px-4 py-4">
+                <div className="absolute top-0 left-0 w-full border-t border-white/20 z-10 top-20 sm:w-80 bg-gradient-to-r from-grade1-500 via-grade2-500 to-grade3-500 rounded-3xl shadow-2xl backdrop-blur-sm">
+                    <section className="sm:hidden space-y-2 px-4 py-4">
+					<h2 className="text-white text-2xl font-bold">Modes</h2>
                         <button 
                             onClick={() => handleModeClick('quiz')}
-                            className={`flex items-center gap-3 w-full text-left rounded-2xl px-4 py-3 text-base font-semibold transition-all ${
+                            className={`sm:hidden flex items-center gap-3 w-full text-left rounded-2xl px-4 py-3 text-base font-semibold transition-all ${
                                 currentMode === 'quiz'
                                     ? 'bg-white text-grade1-600 shadow-lg'
                                     : 'bg-white/20 text-white hover:bg-white/30'
@@ -218,7 +238,7 @@ const QuizHeader = ({
                         
                         <button 
                             onClick={() => handleModeClick('flashcard')}
-                            className={`flex items-center gap-3 w-full text-left rounded-2xl px-4 py-3 text-base font-semibold transition-all ${
+                            className={`sm:hidden flex items-center gap-3 w-full text-left rounded-2xl px-4 py-3 text-base font-semibold transition-all ${
                                 currentMode === 'flashcard'
                                     ? 'bg-white text-grade2-600 shadow-lg'
                                     : 'bg-white/20 text-white hover:bg-white/30'
@@ -227,7 +247,44 @@ const QuizHeader = ({
                             <Cards size={24} weight="duotone" />
                             <span>Flash Cards</span>
                         </button>
-                    </div>
+                    </section>
+					<section className="space-y-2 px-4 py-4">
+						<h2 className="text-white text-2xl font-bold">Learning Areas</h2>
+						<button 
+								onClick={() => handleDomainClick('vocabulaire')}
+								className={`flex items-center gap-3 w-full text-left rounded-2xl px-4 py-3 text-base font-semibold transition-all ${
+									currentMode === 'flashcard'
+										? 'bg-white text-grade2-600 shadow-lg'
+										: 'bg-white/20 text-white hover:bg-white/30'
+								}`}
+							>
+								<BookOpen size={28} weight="duotone" />
+								<span>Vocabulaire</span>
+							</button>
+							<button 
+								onClick={() => handleSectionClick('grammaire', 'verbes')}
+								className={`flex items-center gap-3 w-full text-left rounded-2xl px-4 py-3 text-base font-semibold transition-all ${
+									currentMode === 'flashcard'
+										? 'bg-white text-grade2-600 shadow-lg'
+										: 'bg-white/20 text-white hover:bg-white/30'
+								}`}
+							>
+								<Article size={28} weight="duotone" />
+								<span>Verbes</span>
+							</button>
+							<button 
+								onClick={() => handleSectionClick('grammaire', 'expressions')}
+								className={`flex items-center gap-3 w-full text-left rounded-2xl px-4 py-3 text-base font-semibold transition-all ${
+									currentMode === 'flashcard'
+										? 'bg-white text-grade2-600 shadow-lg'
+										: 'bg-white/20 text-white hover:bg-white/30'
+								}`}
+							>
+								<Article size={28} weight="duotone" />
+								<span>Expressions</span>
+							</button>
+
+						</section>
                 </div>
             )}
         </nav>

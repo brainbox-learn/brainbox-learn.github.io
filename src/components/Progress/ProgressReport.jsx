@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CATEGORY_CONFIG, getCategoriesForGrade } from '../../data/words';
+import { DOMAINS_CONFIG, CONTENT_BY_DOMAIN } from '../../data/words';
 import { calculatePercentComplete, getProgressDataForCategory } from '../../utils/statsCalculator';
 import { 
     ChartBar, 
@@ -21,6 +21,10 @@ import {
     Heart,
     Book,
     Pencil,
+    Leaf,
+    TreePalm,
+    Lightning,
+    ChatCircle
 } from '@phosphor-icons/react';
 
 const ICON_MAP = {
@@ -36,23 +40,30 @@ const ICON_MAP = {
     'Heart': Heart,
     'Book': Book,
     'Pencil': Pencil,
+    'Lightning': Lightning,
+    'ChatCircle': ChatCircle,
 };
 
-// Theme styles
+const LEVEL_ICON_MAP = {
+    Leaf,
+    TreePalm,
+    Tree
+};
+
 const THEME_STYLES = {
-    grade1: {
+    vocabulaire: {
         bg: 'from-grade1-50 to-grade1-100',
         border: 'border-grade1-300',
         text: 'text-grade1-700',
         progress: 'bg-grade1-500',
     },
-    grade2: {
+    verbes: {
         bg: 'from-grade2-50 to-grade2-100',
         border: 'border-grade2-300',
         text: 'text-grade2-700',
         progress: 'bg-grade2-500',
     },
-    grade3: {
+    expressions: {
         bg: 'from-grade3-50 to-grade3-100',
         border: 'border-grade3-300',
         text: 'text-grade3-700',
@@ -63,65 +74,67 @@ const THEME_STYLES = {
 const ProgressReport = ({ 
     getCurrentStats, 
     onClose, 
-    onStartPracticeMode, 
-    wordsByCategory,
-    selectedGrade
+    onStartPracticeMode
 }) => {
-    const [expandedGrades, setExpandedGrades] = useState([selectedGrade]);
-    
-    const toggleGrade = (gradeKey) => {
-        setExpandedGrades(prev => 
-            prev.includes(gradeKey) 
-                ? prev.filter(g => g !== gradeKey)
-                : [...prev, gradeKey]
-        );
-    };
+    const [selectedTab, setSelectedTab] = useState('vocabulaire');
+    const [expandedLevels, setExpandedLevels] = useState([]);
+    const [expandedCategories, setExpandedCategories] = useState([]);
     
     const stats = getCurrentStats();
     
-    const getGradeStats = (gradeKey) => {
-        const categories = getCategoriesForGrade(gradeKey);
-        let totalWords = 0;
-        let masteredWords = 0;
-        let practiceWords = 0;
-        
-        categories.forEach(category => {
-            const categoryWords = category.words;
-            const { allCorrect, hasIncorrect } = getProgressDataForCategory(
-                gradeKey, 
-                { [gradeKey]: categoryWords }, 
-                stats
-            );
-            
-            totalWords += categoryWords.length;
-            masteredWords += allCorrect.length;
-            practiceWords += hasIncorrect.length;
-        });
+    const toggleLevel = (levelId) => {
+        setExpandedLevels(prev => 
+            prev.includes(levelId) 
+                ? prev.filter(l => l !== levelId)
+                : [...prev, levelId]
+        );
+    };
+    
+    const toggleCategory = (categoryId) => {
+        setExpandedCategories(prev => 
+            prev.includes(categoryId) 
+                ? prev.filter(c => c !== categoryId)
+                : [...prev, categoryId]
+        );
+    };
+    
+    // Get level stats using the SAME utility function as before
+    const getLevelStats = (items) => {
+        const { allCorrect } = getProgressDataForCategory(
+            'grade1', 
+            { 'grade1': items }, 
+            stats
+        );
         
         return {
-            totalWords,
-            masteredWords,
-            practiceWords,
-            percentComplete: Math.round((masteredWords / totalWords) * 100) || 0
+            totalItems: items.length,
+            masteredItems: allCorrect.length,
+            percentComplete: Math.round((allCorrect.length / items.length) * 100) || 0
         };
     };
     
-    const getGradePracticeWords = (gradeKey) => {
-        const categories = getCategoriesForGrade(gradeKey);
-        const practiceWords = [];
-        
-        categories.forEach(category => {
-            const categoryWords = category.words;
-            const { hasIncorrect } = getProgressDataForCategory(
-                gradeKey,
-                { [gradeKey]: categoryWords },
-                stats
-            );
-            practiceWords.push(...hasIncorrect);
-        });
-        
-        return practiceWords;
+    const getLevelPracticeItems = (items) => {
+        const { hasIncorrect } = getProgressDataForCategory(
+            'grade1',
+            { 'grade1': items },
+            stats
+        );
+        return hasIncorrect;
     };
+
+    const getCurrentData = () => {
+        if (selectedTab === 'vocabulaire') {
+            return CONTENT_BY_DOMAIN.vocabulaire;
+        } else if (selectedTab === 'verbes') {
+            return CONTENT_BY_DOMAIN.grammaire?.verbes;
+        } else if (selectedTab === 'expressions') {
+            return CONTENT_BY_DOMAIN.grammaire?.expressions;
+        }
+        return null;
+    };
+
+    const currentData = getCurrentData();
+    const themeStyles = THEME_STYLES[selectedTab] || THEME_STYLES.vocabulaire;
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 p-4 sm:p-8">
@@ -141,70 +154,108 @@ const ProgressReport = ({
                     </button>
                 </div>
 
-                {/* Grade Accordions */}
-                {Object.keys(wordsByCategory).map(gradeKey => {
-                    const config = CATEGORY_CONFIG[gradeKey];
-                    const theme = config.theme || gradeKey;
-                    const themeStyles = THEME_STYLES[theme] || THEME_STYLES.grade1;
-                    const Icon = config.icon;
-                    const isExpanded = expandedGrades.includes(gradeKey);
-                    const gradeStats = getGradeStats(gradeKey);
-                    const gradePracticeWords = getGradePracticeWords(gradeKey);
-                    const categories = getCategoriesForGrade(gradeKey);
+                {/* Tab Navigation */}
+                <header className="mb-6 flex flex-row justify-between items-center gap-4">
+                    <button
+                        onClick={() => setSelectedTab('vocabulaire')}
+                        className={`group w-full relative overflow-hidden rounded-2xl py-4 px-4 border-4 font-bold transition-all transform hover:scale-105 ${
+                            selectedTab === 'vocabulaire'
+                                ? 'bg-gradient-to-br from-grade1-400 to-grade1-600 text-white border-grade1-700 shadow-xl'
+                                : 'bg-white text-grade1-700 border-grade1-300 hover:bg-gradient-to-br hover:from-grade1-50 hover:to-grade1-100 hover:border-grade1-400'
+                        }`}
+                    >
+                        <h2 className="text-2xl font-bold flex items-center gap-3">
+                            <BookOpen size={28} weight="duotone" />
+                            <span className="block text-sm sm:text-xl">Vocabulaire</span>
+                        </h2>
+                        {/* <p className={`text-sm font-semibold block ${selectedTab === 'vocabulaire' ? 'text-white/80' : 'text-gray-600'}`}>
+                            Vocabulary
+                        </p> */}
+                    </button>
+                    
+                    <button
+                        onClick={() => setSelectedTab('verbes')}
+                        className={`group w-full relative overflow-hidden rounded-2xl py-4 px-4 border-4 font-bold transition-all transform hover:scale-105 ${
+                            selectedTab === 'verbes'
+                                ? 'bg-gradient-to-br from-grade2-400 to-grade2-600 text-white border-grade2-700 shadow-xl'
+                                : 'bg-white text-grade2-700 border-grade2-300 hover:bg-gradient-to-br hover:from-grade2-50 hover:to-grade2-100 hover:border-grade2-400'
+                        }`}
+                    >
+                        <h2 className="text-2xl font-bold flex items-center gap-3">
+                            <Lightning size={28} weight="duotone" />
+                            <span className="block text-sm sm:text-xl">Verbes</span>
+                        </h2>
+							{/* <p className={`text-sm font-semibold block ${selectedTab === 'verbes' ? 'text-white/80' : 'text-gray-600'}`}>
+								Verbs
+							</p> */}
+                    </button>
+                    
+                    <button
+                        onClick={() => setSelectedTab('expressions')}
+                        className={`group w-full relative overflow-hidden rounded-2xl py-4 px-4 border-4 font-bold transition-all transform hover:scale-105 ${
+                            selectedTab === 'expressions'
+                                ? 'bg-gradient-to-br from-grade3-400 to-grade3-600 text-white border-grade3-700 shadow-xl'
+                                : 'bg-white text-grade3-700 border-grade3-300 hover:bg-gradient-to-br hover:from-grade3-50 hover:to-grade3-100 hover:border-grade3-400'
+                        }`}
+                    >
+                        <h2 className="text-2xl font-bold flex items-center gap-3">
+                            <ChatCircle size={28} weight="duotone" />
+                            <span className="block text-sm sm:text-xl">Expressions</span>
+                        </h2>
+                        {/* <p className={`text-sm font-semibold block ${selectedTab === 'expressions' ? 'text-white/80' : 'text-gray-600'}`}>
+                            Expressions
+                        </p> */}
+                    </button>
+                </header>
+
+                {/* Level Accordions */}
+                {currentData && Object.entries(currentData).map(([levelId, levelData]) => {
+                    const items = levelData.words || levelData.items || [];
+                    const levelStats = getLevelStats(items);
+                    const levelPracticeItems = getLevelPracticeItems(items);
+                    const LevelIcon = LEVEL_ICON_MAP[levelData.config.icon] || Leaf;
+                    const isLevelExpanded = expandedLevels.includes(levelId);
                     
                     return (
                         <div 
-                            key={gradeKey} 
+                            key={levelId}
                             className={`mb-6 bg-gradient-to-br ${themeStyles.bg} rounded-3xl shadow-2xl border-4 ${themeStyles.border} overflow-hidden`}
                         >
-                            {/* Grade Header - FIXED: Split into clickable and non-clickable sections */}
+                            {/* Level Header */}
                             <div className="p-6">
-                                <div className="flex flex-row sm:flex-row justify-between items-start sm:items-center gap-4">
-                                    {/* Left side - Clickable accordion toggle */}
+                                <div className="flex flex-row justify-between items-center gap-4">
                                     <button
-                                        onClick={() => toggleGrade(gradeKey)}
+                                        onClick={() => toggleLevel(levelId)}
                                         className="flex items-center gap-4 hover:opacity-80 transition-opacity"
                                     >
-                                        {isExpanded ? (
+                                        {isLevelExpanded ? (
                                             <CaretDown size={32} weight="bold" className={themeStyles.text} />
                                         ) : (
                                             <CaretRight size={32} weight="bold" className={themeStyles.text} />
                                         )}
                                         <div className="p-2 bg-white/60 rounded-xl">
-                                            <Icon size={24} weight="duotone" />
+                                            <LevelIcon size={28} weight="duotone" />
                                         </div>
                                         <div className="text-left">
-                                            <h2 className={`text-1xl sm:text-3xl font-bold ${themeStyles.text}`}>
-                                                {config.label} <span className="text-sm text-gray-600 font-semibold">({gradeStats.percentComplete}%)</span>
+                                            <h2 className={`text-2xl sm:text-3xl font-bold ${themeStyles.text}`}>
+                                                {levelData.level.difficulty} <span className="text-sm text-gray-600 font-semibold">({levelStats.percentComplete}%)</span>
                                             </h2>
                                             <p className="text-sm text-gray-600 font-semibold">
-                                                {gradeStats.masteredWords}/{gradeStats.totalWords} mastered
+                                                {levelData.level.difficultyEnglish} • {levelStats.masteredItems}/{levelStats.totalItems} mastered
                                             </p>
                                         </div>
                                     </button>
                                     
-                                    {/* Right side - Action buttons (NOT nested in accordion button) */}
-                                    <div className="flex items-center gap-3">
-                                        {/* Grade-level Practice Button */}
-                                        {gradePracticeWords.length > 0 && (
-											<button
-											onClick={() => onStartPracticeMode(gradeKey, gradePracticeWords)}
-											className="flex items-center gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-gradient-to-r from-celebration-500 to-celebration-600 hover:from-celebration-600 hover:to-celebration-700 text-white rounded-xl transition-all transform hover:scale-105 font-bold text-xs sm:text-sm shadow-lg whitespace-nowrap"
-										>
-											<Fire size={16} className="sm:hidden" weight="duotone" />
-											<Fire size={20} className="hidden sm:block" weight="duotone" />
-											<span className="hidden sm:inline">Practice All ({gradePracticeWords.length})</span>
-											<span className="sm:hidden">Practice ({gradePracticeWords.length})</span>
-										</button>
-                                        )}
-                                        
-                                        {/* Progress Badge */}
-                                        {/* <div className="text-center bg-white/80 backdrop-blur-sm rounded-2xl px-5 py-3 shadow-lg">
-                                            <div className="text-3xl font-bold text-grade1-700">
-                                                {gradeStats.percentComplete}%
-                                            </div>
-                                        </div> */}
-                                    </div>
+                                    {levelPracticeItems.length > 0 && (
+                                        <button
+                                            onClick={() => onStartPracticeMode('grade1', levelPracticeItems)}
+                                            className="flex items-center gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-gradient-to-r from-celebration-500 to-celebration-600 hover:from-celebration-600 hover:to-celebration-700 text-white rounded-xl transition-all transform hover:scale-105 font-bold text-xs sm:text-sm shadow-lg whitespace-nowrap"
+                                        >
+                                            <Fire size={20} weight="duotone" />
+                                            <span className="hidden sm:inline">Practice All ({levelPracticeItems.length})</span>
+                                            <span className="sm:hidden">Practice ({levelPracticeItems.length})</span>
+                                        </button>
+                                    )}
                                 </div>
 
                                 {/* Progress Bar */}
@@ -212,11 +263,11 @@ const ProgressReport = ({
                                     <div className="w-full bg-white/50 rounded-full h-6 shadow-inner overflow-hidden">
                                         <div 
                                             className={`${themeStyles.progress} h-6 rounded-full transition-all duration-500 flex items-center justify-end pr-3 shadow-lg`}
-                                            style={{ width: `${gradeStats.percentComplete}%` }}
+                                            style={{ width: `${levelStats.percentComplete}%` }}
                                         >
-                                            {gradeStats.percentComplete > 15 && (
+                                            {levelStats.percentComplete > 15 && (
                                                 <span className="text-white font-bold text-sm">
-                                                    {gradeStats.percentComplete}%
+                                                    {levelStats.percentComplete}%
                                                 </span>
                                             )}
                                         </div>
@@ -224,20 +275,22 @@ const ProgressReport = ({
                                 </div>
                             </div>
 
-                            {/* Category Breakdown - Expandable */}
-                            {isExpanded && (
-                                <div className="px-6 pb-6 space-y-4 transition-all duration-300">
-                                    {categories.map(category => {
-                                        const categoryWords = category.words;
+                            {/* Categories */}
+                            {isLevelExpanded && (
+                                <div className="px-6 pb-6 space-y-4">
+                                    {levelData.categories.map(category => {
+                                        const categoryItems = category.words || category.items || [];
+                                        
+                                        // USE THE SAME UTILITY FUNCTION AS BEFORE
                                         const { notAttempted, allCorrect, hasIncorrect, total } = getProgressDataForCategory(
-                                            gradeKey,
-                                            { [gradeKey]: categoryWords },
+                                            'grade1',
+                                            { 'grade1': categoryItems },
                                             stats
                                         );
-                                        const percentComplete = calculatePercentComplete(allCorrect, total);
                                         
-                                        // FIXED: Use icon mapping with fallback
+                                        const percentComplete = calculatePercentComplete(allCorrect, total);
                                         const CategoryIcon = ICON_MAP[category.icon] || BookOpen;
+                                        const isCategoryExpanded = expandedCategories.includes(category.id);
                                         
                                         return (
                                             <div 
@@ -246,11 +299,19 @@ const ProgressReport = ({
                                             >
                                                 {/* Category Header */}
                                                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
-                                                    <div className="flex items-center gap-3">
+                                                    <button
+                                                        onClick={() => toggleCategory(category.id)}
+                                                        className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+                                                    >
+                                                        {isCategoryExpanded ? (
+                                                            <CaretDown size={24} weight="bold" className="text-gray-600" />
+                                                        ) : (
+                                                            <CaretRight size={24} weight="bold" className="text-gray-600" />
+                                                        )}
                                                         <div className="p-2 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl">
                                                             <CategoryIcon size={28} weight="duotone" />
                                                         </div>
-                                                        <div>
+                                                        <div className="text-left">
                                                             <h3 className="text-xl font-bold text-gray-800">
                                                                 {category.name}
                                                             </h3>
@@ -258,13 +319,12 @@ const ProgressReport = ({
                                                                 {category.nameEnglish}
                                                             </p>
                                                         </div>
-                                                    </div>
+                                                    </button>
                                                     
                                                     <div className="flex items-center gap-3">
-                                                        {/* Category Practice Button */}
                                                         {hasIncorrect.length > 0 && (
                                                             <button 
-                                                                onClick={() => onStartPracticeMode(gradeKey, hasIncorrect)} 
+                                                                onClick={() => onStartPracticeMode('grade1', hasIncorrect)} 
                                                                 className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-celebration-500 to-celebration-600 hover:from-celebration-600 hover:to-celebration-700 text-white rounded-xl transition-all transform hover:scale-105 font-bold text-sm shadow-lg whitespace-nowrap"
                                                             >
                                                                 <Fire size={18} weight="duotone" />
@@ -283,7 +343,7 @@ const ProgressReport = ({
                                                     </div>
                                                 </div>
 
-                                                {/* Category Progress Bar */}
+                                                {/* Progress Bar */}
                                                 <div className="w-full bg-gray-200 rounded-full h-4 mb-4 shadow-inner overflow-hidden">
                                                     <div 
                                                         className={`${themeStyles.progress} h-4 rounded-full transition-all duration-500`}
@@ -291,68 +351,70 @@ const ProgressReport = ({
                                                     />
                                                 </div>
 
-                                                {/* Category Stats Sections */}
-                                                <div className="space-y-3">
-                                                    {/* Not Attempted */}
-                                                    {notAttempted.length > 0 && (
-                                                        <div className="bg-grade2-50 p-4 rounded-xl border-2 border-grade2-200">
-                                                            <h4 className="text-sm font-bold text-grade2-700 mb-2 flex items-center gap-2">
-                                                                <Target size={18} weight="duotone" />
-                                                                <span>Not Tried Yet ({notAttempted.length})</span>
-                                                            </h4>
-                                                            <div className="flex flex-wrap gap-2">
-                                                                {notAttempted.map(w => (
-                                                                    <span 
-                                                                        key={w.id} 
-                                                                        className="px-3 py-1 bg-grade2-100 rounded-lg text-xs font-bold text-grade2-700"
-                                                                    >
-                                                                        {w.french}
-                                                                    </span>
-                                                                ))}
+                                                {/* Expandable Details */}
+                                                {isCategoryExpanded && (
+                                                    <div className="space-y-3">
+                                                        {/* Not Attempted */}
+                                                        {notAttempted.length > 0 && (
+                                                            <div className="bg-grade2-50 p-4 rounded-xl border-2 border-grade2-200">
+                                                                <h4 className="text-sm font-bold text-grade2-700 mb-2 flex items-center gap-2">
+                                                                    <Target size={18} weight="duotone" />
+                                                                    <span>Not Tried Yet ({notAttempted.length})</span>
+                                                                </h4>
+                                                                <div className="flex flex-wrap gap-2">
+                                                                    {notAttempted.map(item => (
+                                                                        <span 
+                                                                            key={item.id} 
+                                                                            className="px-3 py-1 bg-grade2-100 rounded-lg text-xs font-bold text-grade2-700"
+                                                                        >
+                                                                            {item.french || item.infinitive}
+                                                                        </span>
+                                                                    ))}
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    )}
+                                                        )}
 
-                                                    {/* Mastered */}
-                                                    {allCorrect.length > 0 && (
-                                                        <div className="bg-success-50 p-4 rounded-xl border-2 border-success-200">
-                                                            <h4 className="text-sm font-bold text-success-700 mb-2 flex items-center gap-2">
-                                                                <Trophy size={18} weight="duotone" />
-                                                                <span>Mastered! ⭐ ({allCorrect.length})</span>
-                                                            </h4>
-                                                            <div className="flex flex-wrap gap-2">
-                                                                {allCorrect.map(w => (
-                                                                    <span 
-                                                                        key={w.id} 
-                                                                        className="px-3 py-1 bg-success-100 rounded-lg text-xs font-bold text-success-700"
-                                                                    >
-                                                                        {w.french} ({stats[w.id].correct}/{stats[w.id].attempts})
-                                                                    </span>
-                                                                ))}
+                                                        {/* Mastered */}
+                                                        {allCorrect.length > 0 && (
+                                                            <div className="bg-success-50 p-4 rounded-xl border-2 border-success-200">
+                                                                <h4 className="text-sm font-bold text-success-700 mb-2 flex items-center gap-2">
+                                                                    <Trophy size={18} weight="duotone" />
+                                                                    <span>Mastered! ⭐ ({allCorrect.length})</span>
+                                                                </h4>
+                                                                <div className="flex flex-wrap gap-2">
+                                                                    {allCorrect.map(item => (
+                                                                        <span 
+                                                                            key={item.id} 
+                                                                            className="px-3 py-1 bg-success-100 rounded-lg text-xs font-bold text-success-700"
+                                                                        >
+                                                                            {item.french || item.infinitive} ({stats[item.id].correct}/{stats[item.id].attempts})
+                                                                        </span>
+                                                                    ))}
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    )}
+                                                        )}
 
-                                                    {/* Need Practice */}
-                                                    {hasIncorrect.length > 0 && (
-                                                        <div className="bg-celebration-50 p-4 rounded-xl border-2 border-celebration-200">
-                                                            <h4 className="text-sm font-bold text-celebration-700 mb-2 flex items-center gap-2">
-                                                                <Fire size={18} weight="duotone" />
-                                                                <span>Need Practice 💪 ({hasIncorrect.length})</span>
-                                                            </h4>
-                                                            <div className="flex flex-wrap gap-2">
-                                                                {hasIncorrect.map(w => (
-                                                                    <span 
-                                                                        key={w.id} 
-                                                                        className="px-3 py-1 bg-celebration-100 rounded-lg text-xs font-bold text-celebration-700"
-                                                                    >
-                                                                        {w.french} ({stats[w.id].correct}/{stats[w.id].attempts})
-                                                                    </span>
-                                                                ))}
+                                                        {/* Need Practice */}
+                                                        {hasIncorrect.length > 0 && (
+                                                            <div className="bg-celebration-50 p-4 rounded-xl border-2 border-celebration-200">
+                                                                <h4 className="text-sm font-bold text-celebration-700 mb-2 flex items-center gap-2">
+                                                                    <Fire size={18} weight="duotone" />
+                                                                    <span>Need Practice 💪 ({hasIncorrect.length})</span>
+                                                                </h4>
+                                                                <div className="flex flex-wrap gap-2">
+                                                                    {hasIncorrect.map(item => (
+                                                                        <span 
+                                                                            key={item.id} 
+                                                                            className="px-3 py-1 bg-celebration-100 rounded-lg text-xs font-bold text-celebration-700"
+                                                                        >
+                                                                            {item.french || item.infinitive} ({stats[item.id].correct}/{stats[item.id].attempts})
+                                                                        </span>
+                                                                    ))}
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    )}
-                                                </div>
+                                                        )}
+                                                    </div>
+                                                )}
                                             </div>
                                         );
                                     })}

@@ -151,6 +151,118 @@
 		  { "id": 520, "french": "la chaise", "english": "the chair" },
 		  { "id": 521, "french": "le tableau", "english": "the board" }
 		]
+	  },
+	  {
+		"id": "flowers-trees-3",
+		"name": "Fleurs et Arbres",
+		"nameEnglish": "Flowers & Trees",
+		"icon": "Tree",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "school-3",
+		  "accuracy": 70
+		},
+		"words": [
+		  { "id": 522, "french": "la fleur", "english": "the flower" },
+		  { "id": 523, "french": "l'arbre", "english": "the tree" },
+		  { "id": 524, "french": "la branche", "english": "the branch" },
+		  { "id": 525, "french": "les briques", "english": "the bricks" },
+		  { "id": 526, "french": "la feuille", "english": "the leaf" },
+		  { "id": 527, "french": "la brouette", "english": "the wheelbarrow" },
+		  { "id": 528, "french": "le pot", "english": "the pot" },
+		  { "id": 529, "french": "le gland", "english": "the acorn" },
+		  { "id": 530, "french": "le cactus", "english": "the cactus" },
+		  { "id": 531, "french": "la pollinisation", "english": "the pollination" },
+		  { "id": 532, "french": "la chenille", "english": "the caterpillar" },
+		  { "id": 533, "french": "l'escargot", "english": "the snail" },
+		  { "id": 534, "french": "l'érable", "english": "the maple tree" },
+		  { "id": 535, "french": "la colline", "english": "the hill" },
+		  { "id": 536, "french": "le tremble", "english": "the aspen" }
+		]
+	  },
+	  {
+		"id": "grasses-plants-3",
+		"name": "Herbes et Petites Plantes",
+		"nameEnglish": "Grasses & Small Plants",
+		"icon": "Plant",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "flowers-trees-3",
+		  "accuracy": 70
+		},
+		"words": [
+		  { "id": 537, "french": "l'herbe", "english": "the grass" },
+		  { "id": 538, "french": "la fourmi", "english": "the ant" },
+		  { "id": 539, "french": "le ver de terre", "english": "the worm" },
+		  { "id": 540, "french": "la racine", "english": "the root" },
+		  { "id": 541, "french": "le légume", "english": "the vegetable" },
+		  { "id": 542, "french": "la pluie", "english": "the rain" },
+		  { "id": 543, "french": "la goutte d'eau", "english": "the drop of water" },
+		  { "id": 544, "french": "le soleil", "english": "the sun" },
+		  { "id": 545, "french": "l'arrosoir", "english": "the watering can" },
+		  { "id": 546, "french": "le bourgeon", "english": "the sprout" },
+		  { "id": 547, "french": "les déchets", "english": "the litter" },
+		  { "id": 548, "french": "le sapin douglas", "english": "the douglas fir" },
+		  { "id": 549, "french": "la pruche", "english": "the hemlock" },
+		  { "id": 550, "french": "le marais", "english": "the swamp" },
+		  { "id": 551, "french": "la grotte", "english": "the cave" }
+		]
+	  },
+	  {
+		"id": "plants-nature-3",
+		"name": "Plantes et Nature",
+		"nameEnglish": "Plants & Nature",
+		"icon": "Flower",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "grasses-plants-3",
+		  "accuracy": 70
+		},
+		"words": [
+		  { "id": 552, "french": "la plante", "english": "the plant" },
+		  { "id": 553, "french": "le sol", "english": "the soil" },
+		  { "id": 554, "french": "la forêt", "english": "the forest" },
+		  { "id": 555, "french": "la roche", "english": "the rock" },
+		  { "id": 556, "french": "le fruit", "english": "the fruit" },
+		  { "id": 557, "french": "la tige", "english": "the stem" },
+		  { "id": 558, "french": "le pollen", "english": "the pollen" },
+		  { "id": 559, "french": "la peau de banana", "english": "the banana peel" },
+		  { "id": 560, "french": "le vent", "english": "the wind" },
+		  { "id": 561, "french": "le haricot", "english": "the bean" },
+		  { "id": 562, "french": "les sépales", "english": "the sepals" },
+		  { "id": 563, "french": "l'aiguille", "english": "the needle" },
+		  { "id": 564, "french": "le cèdre", "english": "the cedar" },
+		  { "id": 565, "french": "le banc de la rivière", "english": "the river bank" },
+		  { "id": 566, "french": "le courant", "english": "the current" }
+		]
+	  },
+	  {
+		"id": "water-soil-3",
+		"name": "Eau et Sol",
+		"nameEnglish": "Water & Soil",
+		"icon": "Drop",
+		"unlocked": false,
+		"unlockRequirement": {
+		  "categoryId": "plants-nature-3",
+		  "accuracy": 70
+		},
+		"words": [
+		  { "id": 567, "french": "l'eau", "english": "the water" },
+		  { "id": 568, "french": "le cailloux", "english": "the stone" },
+		  { "id": 569, "french": "la graine", "english": "the seed" },
+		  { "id": 570, "french": "le sable", "english": "the sand" },
+		  { "id": 571, "french": "le bâton", "english": "the stick" },
+		  { "id": 572, "french": "le tronc", "english": "the trunk" },
+		  { "id": 573, "french": "la souche", "english": "the stump" },
+		  { "id": 574, "french": "le pétale", "english": "the petal" },
+		  { "id": 575, "french": "la matière organique", "english": "the organic matter" },
+		  { "id": 576, "french": "le nuage", "english": "the cloud" },
+		  { "id": 577, "french": "l'écorce", "english": "the bark" },
+		  { "id": 578, "french": "le cône", "english": "the cone" },
+		  { "id": 579, "french": "le ruisseau", "english": "the river/creek" },
+		  { "id": 580, "french": "la rivière", "english": "the river" },
+		  { "id": 581, "french": "la mousse", "english": "the moss" }
+		]
 	  }
 	]
   }

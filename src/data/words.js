@@ -1,107 +1,200 @@
 import { Leaf, Tree, TreePalm } from '@phosphor-icons/react';
 
 const basePath = import.meta.env.BASE_URL;
-console.log('basePath', basePath);
 
-// Category configuration - Easy to add new categories!
-const CATEGORY_CONFIG = {
-    grade1: { label: "Grade 1", icon: Leaf },
-    grade2: { label: "Grade 2", icon: TreePalm },
-    grade3: { label: "Grade 3", icon: Tree },
-};
+let CATEGORY_CONFIG = {};
 
-// This will be populated by loadAllWords()
 let WORDS_BY_CATEGORY = {};
-let CATEGORIES_BY_GRADE = {}; // NEW
+let CATEGORIES_BY_GRADE = {};
+let DOMAINS_CONFIG = null;
+let CONTENT_BY_DOMAIN = {};
 let isLoading = false;
 let loadPromise = null;
 
-// Load all category data from JSON files
-export const loadAllWords = async () => {
-    if (Object.keys(WORDS_BY_CATEGORY).length > 0) {
-        return { words: WORDS_BY_CATEGORY, categories: CATEGORIES_BY_GRADE };
+export const loadDomains = async () => {
+    try {
+        const response = await fetch(`${basePath}data/domains.json`, { cache: 'force-cache' });
+        if (!response.ok) return null;
+        const resp = await response.json();
+		console.log('resp', resp)
+		return resp;
+    } catch (error) {
+        console.error('Error loading domains:', error);
+        return null;
     }
-    
-    if (isLoading && loadPromise) {
-        return loadPromise;
+};
+
+const loadLevelBasedDomain = async (domain) => {
+    console.log(`📚 Loading ${domain.name}...`);
+    const levelData = {};
+    for (const level of domain.levels) {
+        try {
+            const response = await fetch(`${basePath}data/${level.dataFile}`, { cache: 'force-cache' });
+            if (!response.ok) throw new Error(`Failed to load ${level.dataFile}`);
+            const data = await response.json();
+            levelData[level.id] = {
+                level: data.level,
+                categories: data.categories,
+                words: data.categories.flatMap(cat => cat.words || []),
+                config: level
+            };
+            console.log(`  ✅ ${level.displayName}: ${levelData[level.id].words.length} words, ${data.categories.length} categories`);
+        } catch (error) {
+            console.error(`  ❌ Error loading ${level.id}:`, error);
+        }
     }
+    return levelData;
+};
+
+const loadTopicBasedDomain = async (domain) => {
+    console.log(`📖 Loading ${domain.name}...`);
+    const sectionData = {};
+    for (const section of domain.sections) {
+        if (section.levels) {
+            console.log(`  ├─ ${section.name}`);
+            sectionData[section.id] = {};
+            for (const level of section.levels) {
+                try {
+                    const response = await fetch(`${basePath}data/${level.dataFile}`, { cache: 'force-cache' });
+                    if (!response.ok) throw new Error(`Failed to load ${level.dataFile}`);
+                    const data = await response.json();
+                    sectionData[section.id][level.id] = {
+                        level: data.level,
+                        categories: data.categories,
+                        items: data.categories.flatMap(cat => cat.items || []),
+                        config: level
+                    };
+                    console.log(`  │  ✅ ${level.displayName}: ${sectionData[section.id][level.id].items.length} items`);
+                } catch (error) {
+                    console.error(`  │  ❌ Error loading ${section.id}/${level.id}:`, error);
+                }
+            }
+        }
+    }
+    return sectionData;
+};
+
+const buildLegacyCompatibility = (contentByDomain) => {
+    console.log('🔄 Building legacy compatibility...');
+    const vocab = contentByDomain.vocabulaire || {};
+    WORDS_BY_CATEGORY = {
+        grade1: vocab.niveau1?.words || [],
+        grade2: vocab.niveau2?.words || [],
+        grade3: vocab.niveau3?.words || []
+    };
+    CATEGORIES_BY_GRADE = {
+        grade1: vocab.niveau1?.categories || [],
+        grade2: vocab.niveau2?.categories || [],
+        grade3: vocab.niveau3?.categories || []
+    };
+
+	CATEGORY_CONFIG = {
+		grade1: { label: vocab.niveau1?.level?.difficulty, englishLabel: vocab.niveau1?.level?.difficultyEnglish, icon: Leaf },
+		grade2: { label: vocab.niveau2?.level?.difficulty, englishLabel: vocab.niveau2?.level?.difficultyEnglish, icon: TreePalm },
+		grade3: { label: vocab.niveau3?.level?.difficulty, englishLabel: vocab.niveau3?.level?.difficultyEnglish, icon: Tree },
+	};
+
+    console.log(`  ✅ grade1: ${WORDS_BY_CATEGORY.grade1.length} words`);
+    console.log(`  ✅ grade2: ${WORDS_BY_CATEGORY.grade2.length} words`);
+    console.log(`  ✅ grade3: ${WORDS_BY_CATEGORY.grade3.length} words`);
+};
+
+export const loadAllContent = async () => {
+    if (DOMAINS_CONFIG && Object.keys(CONTENT_BY_DOMAIN).length > 0) {
+        return { domains: DOMAINS_CONFIG, content: CONTENT_BY_DOMAIN };
+    }
+    if (isLoading && loadPromise) return loadPromise;
     
     isLoading = true;
-    
     loadPromise = (async () => {
-        const grades = Object.keys(CATEGORY_CONFIG);
-        const wordData = {};
-        const categoryData = {};
+        const domains = await loadDomains();
+        if (!domains) {
+            const result = await loadLegacyStructure();
+            isLoading = false;
+            return result;
+        }
         
-        for (const gradeKey of grades) {
-            try {
-                const response = await fetch(`${basePath}data/${gradeKey}.json`, {
-                    cache: 'force-cache'
-                });
-                if (!response.ok) {
-                    throw new Error(`Failed to load ${gradeKey}`);
-                }
-                
-                const data = await response.json();
-                
-                // NEW: Check if it's the new structure (with categories)
-                if (data.categories && Array.isArray(data.categories)) {
-                    // Store categories
-                    categoryData[gradeKey] = data.categories;
-                    
-                    // Flatten words for backward compatibility
-                    wordData[gradeKey] = data.categories.flatMap(cat => cat.words);
-                } else {
-                    // OLD: Fallback for old structure (flat array)
-                    wordData[gradeKey] = data;
-                    categoryData[gradeKey] = [{
-                        id: `essential-${data.grade || gradeKey}`,
-                        name: "Mots Essentiels",
-                        nameEnglish: "Essential Words",
-                        icon: "BookOpen",
-                        unlocked: true,
-                        words: data
-                    }];
-                }
-            } catch (error) {
-                console.error(`Error loading ${gradeKey}:`, error);
-                wordData[gradeKey] = [];
-                categoryData[gradeKey] = [];
+        DOMAINS_CONFIG = domains;
+        const contentByDomain = {};
+        
+        for (const domain of domains.domains.filter(d => d.enabled)) {
+            if (domain.organizationType === 'level-based') {
+                contentByDomain[domain.id] = await loadLevelBasedDomain(domain);
+            } else if (domain.organizationType === 'topic-based') {
+                contentByDomain[domain.id] = await loadTopicBasedDomain(domain);
             }
         }
         
-        WORDS_BY_CATEGORY = wordData;
-        CATEGORIES_BY_GRADE = categoryData;
+        CONTENT_BY_DOMAIN = contentByDomain;
+        buildLegacyCompatibility(contentByDomain);
         isLoading = false;
-        
-        return { words: wordData, categories: categoryData };
+        return { domains: DOMAINS_CONFIG, content: CONTENT_BY_DOMAIN };
     })();
     
     return loadPromise;
 };
 
-// NEW: Get categories for a specific grade
-export const getCategoriesForGrade = (gradeKey) => {
-    return CATEGORIES_BY_GRADE[gradeKey] || [];
+const loadLegacyStructure = async () => {
+    const wordData = {};
+    const categoryData = {};
+    for (const gradeKey of Object.keys(CATEGORY_CONFIG)) {
+        try {
+            const response = await fetch(`${basePath}data/${gradeKey}.json`, { cache: 'force-cache' });
+            if (!response.ok) throw new Error(`Failed to load ${gradeKey}`);
+            const data = await response.json();
+            if (data.categories) {
+                categoryData[gradeKey] = data.categories;
+                wordData[gradeKey] = data.categories.flatMap(cat => cat.words);
+            } else {
+                wordData[gradeKey] = data;
+                categoryData[gradeKey] = [{ id: `essential-${gradeKey}`, name: "Mots Essentiels", icon: "BookOpen", unlocked: true, words: data }];
+            }
+        } catch (error) {
+            console.error(`Error loading ${gradeKey}:`, error);
+            wordData[gradeKey] = [];
+            categoryData[gradeKey] = [];
+        }
+    }
+    WORDS_BY_CATEGORY = wordData;
+    CATEGORIES_BY_GRADE = categoryData;
+    return { words: wordData, categories: categoryData };
 };
 
-// NEW: Get words for a specific category
+export const loadAllWords = async () => {
+    await loadAllContent();
+    return { words: WORDS_BY_CATEGORY, categories: CATEGORIES_BY_GRADE };
+};
+
+export const getCategoriesForGrade = (gradeKey) => CATEGORIES_BY_GRADE[gradeKey] || [];
 export const getWordsForCategory = (gradeKey, categoryId) => {
-    const categories = CATEGORIES_BY_GRADE[gradeKey] || [];
-    const category = categories.find(cat => cat.id === categoryId);
-    return category ? category.words : [];
+    const cat = getCategoriesForGrade(gradeKey).find(c => c.id === categoryId);
+    return cat ? cat.words : [];
+};
+export const getUnlockedCategories = (gradeKey) => getCategoriesForGrade(gradeKey).filter(c => c.unlocked);
+
+export const getDomainConfig = (domainId) => DOMAINS_CONFIG?.domains.find(d => d.id === domainId) || null;
+
+export const getContentForLevel = (domainId, levelId) => CONTENT_BY_DOMAIN[domainId]?.[levelId] || null;
+
+export const getContentForSection = (domainId, sectionId, levelId) => {
+    return CONTENT_BY_DOMAIN[domainId]?.[sectionId]?.[levelId] || null;
 };
 
-// NEW: Get all unlocked categories for a grade
-export const getUnlockedCategories = (gradeKey) => {
-    const categories = CATEGORIES_BY_GRADE[gradeKey] || [];
-    return categories.filter(cat => cat.unlocked);
+export const getCategoriesForLevel = (domainId, levelId, sectionId = null) => {
+    if (sectionId) {
+        // Grammaire with section
+        const levelData = getContentForSection(domainId, sectionId, levelId);
+        return levelData?.categories || [];
+    } else {
+        // Vocabulaire without section
+        const levelData = getContentForLevel(domainId, levelId);
+        return levelData?.categories || [];
+    }
 };
 
-// Settings
 const SETTINGS = {
     multipleChoiceCount: 2,
     quizDirection: 'french-to-english',
 };
 
-export { CATEGORY_CONFIG, WORDS_BY_CATEGORY, CATEGORIES_BY_GRADE, SETTINGS };
+export { CATEGORY_CONFIG, WORDS_BY_CATEGORY, CATEGORIES_BY_GRADE, SETTINGS, DOMAINS_CONFIG, CONTENT_BY_DOMAIN };
