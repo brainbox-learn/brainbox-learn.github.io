@@ -187,6 +187,9 @@ const CategoryTabs = ({
 
                 {/* Level Tabs - Desktop */}
                 <div className="hidden sm:grid grid-cols-1 gap-3 w-full">
+					<header className="text-white text-2xl font-bold mb-4">
+						<h1 className="text-2xl font-bold capitalize text-grade1-600 px-4">{selectedDomain}</h1>
+						</header>
                     {levels.map(level => {
                         const LevelIcon = LEVEL_ICON_MAP[level.icon] || LEVEL_ICON_MAP['Leaf'];
                         const isSelected = selectedLevel === level.id;
@@ -264,7 +267,7 @@ const CategoryTabs = ({
                                                     className={`p-1 rounded transition-colors ${
                                                         selectedLevel === level.id 
                                                             ? 'hover:bg-white/20 cursor-pointer' 
-                                                            : 'opacity-50 cursor-not-allowed'
+                                                            : 'hidden'
                                                     }`}
                                                 >
                                                     <Funnel size={16} weight="bold" />

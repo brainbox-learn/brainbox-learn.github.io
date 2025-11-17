@@ -14,6 +14,8 @@ const QuizHeader = ({
     onShowProgress,
 	onSelectDomain,
 	onSelectSection,
+	selectedDomain,
+	selectedSection,
 	onClose
 }) => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -253,7 +255,7 @@ const QuizHeader = ({
 						<button 
 								onClick={() => handleDomainClick('vocabulaire')}
 								className={`flex items-center gap-3 w-full text-left rounded-2xl px-4 py-3 text-base font-semibold transition-all ${
-									currentMode === 'flashcard'
+									selectedDomain === 'vocabulaire'
 										? 'bg-white text-grade2-600 shadow-lg'
 										: 'bg-white/20 text-white hover:bg-white/30'
 								}`}
@@ -261,10 +263,11 @@ const QuizHeader = ({
 								<Book size={28} weight="duotone" />
 								<span>Vocabulaire</span>
 							</button>
+							<h2 className="text-white text-1xl font-bold">Grammaire</h2>
 							<button 
 								onClick={() => handleSectionClick('grammaire', 'verbes')}
 								className={`flex items-center gap-3 w-full text-left rounded-2xl px-4 py-3 text-base font-semibold transition-all ${
-									currentMode === 'flashcard'
+									selectedSection === 'verbes'
 										? 'bg-white text-grade2-600 shadow-lg'
 										: 'bg-white/20 text-white hover:bg-white/30'
 								}`}
@@ -275,7 +278,7 @@ const QuizHeader = ({
 							<button 
 								onClick={() => handleSectionClick('grammaire', 'expressions')}
 								className={`flex items-center gap-3 w-full text-left rounded-2xl px-4 py-3 text-base font-semibold transition-all ${
-									currentMode === 'flashcard'
+									selectedSection === 'expressions'
 										? 'bg-white text-grade2-600 shadow-lg'
 										: 'bg-white/20 text-white hover:bg-white/30'
 								}`}

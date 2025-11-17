@@ -407,6 +407,8 @@ useEffect(() => {
 					onShowProgress={() => setShowProgress(true)}
 					onSelectDomain={handleDomainSelection}
 					onSelectSection={handleSectionSelection}
+					selectedDomain={selectedDomain}
+					selectedSection={selectedSection}
 					onClose={() => {}} // Menu closes itself
 				/>
 
