@@ -17,7 +17,7 @@ const QuestionCard = ({
         <div className="mx-auto bg-gradient-to-br from-white via-amber-50 to-orange-50 rounded-3xl shadow-2xl p-8 sm:p-12 mb-8 border-4 border-grade1-300">
         {/* <div className="max-w-3xl mx-auto bg-gradient-to-br from-white via-amber-50 to-orange-50 rounded-3xl shadow-2xl p-8 sm:p-12 mb-8 border-4 border-grade1-300"> */}
             <div className="text-center mb-8">
-                <p className="text-gray-600 text-xl mb-4 font-medium">What does this mean?</p>
+                <p className="text-gray-600 text-xl mb-2 font-medium">What does this mean?</p>
                 
                 <div className="flex items-center justify-center gap-4 mb-6">
                     <h2 className="text-3xl sm:text-6xl font-bold text-grade1-700">{questionText}</h2>

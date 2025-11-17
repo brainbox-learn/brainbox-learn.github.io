@@ -140,6 +140,7 @@ const getCurrentWords = () => {
 		getCurrentStats,
 		updateCurrentStats,
 		createProfile,
+		updateProfileName, // ADD THIS
 		deleteProfile,
 		switchProfile,
 		setCurrentProfileId,
@@ -196,7 +197,7 @@ const getCurrentWords = () => {
 		if (domainId === selectedDomain) {
 			return;
 		}
-		
+
 		console.log('🎯 Domain selected:', domainId);
 		setSelectedDomain(domainId);
 		setSelectedSection(null);
@@ -362,6 +363,7 @@ useEffect(() => {
 				profiles={profiles}
 				onSelectProfile={switchProfile}
 				onCreateProfile={createProfile}
+				onUpdateProfileName={updateProfileName} // ADD THIS
 				onDeleteProfile={deleteProfile}
 				onImportProfile={importProfile}
 				wordsByCategory={WORDS_BY_CATEGORY}

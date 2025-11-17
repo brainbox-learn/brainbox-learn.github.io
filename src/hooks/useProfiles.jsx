@@ -21,16 +21,34 @@ export const useProfiles = () => {
             [currentProfileId]: {
                 ...prev[currentProfileId],
                 stats: newStats,
-                lastModified: Date.now() // Track when stats were last updated
+                lastModified: Date.now()
             }
         }));
     };
 
+    // Helper: Generate unique name by appending number if duplicate exists
+    const getUniqueName = (desiredName, excludeProfileId = null) => {
+        const existingNames = Object.values(profiles)
+            .filter(p => p.id !== excludeProfileId)
+            .map(p => p.name.toLowerCase());
+        
+        let uniqueName = desiredName;
+        let counter = 2;
+        
+        while (existingNames.includes(uniqueName.toLowerCase())) {
+            uniqueName = `${desiredName} ${counter}`;
+            counter++;
+        }
+        
+        return uniqueName;
+    };
+
     const createProfile = (name) => {
+        const uniqueName = getUniqueName(name);
         const profileId = `profile-${Date.now()}`;
         const newProfile = {
             id: profileId,
-            name,
+            name: uniqueName,
             stats: {},
             createdAt: Date.now(),
             lastModified: Date.now()
@@ -41,6 +59,23 @@ export const useProfiles = () => {
         }));
         setCurrentProfileId(profileId);
         return profileId;
+    };
+
+    const updateProfileName = (profileId, newName) => {
+        if (!profiles[profileId]) return false;
+        
+        const uniqueName = getUniqueName(newName, profileId);
+        
+        setProfiles(prev => ({
+            ...prev,
+            [profileId]: {
+                ...prev[profileId],
+                name: uniqueName,
+                lastModified: Date.now()
+            }
+        }));
+        
+        return true;
     };
 
     const deleteProfile = (profileId) => {
@@ -54,7 +89,6 @@ export const useProfiles = () => {
             return newProfiles;
         });
         
-        // If deleting current profile, switch to another
         if (currentProfileId === profileId) {
             const remainingProfiles = Object.keys(profiles).filter(id => id !== profileId);
             setCurrentProfileId(remainingProfiles[0] || null);
@@ -67,13 +101,10 @@ export const useProfiles = () => {
         setCurrentProfileId(profileId);
     };
 
-    // NEW: Import profile with smart merge logic
     const importProfile = (importedProfile) => {
-        // Check if profile already exists locally
         const existingProfile = profiles[importedProfile.id];
         
         if (existingProfile) {
-            // Profile exists - merge stats (take max values)
             const mergedStats = mergeStats(existingProfile.stats, importedProfile.stats);
             
             const updatedProfile = {
@@ -92,7 +123,6 @@ export const useProfiles = () => {
             
             return importedProfile.id;
         } else {
-            // New profile - just add it
             setProfiles(prev => ({
                 ...prev,
                 [importedProfile.id]: {
@@ -105,7 +135,6 @@ export const useProfiles = () => {
         }
     };
 
-    // Helper: Merge stats by taking max values for each word
     const mergeStats = (localStats, importedStats) => {
         const merged = { ...localStats };
         
@@ -114,10 +143,8 @@ export const useProfiles = () => {
             const importedStat = importedStats[wordId];
             
             if (!localStat) {
-                // Word only exists in imported data
                 merged[wordId] = importedStat;
             } else {
-                // Word exists in both - take max values
                 merged[wordId] = {
                     attempts: Math.max(localStat.attempts, importedStat.attempts),
                     correct: Math.max(localStat.correct, importedStat.correct),
@@ -137,9 +164,10 @@ export const useProfiles = () => {
         getCurrentStats,
         updateCurrentStats,
         createProfile,
+        updateProfileName, // NEW
         deleteProfile,
         switchProfile,
         setCurrentProfileId,
-        importProfile // NEW: Export import function
+        importProfile
     };
 };

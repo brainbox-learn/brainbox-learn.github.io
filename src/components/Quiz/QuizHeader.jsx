@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Hamburger, ClipboardText, SpeakerHigh, SpeakerSimpleSlash, Cards, ChartBar, PlusSquare, PencilLine, PersonSimpleRun, X, Brain, BookOpen, Article } from '@phosphor-icons/react';
+import { Hamburger, ClipboardText, SpeakerHigh, SpeakerSimpleSlash, Cards, ChartBar, PlusSquare, PencilLine, PersonSimpleRun, X, Brain, BookOpen, Article, BookOpenText, Books, Users } from '@phosphor-icons/react';
 
 const QuizHeader = ({ 
     currentProfile, 
@@ -195,8 +195,8 @@ const QuizHeader = ({
                                                 }}
                                                 className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-green-100 transition-all font-semibold text-lg text-green-700 border-t-2 border-gray-200 mt-2"
                                             >
-                                                <PlusSquare size={28} weight="duotone" />
-                                                <span>Add New Profile</span>
+                                                <Users size={28} weight="duotone" />
+                                                <span>Manage Profiles</span>
                                             </button>
                                         ) : (
                                             <button 
@@ -269,7 +269,7 @@ const QuizHeader = ({
 										: 'bg-white/20 text-white hover:bg-white/30'
 								}`}
 							>
-								<Article size={28} weight="duotone" />
+								<BookOpenText size={28} weight="duotone" />
 								<span>Verbes</span>
 							</button>
 							<button 
@@ -280,7 +280,7 @@ const QuizHeader = ({
 										: 'bg-white/20 text-white hover:bg-white/30'
 								}`}
 							>
-								<Article size={28} weight="duotone" />
+								<Books size={28} weight="duotone" />
 								<span>Expressions</span>
 							</button>
 

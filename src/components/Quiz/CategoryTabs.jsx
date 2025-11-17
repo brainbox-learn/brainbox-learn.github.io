@@ -88,13 +88,23 @@ const CategoryTabs = ({
     const handleFilterClick = (levelId, e) => {
         e.stopPropagation();
         if (selectedLevel !== levelId) return;
+		const html = document.documentElement;
+		html.style.overflow = 'hidden';
         setShowCategoryModal(true);
     };
 
     const handleCategoryClick = (categoryId) => {
         onSelectCategory(categoryId);
         setShowCategoryModal(false);
+		const html = document.documentElement;
+		html.style.overflow = 'auto';
     };
+
+	const handleCloseModal = () => {
+		const html = document.documentElement;
+		html.style.overflow = 'auto';
+		setShowCategoryModal(false);
+	};
 
     const handleClearFilter = (e) => {
         e.stopPropagation();
@@ -191,23 +201,23 @@ const CategoryTabs = ({
                                         </div>
                                         <div className="flex flex-col items-start">
                                             <span className="text-xl">{level.displayName}</span>
-                                            <span className="text-xs text-gray-500 hidden sm:block">{level.displayNameEnglish}</span>
+                                            <span className={`text-xs  ${selectedLevel === level.id ? 'text-white' : 'text-gray-500'} sm:block`}>{level.displayNameEnglish}</span>
                                         </div>
                                     </div>
                                     
                                     <div className="flex items-center gap-2">
-                                        {isSelected && (
+                                        {/* {isSelected && (
                                             <div className="w-3 h-3 bg-white rounded-full shadow-lg animate-pulse"></div>
-                                        )}
+                                        )} */}
                                         <div
                                             onClick={(e) => handleFilterClick(level.id, e)}
                                             className={`p-1 rounded transition-colors ${
                                                 selectedLevel === level.id 
                                                     ? 'hover:bg-white/20 cursor-pointer' 
-                                                    : 'opacity-50 cursor-not-allowed'
+                                                    : 'hidden'
                                             }`}
                                         >
-                                            <Funnel size={20} weight="bold" />
+                                            <Funnel size={20} weight="bold"  />
                                         </div>
                                     </div>
                                 </div>
@@ -270,7 +280,7 @@ const CategoryTabs = ({
                     <div className="relative w-full max-w-md bg-gradient-to-r from-grade1-500 via-grade2-500 to-grade3-500 rounded-3xl shadow-2xl backdrop-blur-sm animate-in fade-in zoom-in-95 duration-200">
                         {/* Close button */}
                         <button
-                            onClick={() => setShowCategoryModal(false)}
+                            onClick={handleCloseModal}
                             className="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/30 text-white transition-all"
                         >
                             <X size={24} weight="bold" />

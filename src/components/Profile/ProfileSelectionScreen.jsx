@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { Trash, ArrowsClockwise } from '@phosphor-icons/react';
+import { Trash, ArrowsClockwise, PencilSimple, DownloadSimple, Brain } from '@phosphor-icons/react';
 import { calculateOverallProgress } from '../../utils/statsCalculator';
 import TransferModal from '../Transfer/TransferModal';
-
-// Icons
-import { DownloadSimple } from '@phosphor-icons/react';
+import ProfileNameModal from './ProfileNameModal';
 
 const ProfileSelectionScreen = ({ 
     profiles, 
     onSelectProfile, 
-    onCreateProfile, 
+    onCreateProfile,
+    onUpdateProfileName,
     onDeleteProfile,
     onImportProfile,
     wordsByCategory
@@ -17,24 +16,48 @@ const ProfileSelectionScreen = ({
     const [showTransferModal, setShowTransferModal] = useState(false);
     const [selectedProfileForTransfer, setSelectedProfileForTransfer] = useState(null);
     
+    const [showNameModal, setShowNameModal] = useState(false);
+    const [nameModalMode, setNameModalMode] = useState('create'); // 'create' or 'edit'
+    const [editingProfile, setEditingProfile] = useState(null);
+    
     const profileCount = Object.keys(profiles).length;
     const canCreateProfile = profileCount < 3;
 
-    const handleCreateProfile = () => {
-        const name = prompt("Enter profile name:");
-        if (name && name.trim()) {
-            onCreateProfile(name.trim());
+    const handleOpenCreateModal = () => {
+        setNameModalMode('create');
+        setEditingProfile(null);
+        setShowNameModal(true);
+    };
+
+    const handleOpenEditModal = (profile, e) => {
+        e.stopPropagation();
+        setNameModalMode('edit');
+        setEditingProfile(profile);
+        setShowNameModal(true);
+    };
+
+    const handleCloseNameModal = () => {
+        setShowNameModal(false);
+        setEditingProfile(null);
+    };
+
+    const handleSubmitName = (name) => {
+        if (nameModalMode === 'create') {
+            onCreateProfile(name);
+        } else if (nameModalMode === 'edit' && editingProfile) {
+            onUpdateProfileName(editingProfile.id, name);
         }
+        handleCloseNameModal();
     };
 
     const handleOpenTransferForProfile = (profile, e) => {
-        e.stopPropagation(); // Prevent profile selection
+        e.stopPropagation();
         setSelectedProfileForTransfer(profile);
         setShowTransferModal(true);
     };
 
     const handleOpenImportOnly = () => {
-        setSelectedProfileForTransfer(null); // No profile = import-only mode
+        setSelectedProfileForTransfer(null);
         setShowTransferModal(true);
     };
 
@@ -47,7 +70,6 @@ const ProfileSelectionScreen = ({
         const profileCount = Object.keys(profiles).length;
         const isExistingProfile = profiles[importedProfile.id] !== undefined;
         
-        // Check if we're at the limit AND importing a NEW profile (not a merge)
         if (profileCount >= 3 && !isExistingProfile) {
             alert(
                 '❌ Profile Limit Reached\n\n' +
@@ -59,13 +81,10 @@ const ProfileSelectionScreen = ({
             return;
         }
         
-        // Either we're under the limit, OR we're merging an existing profile
         onImportProfile(importedProfile);
         handleCloseTransfer();
         
-        // Show success message
         if (isExistingProfile) {
-            // Optional: Show merge success message
             setTimeout(() => {
                 alert(`✅ Profile "${importedProfile.name}" has been updated with the latest progress!`);
             }, 100);
@@ -75,7 +94,7 @@ const ProfileSelectionScreen = ({
     return (
         <div className="min-h-screen bg-gradient-to-b from-amber-50 to-green-100 p-8 flex items-center justify-center">
             <div className="max-w-2xl w-full">
-                <h1 className="text-5xl font-bold text-green-800 text-center mb-12">🦊 Choose Your Profile</h1>
+                <h1 className="text-5xl font-bold text-green-800 text-center mb-12"><Brain size={56} weight="duotone" /> Choose Your Profile</h1>
                 <div className="grid gap-6">
                     {Object.values(profiles).map(profile => {
                         const stats = profile.stats || {};
@@ -105,6 +124,13 @@ const ProfileSelectionScreen = ({
                                     
                                     <div className="flex gap-2">
                                         <button 
+                                            onClick={(e) => handleOpenEditModal(profile, e)} 
+                                            className="p-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transition-all"
+                                            title="Edit Name"
+                                        >
+                                            <PencilSimple size={24} weight="bold" />
+                                        </button>
+                                        <button 
                                             onClick={(e) => handleOpenTransferForProfile(profile, e)} 
                                             className="p-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-all"
                                             title="Transfer Profile"
@@ -126,7 +152,7 @@ const ProfileSelectionScreen = ({
                     
                     {canCreateProfile && (
                         <button 
-                            onClick={handleCreateProfile} 
+                            onClick={handleOpenCreateModal} 
                             className="bg-green-100 border-4 border-dashed border-green-400 rounded-3xl p-8 hover:bg-green-200 transition-all text-center"
                         >
                             <div className="text-6xl mb-4">➕</div>
@@ -137,13 +163,13 @@ const ProfileSelectionScreen = ({
                         </button>
                     )}
 
-                    {/* Import Profile Button - Always visible */}
                     <button 
                         onClick={handleOpenImportOnly} 
                         className="bg-blue-100 border-4 border-blue-400 rounded-3xl p-8 hover:bg-blue-200 transition-all text-center"
                     >
-						{/* margin center */}
-                        <div className="text-6xl mb-4 flex justify-center items-center"><DownloadSimple size={56} weight="duotone" /></div>
+                        <div className="text-6xl mb-4 flex justify-center items-center">
+                            <DownloadSimple size={56} weight="duotone" />
+                        </div>
                         <div className="text-2xl font-bold text-blue-800">Import Profile from Code</div>
                         <div className="text-sm text-blue-600 mt-2">
                             {profileCount >= 3 
@@ -160,6 +186,14 @@ const ProfileSelectionScreen = ({
                 onClose={handleCloseTransfer}
                 profile={selectedProfileForTransfer}
                 onProfileImported={handleProfileImported}
+            />
+
+            <ProfileNameModal
+                isOpen={showNameModal}
+                onClose={handleCloseNameModal}
+                onSubmit={handleSubmitName}
+                initialName={editingProfile?.name || ''}
+                mode={nameModalMode}
             />
         </div>
     );
