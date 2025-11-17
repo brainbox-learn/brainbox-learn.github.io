@@ -8,7 +8,7 @@
 		"id": "vocabulaire",
 		"name": "Vocabulaire",
 		"nameEnglish": "Vocabulary",
-		"icon": "BookOpen",
+		"icon": "Book",
 		"color": "#3B82F6",
 		"gradient": "from-blue-500 to-blue-600",
 		"description": "Apprenez des mots français par thème",
@@ -97,7 +97,7 @@
 			"id": "verbes",
 			"name": "Les Verbes",
 			"nameEnglish": "Verbs",
-			"icon": "TreePalm",
+			"icon": "BookOpen",
 			"description": "Conjugaisons et verbes essentiels",
 			"descriptionEnglish": "Conjugations and essential verbs",
 			"levels": [
@@ -111,7 +111,8 @@
 				"displayNameEnglish": "Level 1 - Essential Verbs",
 				"stars": 1,
 				"dataFile": "grammaire/verbes-niveau1.json",
-				"estimatedVerbs": 10
+				"estimatedVerbs": 10,
+				"icon": "Leaf"
 			  },
 			  {
 				"id": "niveau2",
@@ -123,7 +124,8 @@
 				"displayNameEnglish": "Level 2 - Regular Verbs",
 				"stars": 2,
 				"dataFile": "grammaire/verbes-niveau2.json",
-				"estimatedVerbs": 30
+				"estimatedVerbs": 30,
+				"icon": "TreePalm"
 			  },
 			  {
 				"id": "niveau3",
@@ -135,15 +137,17 @@
 				"displayNameEnglish": "Level 3 - Advanced Verbs",
 				"stars": 3,
 				"dataFile": "grammaire/verbes-niveau3.json",
-				"estimatedVerbs": 50
+				"estimatedVerbs": 50,
+				"icon": "Tree"
 			  }
-			]
+			],
+			"active": true
 		  },
 		  {
 			"id": "expressions",
 			"name": "Les Expressions",
 			"nameEnglish": "Expressions",
-			"icon": "ChatCircle",
+			"icon": "BookOpenText",
 			"description": "Expressions idiomatiques françaises",
 			"descriptionEnglish": "French idiomatic expressions",
 			"levels": [
@@ -157,7 +161,8 @@
 				"displayNameEnglish": "Level 1 - Basic Expressions",
 				"stars": 1,
 				"dataFile": "grammaire/expressions-niveau1.json",
-				"estimatedExpressions": 20
+				"estimatedExpressions": 20,
+				"icon": "Leaf"
 			  },
 			  {
 				"id": "niveau2",
@@ -169,9 +174,11 @@
 				"displayNameEnglish": "Level 2 - Common Expressions",
 				"stars": 2,
 				"dataFile": "grammaire/expressions-niveau2.json",
-				"estimatedExpressions": 40
+				"estimatedExpressions": 40,
+				"icon": "TreePalm"
 			  }
-			]
+			],
+			"active": true
 		  },
 		  {
 			"id": "devoirs",
@@ -183,7 +190,8 @@
 			"dataFile": "grammaire/homework-sets.json",
 			"curriculum": "BC Grade 3 Core French",
 			"optional": true,
-			"visibilityToggle": true
+			"visibilityToggle": false,
+			"active": false
 		  }
 		],
 		"supportedModes": [

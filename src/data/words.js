@@ -38,7 +38,6 @@ const loadLevelBasedDomain = async (domain) => {
                 words: data.categories.flatMap(cat => cat.words || []),
                 config: level
             };
-            console.log(`  ✅ ${level.displayName}: ${levelData[level.id].words.length} words, ${data.categories.length} categories`);
         } catch (error) {
             console.error(`  ❌ Error loading ${level.id}:`, error);
         }

@@ -216,10 +216,9 @@ const ProgressReport = ({
                 {/* Level Accordions */}
                 {currentData && Object.entries(currentData).map(([levelId, levelData]) => {
                     const items = levelData.words || levelData.items || [];
-					console.log('levelData', levelData.config.icon)
                     const levelStats = getLevelStats(items);
                     const levelPracticeItems = getLevelPracticeItems(items);
-                    const LevelIcon = LEVEL_ICON_MAP[levelData.config.icon] || Leaf;
+                    const LevelIcon = LEVEL_ICON_MAP[levelData.config.icon] || PottedPlant;
                     const isLevelExpanded = expandedLevels.includes(levelId);
                     
                     return (
