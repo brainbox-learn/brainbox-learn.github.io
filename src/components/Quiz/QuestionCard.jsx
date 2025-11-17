@@ -1,6 +1,7 @@
 import React from 'react';
 import { RotateCcw } from '../UI/Icons';
 import SpeakerIcon from '../UI/SpeakerIcon';
+import { Sparkle, SmileySad } from '@phosphor-icons/react';
 
 const QuestionCard = ({ 
     questionText,
@@ -35,7 +36,7 @@ const QuestionCard = ({
                 )}
             </div>
 
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {choices.map((choice, index) => {
                     const isSelected = selectedAnswer === choice;
                     const isCorrect = choice === correctAnswer;
@@ -53,9 +54,9 @@ const QuestionCard = ({
                                 ${!showResult ? 'bg-white border-grade1-200 hover:bg-grade1-50 hover:border-grade1-400 text-grade1-800' : ''}
                                 ${showResult && !isSelected && !isCorrect ? 'bg-gray-100 border-gray-300 text-gray-400 opacity-50' : ''}`}
                         >
-                            {showCorrect && <span className="mr-2">🌟</span>}
+                            {showCorrect && <span className="mr-2"><Sparkle size={36} color="#fff705" weight="fill" className="animate-pulse inline" /></span>}
                             {choice}
-                            {showWrong && <span className="ml-2">❌</span>}
+                            {showWrong && <span className="ml-2"><SmileySad size={36} color="#ffffff" weight="fill" className="inline" /></span>}
                         </button>
                     );
                 })}

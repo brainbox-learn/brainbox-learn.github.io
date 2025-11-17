@@ -24,8 +24,13 @@ import {
     Lightning,
     Leaf,
     TreePalm,
-    Tree
+    Tree,
+	Plant,
+	PottedPlant,
+	FlowerTulip
 } from '@phosphor-icons/react';
+
+//Intersect, IntersectThree, Circle
 
 // Icon mapping for categories
 const ICON_MAP = {
@@ -45,9 +50,9 @@ const ICON_MAP = {
 };
 
 const LEVEL_ICON_MAP = {
-    'Leaf': Leaf,
-    'TreePalm': TreePalm,
-    'Tree': Tree
+    'Leaf': PottedPlant,
+    'TreePalm': Plant,
+    'Tree': FlowerTulip
 };
 
 const CategoryTabs = ({ 
@@ -164,7 +169,7 @@ const CategoryTabs = ({
 
     return (
         <>
-            <div className="mx-auto px-4 mb-6 w-full space-y-4">
+            <div className="mx-auto px-4 mb-2 w-full space-y-4">
                 {/* Clear Filter Button */}
                 {selectedCategory && (
                     <div className="animate-in slide-in-from-top-2 duration-300">

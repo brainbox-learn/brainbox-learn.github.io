@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Hamburger, ClipboardText, SpeakerHigh, SpeakerSimpleSlash, Cards, ChartBar, PlusSquare, PencilLine, PersonSimpleRun, X, Brain, BookOpen, Article, BookOpenText, Books, Users } from '@phosphor-icons/react';
+import { Hamburger, Exam, SpeakerHigh, SpeakerSimpleSlash, Cards, ChartBar, PlusSquare, PencilLine, PersonSimpleRun, X, Brain, BookOpen, Article, BookOpenText, Books, Users, Book } from '@phosphor-icons/react';
 
 const QuizHeader = ({ 
     currentProfile, 
@@ -53,7 +53,7 @@ const QuizHeader = ({
     };
 
     return (
-        <nav className="relative bg-gradient-to-r from-grade1-500 via-grade2-500 to-grade3-500 rounded-b-3xl shadow-2xl mb-8">
+        <nav className="relative bg-gradient-to-r from-grade1-500 via-grade2-500 to-grade3-500 rounded-b-3xl shadow-2xl mb-2 sm:mb-8">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="relative flex h-20 items-center justify-between">
                     
@@ -93,7 +93,7 @@ const QuizHeader = ({
                                         : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm'
                                 }`}
                             >
-                                <ClipboardText size={24} weight="duotone" />
+                                <Exam size={24} weight="duotone" />
                                 <span>Quiz</span>
                             </button>
                             
@@ -232,7 +232,7 @@ const QuizHeader = ({
                                     : 'bg-white/20 text-white hover:bg-white/30'
                             }`}
                         >
-                            <ClipboardText size={24} weight="duotone" />
+                            <Exam size={24} weight="duotone" />
                             <span>Quiz Mode</span>
                         </button>
                         
@@ -258,7 +258,7 @@ const QuizHeader = ({
 										: 'bg-white/20 text-white hover:bg-white/30'
 								}`}
 							>
-								<BookOpen size={28} weight="duotone" />
+								<Book size={28} weight="duotone" />
 								<span>Vocabulaire</span>
 							</button>
 							<button 
@@ -269,7 +269,7 @@ const QuizHeader = ({
 										: 'bg-white/20 text-white hover:bg-white/30'
 								}`}
 							>
-								<BookOpenText size={28} weight="duotone" />
+								<BookOpen size={28} weight="duotone" />
 								<span>Verbes</span>
 							</button>
 							<button 
@@ -280,7 +280,7 @@ const QuizHeader = ({
 										: 'bg-white/20 text-white hover:bg-white/30'
 								}`}
 							>
-								<Books size={28} weight="duotone" />
+								<BookOpenText size={28} weight="duotone" />
 								<span>Expressions</span>
 							</button>
 
