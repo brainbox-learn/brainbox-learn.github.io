@@ -16,7 +16,7 @@
 		"id": "verbes-essentiels",
 		"name": "Verbes Essentiels",
 		"nameEnglish": "Essential Verbs",
-		"icon": "Lightning",
+		"icon": "BookOpen",
 		"contentType": "verb",
 		"unlocked": true,
 		"unlockRequirement": null,

@@ -24,7 +24,11 @@ import {
     Leaf,
     TreePalm,
     Lightning,
-    ChatCircle
+    ChatCircle,
+	BookOpenText,
+	PottedPlant,
+	Plant,
+	FlowerTulip,
 } from '@phosphor-icons/react';
 
 const ICON_MAP = {
@@ -45,10 +49,11 @@ const ICON_MAP = {
 };
 
 const LEVEL_ICON_MAP = {
-    Leaf,
-    TreePalm,
-    Tree
+    'Leaf': PottedPlant,
+    'TreePalm': Plant,
+    'Tree': FlowerTulip
 };
+
 
 const THEME_STYLES = {
     vocabulaire: {
@@ -165,7 +170,7 @@ const ProgressReport = ({
                         }`}
                     >
                         <h2 className="text-2xl font-bold flex items-center gap-3">
-                            <BookOpen size={28} weight="duotone" />
+                            <Book size={28} weight="duotone" />
                             <span className="block text-sm sm:text-xl">Vocabulaire</span>
                         </h2>
                         {/* <p className={`text-sm font-semibold block ${selectedTab === 'vocabulaire' ? 'text-white/80' : 'text-gray-600'}`}>
@@ -182,7 +187,7 @@ const ProgressReport = ({
                         }`}
                     >
                         <h2 className="text-2xl font-bold flex items-center gap-3">
-                            <Lightning size={28} weight="duotone" />
+                            <BookOpen size={28} weight="duotone" />
                             <span className="block text-sm sm:text-xl">Verbes</span>
                         </h2>
 							{/* <p className={`text-sm font-semibold block ${selectedTab === 'verbes' ? 'text-white/80' : 'text-gray-600'}`}>
@@ -199,7 +204,7 @@ const ProgressReport = ({
                         }`}
                     >
                         <h2 className="text-2xl font-bold flex items-center gap-3">
-                            <ChatCircle size={28} weight="duotone" />
+                            <BookOpenText size={28} weight="duotone" />
                             <span className="block text-sm sm:text-xl">Expressions</span>
                         </h2>
                         {/* <p className={`text-sm font-semibold block ${selectedTab === 'expressions' ? 'text-white/80' : 'text-gray-600'}`}>
@@ -211,6 +216,7 @@ const ProgressReport = ({
                 {/* Level Accordions */}
                 {currentData && Object.entries(currentData).map(([levelId, levelData]) => {
                     const items = levelData.words || levelData.items || [];
+					console.log('levelData', levelData.config.icon)
                     const levelStats = getLevelStats(items);
                     const levelPracticeItems = getLevelPracticeItems(items);
                     const LevelIcon = LEVEL_ICON_MAP[levelData.config.icon] || Leaf;

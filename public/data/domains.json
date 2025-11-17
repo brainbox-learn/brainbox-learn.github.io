@@ -84,7 +84,7 @@
 		"id": "grammaire",
 		"name": "Grammaire",
 		"nameEnglish": "Grammar",
-		"icon": "Article",
+		"icon": "Leaf",
 		"color": "#8B5CF6",
 		"gradient": "from-purple-500 to-purple-600",
 		"description": "Maîtrisez les verbes et les expressions",
@@ -97,7 +97,7 @@
 			"id": "verbes",
 			"name": "Les Verbes",
 			"nameEnglish": "Verbs",
-			"icon": "Lightning",
+			"icon": "TreePalm",
 			"description": "Conjugaisons et verbes essentiels",
 			"descriptionEnglish": "Conjugations and essential verbs",
 			"levels": [
