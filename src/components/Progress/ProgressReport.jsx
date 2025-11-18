@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { DOMAINS_CONFIG, CONTENT_BY_DOMAIN } from '../../data/words';
 import { calculatePercentComplete, getProgressDataForCategory } from '../../utils/statsCalculator';
+import { StreakDisplay } from '../UI/StreakDisplay';
+import { TodayStats } from './DailyStats';
+import { WeeklyStats } from './WeeklyStats';
 import { 
     ChartBar, 
     CaretCircleLeft, 
@@ -158,6 +161,11 @@ const ProgressReport = ({
                         <span>Back to Quiz</span>
                     </button>
                 </div>
+
+				<StreakDisplay />
+
+                <TodayStats />
+                <WeeklyStats />
 
                 {/* Tab Navigation */}
                 <header className="mb-6 flex flex-row justify-between items-center gap-4">

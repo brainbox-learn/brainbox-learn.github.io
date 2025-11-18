@@ -16,7 +16,6 @@ export const loadDomains = async () => {
         const response = await fetch(`${basePath}data/domains.json`, { cache: 'force-cache' });
         if (!response.ok) return null;
         const resp = await response.json();
-		console.log('resp', resp)
 		return resp;
     } catch (error) {
         console.error('Error loading domains:', error);
@@ -25,7 +24,6 @@ export const loadDomains = async () => {
 };
 
 const loadLevelBasedDomain = async (domain) => {
-    console.log(`📚 Loading ${domain.name}...`);
     const levelData = {};
     for (const level of domain.levels) {
         try {
@@ -46,11 +44,9 @@ const loadLevelBasedDomain = async (domain) => {
 };
 
 const loadTopicBasedDomain = async (domain) => {
-    console.log(`📖 Loading ${domain.name}...`);
     const sectionData = {};
     for (const section of domain.sections) {
         if (section.levels) {
-            console.log(`  ├─ ${section.name}`);
             sectionData[section.id] = {};
             for (const level of section.levels) {
                 try {
@@ -63,7 +59,6 @@ const loadTopicBasedDomain = async (domain) => {
                         items: data.categories.flatMap(cat => cat.items || []),
                         config: level
                     };
-                    console.log(`  │  ✅ ${level.displayName}: ${sectionData[section.id][level.id].items.length} items`);
                 } catch (error) {
                     console.error(`  │  ❌ Error loading ${section.id}/${level.id}:`, error);
                 }
@@ -74,7 +69,6 @@ const loadTopicBasedDomain = async (domain) => {
 };
 
 const buildLegacyCompatibility = (contentByDomain) => {
-    console.log('🔄 Building legacy compatibility...');
     const vocab = contentByDomain.vocabulaire || {};
     WORDS_BY_CATEGORY = {
         grade1: vocab.niveau1?.words || [],
@@ -92,10 +86,6 @@ const buildLegacyCompatibility = (contentByDomain) => {
 		grade2: { label: vocab.niveau2?.level?.difficulty, englishLabel: vocab.niveau2?.level?.difficultyEnglish, icon: TreePalm },
 		grade3: { label: vocab.niveau3?.level?.difficulty, englishLabel: vocab.niveau3?.level?.difficultyEnglish, icon: Tree },
 	};
-
-    console.log(`  ✅ grade1: ${WORDS_BY_CATEGORY.grade1.length} words`);
-    console.log(`  ✅ grade2: ${WORDS_BY_CATEGORY.grade2.length} words`);
-    console.log(`  ✅ grade3: ${WORDS_BY_CATEGORY.grade3.length} words`);
 };
 
 export const loadAllContent = async () => {

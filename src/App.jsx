@@ -12,15 +12,14 @@ import PracticeModeBanner from './components/Quiz/PracticeModeBanner';
 import CategoryTabs from './components/Quiz/CategoryTabs';
 import QuestionCard from './components/Quiz/QuestionCard';
 import FlashCard from './components/Quiz/FlashCard';
-import AnimalFooter from './components/UI/AnimalFooter';
 import CongratsModal from './components/Quiz/CongratsModal';
-import DomainSelection from './components/Navigation/DomainSelection';
-import SectionSelection from './components/Navigation/SectionSelection';
-import LevelSelection from './components/Navigation/LevelSelection';
 
 // Hooks
 import { useProfiles } from './hooks/useProfiles';
 import { useQuizState } from './hooks/useQuizState';
+
+// utils
+import { safeMigration } from './utils/profileMigration';
 
 const FrenchQuiz = () => {
 	const [wordsLoaded, setWordsLoaded] = useState(false);
@@ -45,6 +44,12 @@ const FrenchQuiz = () => {
 	const [soundEnabled, setSoundEnabled] = useState(true);
 	const [currentMode, setCurrentMode] = useState('quiz'); // 'quiz' or 'flashcard'
 	
+	useEffect(() => {
+		const result = safeMigration();
+		if (!result.success) {
+		  console.error('Migration failed, but data restored');
+		}
+	  }, []);
 	
 	// Load all content on mount
 	useEffect(() => {
@@ -53,16 +58,12 @@ const FrenchQuiz = () => {
 			
 			if (result.domains) {
 				// New domain-based structure loaded
-				console.log('✅ Domain-based structure loaded');
 				setDomains(result.domains);
 				setContentData(result.content);
 				
 				// Auto-select vocabulaire > niveau1 as default
 				setSelectedDomain('vocabulaire');
 				setSelectedLevel('niveau1');
-			} else {
-				// Legacy structure loaded
-				console.log('✅ Legacy structure loaded');
 			}
 			
 			setWordsLoaded(true);
@@ -145,6 +146,7 @@ const getCurrentWords = () => {
 		switchProfile,
 		setCurrentProfileId,
 		importProfile,
+		recordAttempt,
 	} = useProfiles();
 
 	const handleAnswer = (answer) => {
@@ -152,12 +154,19 @@ const getCurrentWords = () => {
 		selectAnswer(answer);
 		
 		const wordId = currentQuestion.id;
-		const currentStats = getCurrentStats();
 		const category = practiceMode ? practiceMode.category : selectedGrade;
-		const newStats = updateWordStatsUtil(currentStats, wordId, isCorrect, category);
-		updateCurrentStats(newStats);
+		
+		// NEW: Use recordAttempt instead of updateCurrentStats
+		recordAttempt(
+		  wordId,
+		  isCorrect,
+		  'multipleChoice',  // or 'flashcard' depending on mode
+		  category,
+		  null  // sessionId - can add later
+		);
+		
 		playSound(isCorrect ? 'correct' : 'wrong', soundEnabled);
-	};
+	  };
 
 	const handleGradeChange = (grade) => {
 		if (grade === selectedGrade) {
@@ -198,7 +207,6 @@ const getCurrentWords = () => {
 			return;
 		}
 
-		console.log('🎯 Domain selected:', domainId);
 		setSelectedDomain(domainId);
 		setSelectedSection(null);
 		setSelectedCategory(null); // No filter
@@ -212,7 +220,6 @@ const getCurrentWords = () => {
 	};
 
 	const handleSectionSelection = (sectionId) => {
-		console.log('📑 Section selected:', sectionId);
 		setSelectedDomain('grammaire');
 		setSelectedSection(sectionId);
 		setSelectedCategory(null); // No filter
@@ -224,7 +231,6 @@ const getCurrentWords = () => {
 	};
 
 	const handleLevelSelection = (levelId) => {
-		console.log('📊 Level selected:', levelId);
 		setSelectedLevel(levelId);
 		setSelectedCategory(null); // Clear filter
 		// setSessionComplete(false);
@@ -238,27 +244,6 @@ const getCurrentWords = () => {
 			setSelectedGrade(levelToGradeMap[levelId]);
 			// resetAndRestart(levelToGradeMap[levelId]); // Start quiz with ALL words from this level
 		}
-	};
-
-	const handleBackToDomains = () => {
-		console.log('⬅️ Back to domains');
-		setSelectedDomain(null);
-		setSelectedSection(null);
-		setSelectedLevel(null);
-		setSelectedCategory(null);
-	};
-
-	const handleBackToSections = () => {
-		console.log('⬅️ Back to sections');
-		setSelectedSection(null);
-		setSelectedLevel(null);
-		setSelectedCategory(null);
-	};
-
-	const handleBackToLevels = () => {
-		console.log('⬅️ Back to levels');
-		setSelectedLevel(null);
-		setSelectedCategory(null);
 	};
     
 	const handleModeChange = (mode) => {
@@ -357,7 +342,6 @@ useEffect(() => {
 
 	// Profile selection screen
 	if (!currentProfileId) {
-		console.log('👤 Showing profile selection screen');
 		return (
 			<ProfileSelectionScreen
 				profiles={profiles}

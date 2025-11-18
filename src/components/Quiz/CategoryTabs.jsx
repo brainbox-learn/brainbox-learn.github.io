@@ -191,7 +191,6 @@ const CategoryTabs = ({
 						<h1 className="text-2xl font-bold capitalize text-grade1-600 px-4">{selectedDomain}</h1>
 						</header>
                     {levels.map(level => {
-						console.log('level', level)
                         const LevelIcon = LEVEL_ICON_MAP[level.icon] || LEVEL_ICON_MAP['Leaf'];
                         const isSelected = selectedLevel === level.id;
                         
@@ -240,7 +239,6 @@ const CategoryTabs = ({
                     <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
                         <div className="flex gap-3 min-w-min">
                             {levels.map(level => {
-								console.log('level', level.icon)
                                 const LevelIcon = LEVEL_ICON_MAP[level.icon] || LEVEL_ICON_MAP['Leaf'];
                                 const isSelected = selectedLevel === level.id;
                                 
