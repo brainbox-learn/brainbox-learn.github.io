@@ -3,6 +3,7 @@ import { Trash, ArrowsClockwise, PencilSimple, DownloadSimple, Brain } from '@ph
 import { calculateOverallProgress } from '../../utils/statsCalculator';
 import TransferModal from '../Transfer/TransferModal';
 import ProfileNameModal from './ProfileNameModal';
+import { getAvatarIcon } from '../../utils/avatarIcons';
 
 const ProfileSelectionScreen = ({ 
     profiles, 
@@ -41,14 +42,14 @@ const ProfileSelectionScreen = ({
         setEditingProfile(null);
     };
 
-    const handleSubmitName = (name) => {
-        if (nameModalMode === 'create') {
-            onCreateProfile(name);
-        } else if (nameModalMode === 'edit' && editingProfile) {
-            onUpdateProfileName(editingProfile.id, name);
-        }
-        handleCloseNameModal();
-    };
+	const handleSubmitName = (name, avatar) => {
+		if (nameModalMode === 'create') {
+			onCreateProfile(name, avatar);
+		} else if (nameModalMode === 'edit' && editingProfile) {
+			onUpdateProfileName(editingProfile.id, name, avatar); // Now passes avatar correctly
+		}
+		handleCloseNameModal();
+	};
 
     const handleOpenTransferForProfile = (profile, e) => {
         e.stopPropagation();
@@ -106,21 +107,32 @@ const ProfileSelectionScreen = ({
                                 className="bg-white rounded-3xl shadow-xl p-6 border-4 border-green-200 hover:scale-105 transition-transform"
                             >
                                 <div className="flex justify-between items-center gap-4">
-                                    <button 
-                                        onClick={() => onSelectProfile(profile.id)} 
-                                        className="flex-1 text-left"
-                                    >
-                                        <h2 className="text-3xl font-bold text-green-800 mb-2">{profile.name}</h2>
-                                        <div className="flex items-center gap-4">
-                                            <div className="flex-1 bg-gray-200 rounded-full h-4">
-                                                <div 
-                                                    className="bg-green-500 h-4 rounded-full transition-all" 
-                                                    style={{ width: `${progressPercent}%` }} 
-                                                />
-                                            </div>
-                                            <span className="text-lg font-semibold text-green-700">{progressPercent}%</span>
-                                        </div>
-                                    </button>
+								<button 
+									onClick={() => onSelectProfile(profile.id)} 
+									className="flex-1 text-left"
+								>
+									<div className="flex items-center gap-4 mb-2">
+										{/* Avatar icon */}
+										<div className="p-3 bg-green-100 rounded-2xl">
+											{(() => {
+												const AvatarIcon = getAvatarIcon(profile.avatar);
+												return <AvatarIcon size={32} weight="duotone" className="text-green-700" />;
+											})()}
+										</div>
+										{/* Profile name */}
+										<h2 className="text-3xl font-bold text-green-800">{profile.name}</h2>
+									</div>
+									{/* Progress bar */}
+									<div className="flex items-center gap-4">
+										<div className="flex-1 bg-gray-200 rounded-full h-4">
+											<div 
+												className="bg-green-500 h-4 rounded-full transition-all" 
+												style={{ width: `${progressPercent}%` }} 
+											/>
+										</div>
+										<span className="text-lg font-semibold text-green-700">{progressPercent}%</span>
+									</div>
+								</button>
                                     
                                     <div className="flex gap-2">
                                         <button 
@@ -193,6 +205,7 @@ const ProfileSelectionScreen = ({
                 onClose={handleCloseNameModal}
                 onSubmit={handleSubmitName}
                 initialName={editingProfile?.name || ''}
+				initialAvatar={editingProfile?.avatar || null}
                 mode={nameModalMode}
             />
         </div>

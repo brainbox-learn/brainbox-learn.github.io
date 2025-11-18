@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Hamburger, Exam, SpeakerHigh, SpeakerSimpleSlash, Cards, ChartBar, PlusSquare, PencilLine, PersonSimpleRun, X, Brain, BookOpen, Article, BookOpenText, Books, Users, Book, Leaf, Tree, TreePalm, ChatCircle, Waveform, Quotes } from '@phosphor-icons/react';
 import { DOMAINS_CONFIG } from '../../data/words';
+import { getAvatarIcon } from '../../utils/avatarIcons';
 
 const ICON_MAP = {
     'Book': Book,
@@ -75,6 +76,8 @@ const QuizHeader = ({
     const getIcon = (iconName) => {
         return ICON_MAP[iconName] || Book; // Fallback to Book icon
     };
+
+	const AvatarIcon = getAvatarIcon(currentProfile?.avatar);
 
     return (
         <nav className="relative bg-gradient-to-r from-grade1-500 via-grade2-500 to-grade3-500 rounded-b-3xl shadow-2xl mb-2 sm:mb-8">
@@ -162,7 +165,7 @@ const QuizHeader = ({
                                 className="flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white text-grade1-600 font-bold text-base sm:text-lg hover:scale-110 transition-all shadow-lg"
                             >
                                 <span className="sr-only">Open user menu</span>
-                                {getInitials(currentProfile?.name)}
+                                <AvatarIcon size={24} weight="duotone" className="text-green-700" />
                             </button>
 
                             {/* Profile Dropdown Menu */}

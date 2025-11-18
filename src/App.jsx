@@ -151,7 +151,8 @@ const getCurrentWords = () => {
 		setCurrentProfileId,
 		importProfile,
 		recordAttempt,
-		updateDailySessionTime
+		updateDailySessionTime,
+		updateProfileAvatar
 	} = useProfiles();
 
 	useEffect(() => {
@@ -369,7 +370,7 @@ useEffect(() => {
 				profiles={profiles}
 				onSelectProfile={switchProfile}
 				onCreateProfile={createProfile}
-				onUpdateProfileName={updateProfileName} // ADD THIS
+				onUpdateProfileName={updateProfileName}
 				onDeleteProfile={deleteProfile}
 				onImportProfile={importProfile}
 				wordsByCategory={WORDS_BY_CATEGORY}

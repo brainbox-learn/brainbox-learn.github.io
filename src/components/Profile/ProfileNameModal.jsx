@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { User, X } from '@phosphor-icons/react';
+import AvatarPicker from './AvatarPicker';
+import { getRandomAvatar } from '../../utils/avatarIcons';
 
 const ProfileNameModal = ({ 
     isOpen, 
     onClose, 
     onSubmit, 
     initialName = '',
+	initialAvatar = null,
     mode = 'create' // 'create' or 'edit'
 }) => {
     const [name, setName] = useState(initialName);
+	const [selectedAvatar, setSelectedAvatar] = useState(initialAvatar || getRandomAvatar());
 
     useEffect(() => {
         if (isOpen) {
             setName(initialName);
+			setSelectedAvatar(initialAvatar || getRandomAvatar());
         }
-    }, [isOpen, initialName]);
+    }, [isOpen, initialName, initialAvatar]);
 
     if (!isOpen) return null;
 
@@ -28,7 +33,7 @@ const ProfileNameModal = ({
         
         // Truncate to 20 chars if needed
         const finalName = trimmedName.slice(0, 20);
-        onSubmit(finalName);
+        onSubmit(finalName, selectedAvatar);
         setName('');
     };
 
@@ -88,6 +93,13 @@ const ProfileNameModal = ({
                             </span>
                         </div>
                     </div>
+
+					<div className="px-4 py-6 border-t-2 border-white/20">
+						<AvatarPicker 
+							selectedAvatar={selectedAvatar}
+							onSelectAvatar={setSelectedAvatar}
+						/>
+					</div>
 
                     {/* Buttons */}
                     <div className="flex gap-3 px-4 py-6">

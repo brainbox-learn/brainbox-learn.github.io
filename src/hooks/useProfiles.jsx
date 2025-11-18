@@ -1,9 +1,30 @@
 import { useLocalStorage } from './useLocalStorage';
+import { useState, useEffect } from 'react';
 import { getLocalDateString, getYesterdayDateString } from '../utils/dateHelpers';
+import { getRandomAvatar } from '../utils/avatarIcons';
 
 export const useProfiles = () => {
     const [profiles, setProfiles] = useLocalStorage('frenchQuizProfiles', {});
     const [currentProfileId, setCurrentProfileId] = useLocalStorage('frenchQuizCurrentProfileId', null);
+
+	useEffect(() => {
+        const profileIds = Object.keys(profiles);
+        if (profileIds.length === 0) return;
+
+        let needsUpdate = false;
+        const updatedProfiles = { ...profiles };
+
+        profileIds.forEach(id => {
+            if (!updatedProfiles[id].avatar) {
+                updatedProfiles[id].avatar = getRandomAvatar();
+                needsUpdate = true;
+            }
+        });
+
+        if (needsUpdate) {
+            setProfiles(updatedProfiles);
+        }
+    }, []);
 
     const getCurrentProfile = () => {
         if (!currentProfileId || !profiles[currentProfileId]) return null;
@@ -301,27 +322,27 @@ const recordAttempt = (wordId, isCorrect, mode, category, sessionId = null, sess
         return uniqueName;
     };
 
-    const createProfile = (name) => {
-        const uniqueName = getUniqueName(name);
-        const profileId = `profile-${Date.now()}`;
-        const newProfile = {
-            id: profileId,
-            name: uniqueName,
-            stats: {},
-            metadata: getDefaultMetadata(),
-            sessions: {},
-            createdAt: Date.now(),
-            lastModified: Date.now()
-        };
-        setProfiles(prev => ({
-            ...prev,
-            [profileId]: newProfile
-        }));
-        setCurrentProfileId(profileId);
-        return profileId;
-    };
+    // const createProfile = (name) => {
+    //     const uniqueName = getUniqueName(name);
+    //     const profileId = `profile-${Date.now()}`;
+    //     const newProfile = {
+    //         id: profileId,
+    //         name: uniqueName,
+    //         stats: {},
+    //         metadata: getDefaultMetadata(),
+    //         sessions: {},
+    //         createdAt: Date.now(),
+    //         lastModified: Date.now()
+    //     };
+    //     setProfiles(prev => ({
+    //         ...prev,
+    //         [profileId]: newProfile
+    //     }));
+    //     setCurrentProfileId(profileId);
+    //     return profileId;
+    // };
 
-    const updateProfileName = (profileId, newName) => {
+    const updateProfileName = (profileId, newName, avatar = null) => {
         if (!profiles[profileId]) return false;
         
         const uniqueName = getUniqueName(newName, profileId);
@@ -331,6 +352,7 @@ const recordAttempt = (wordId, isCorrect, mode, category, sessionId = null, sess
             [profileId]: {
                 ...prev[profileId],
                 name: uniqueName,
+				avatar: avatar || profiles[profileId].avatar,
                 lastModified: Date.now()
             }
         }));
@@ -537,6 +559,38 @@ const recordAttempt = (wordId, isCorrect, mode, category, sessionId = null, sess
 		});
 	  };
 
+	  const createProfile = (name, avatar = null) => {
+		const newProfile = {
+			id: Date.now().toString(),
+			name,
+			avatar: avatar || getRandomAvatar(), // ← Add this
+			stats: {},
+			createdAt: new Date().toISOString()
+		};
+		
+		const updatedProfiles = {
+			...profiles,
+			[newProfile.id]: newProfile
+		};
+		
+		setProfiles(updatedProfiles);
+		setCurrentProfileId(newProfile.id);
+	};
+
+	const updateProfileAvatar = (profileId, avatar) => {
+		if (!profiles[profileId]) return;
+		
+		const updatedProfiles = {
+			...profiles,
+			[profileId]: {
+				...profiles[profileId],
+				avatar
+			}
+		};
+		
+		setProfiles(updatedProfiles);
+	};
+
     return {
         profiles,
         currentProfileId,
@@ -554,6 +608,7 @@ const recordAttempt = (wordId, isCorrect, mode, category, sessionId = null, sess
         setCurrentProfileId,
         importProfile,
         migrateProfile,
-		updateDailySessionTime
+		updateDailySessionTime,
+		updateProfileAvatar
     };
 };
