@@ -1,4 +1,5 @@
 import { useLocalStorage } from './useLocalStorage';
+import { getLocalDateString, getYesterdayDateString } from '../utils/dateHelpers';
 
 export const useProfiles = () => {
     const [profiles, setProfiles] = useLocalStorage('frenchQuizProfiles', {});
@@ -36,7 +37,7 @@ export const useProfiles = () => {
         if (!currentProfileId) return;
         
         const now = Date.now();
-        const today = new Date().toISOString().split('T')[0];
+		const today = getLocalDateString();
         
         setProfiles(prev => {
             const currentProfile = prev[currentProfileId];
@@ -44,7 +45,7 @@ export const useProfiles = () => {
             
             // Update streak logic
             const lastPracticeDate = currentMetadata.lastPracticeDate;
-            const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+            const yesterday = getYesterdayDateString();
             
             let newStreak = currentMetadata.currentStreak;
             
@@ -79,13 +80,14 @@ export const useProfiles = () => {
         });
     };
 
-    // NEW: Record a single attempt with full tracking
     // NEW: Record a single attempt with full tracking + daily stats
-const recordAttempt = (wordId, isCorrect, mode, category, sessionId = null) => {
+const recordAttempt = (wordId, isCorrect, mode, category, sessionId = null, sessionTime = 0) => {
     if (!currentProfileId) return;
+
+	console.log('recordAttempt', wordId, isCorrect, mode, category, sessionId);
     
     const now = Date.now();
-    const today = new Date().toISOString().split('T')[0];
+    const today = getLocalDateString();
     
     setProfiles(prev => {
         const currentProfile = prev[currentProfileId];
@@ -131,7 +133,7 @@ const recordAttempt = (wordId, isCorrect, mode, category, sessionId = null) => {
         
         // ===== UPDATE STREAK =====
         const lastPracticeDate = currentMetadata.lastPracticeDate;
-        const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+		const yesterday = getYesterdayDateString();
         
         let newStreak = currentMetadata.currentStreak;
         
@@ -171,11 +173,14 @@ const recordAttempt = (wordId, isCorrect, mode, category, sessionId = null) => {
         dailyStats[today].wordsAttempted = Array.from(wordsSet);
         
         // Calculate time spent (time since first attempt today)
-        dailyStats[today].timeSpent = now - dailyStats[today].startTime;
+        // dailyStats[today].timeSpent = now - dailyStats[today].startTime;
         
         // Clean up old daily stats (keep last 90 days)
-        const ninetyDaysAgo = new Date(Date.now() - (90 * 24 * 60 * 60 * 1000))
-            .toISOString().split('T')[0];
+		const ninetyDaysAgo = (() => {
+			const date = new Date();
+			date.setDate(date.getDate() - 90);
+			return getLocalDateString(date);
+		})();
         
         Object.keys(dailyStats).forEach(date => {
             if (date < ninetyDaysAgo) {
@@ -506,6 +511,32 @@ const recordAttempt = (wordId, isCorrect, mode, category, sessionId = null) => {
         return migratedStats;
     };
 
+	const updateDailySessionTime = (sessionDuration) => {
+		if (!currentProfileId) return;
+		
+		const today = getLocalDateString();
+		
+		setProfiles(prev => {
+		  const currentProfile = prev[currentProfileId];
+		  const dailyStats = currentProfile?.metadata?.dailyStats || {};
+		  
+		  if (dailyStats[today]) {
+			dailyStats[today].timeSpent = (dailyStats[today].timeSpent || 0) + sessionDuration;
+		  }
+		  
+		  return {
+			...prev,
+			[currentProfileId]: {
+			  ...currentProfile,
+			  metadata: {
+				...currentProfile.metadata,
+				dailyStats: dailyStats
+			  }
+			}
+		  };
+		});
+	  };
+
     return {
         profiles,
         currentProfileId,
@@ -522,6 +553,7 @@ const recordAttempt = (wordId, isCorrect, mode, category, sessionId = null) => {
         switchProfile,
         setCurrentProfileId,
         importProfile,
-        migrateProfile // NEW
+        migrateProfile,
+		updateDailySessionTime
     };
 };

@@ -1,5 +1,5 @@
 import { loadAllWords, loadAllContent, WORDS_BY_CATEGORY, DOMAINS_CONFIG, CONTENT_BY_DOMAIN, getWordsForCategory } from './data/words';
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { playSound } from './utils/sounds';
 import { checkAnswer } from './utils/questionGenerator';
 import { getProgressDataForCategory as getProgressDataForCategoryUtil, updateWordStats as updateWordStatsUtil } from './utils/statsCalculator';
@@ -22,6 +22,10 @@ import { useQuizState } from './hooks/useQuizState';
 import { safeMigration } from './utils/profileMigration';
 
 const FrenchQuiz = () => {
+
+	const sessionStartTime = useRef(Date.now());
+	const accumulatedTime = useRef(0);
+
 	const [wordsLoaded, setWordsLoaded] = useState(false);
 	
 	// NEW: Domain-based state
@@ -147,7 +151,20 @@ const getCurrentWords = () => {
 		setCurrentProfileId,
 		importProfile,
 		recordAttempt,
+		updateDailySessionTime
 	} = useProfiles();
+
+	useEffect(() => {
+		// Reset timer when component mounts
+		sessionStartTime.current = Date.now();
+		accumulatedTime.current = 0;
+		
+		// Save time when component unmounts (user leaves page)
+		return () => {
+		  const sessionDuration = Date.now() - sessionStartTime.current;
+		  updateDailySessionTime(sessionDuration);
+		};
+	  }, []);
 
 	const handleAnswer = (answer) => {
 		const isCorrect = checkAnswer(answer, correctAnswer);
@@ -155,6 +172,9 @@ const getCurrentWords = () => {
 		
 		const wordId = currentQuestion.id;
 		const category = practiceMode ? practiceMode.category : selectedGrade;
+
+	    const attemptTime = Date.now() - sessionStartTime.current;
+    	accumulatedTime.current += attemptTime;
 		
 		// NEW: Use recordAttempt instead of updateCurrentStats
 		recordAttempt(
@@ -164,6 +184,8 @@ const getCurrentWords = () => {
 		  category,
 		  null  // sessionId - can add later
 		);
+
+		sessionStartTime.current = Date.now();
 		
 		playSound(isCorrect ? 'correct' : 'wrong', soundEnabled);
 	  };

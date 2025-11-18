@@ -1,4 +1,5 @@
 import { useProfiles } from '../../hooks/useProfiles';
+import { getLocalDateString } from '../../utils/dateHelpers';
 import { ChartLine } from '@phosphor-icons/react';
 
 export function WeeklyStats() {
@@ -42,21 +43,25 @@ export function WeeklyStats() {
   };
 
   const text = getWeeklyText('fr');
+
+  const today = new Date();
+  const last7Days = [];
   
-  // Get last 7 days starting from today going back
-  const last7Days = Array.from({ length: 7 }, (_, i) => {
-    const date = new Date();
-    date.setDate(date.getDate() - (6 - i)); // Start from 6 days ago
-    return date.toISOString().split('T')[0];
-  });
+  // ✅ CHANGED: Use getLocalDateString instead of toISOString
+  for (let i = 6; i >= 0; i--) {
+    const date = new Date(today);
+    date.setDate(today.getDate() - i);
+    last7Days.push(getLocalDateString(date)); // ← HERE
+  }
   
   const weekData = last7Days.map(date => {
-    const dayEn = new Date(date).toLocaleDateString('en-US', { weekday: 'short' });
+    const dateObj = new Date(date + 'T12:00:00');
+    const dayEn = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
     
     return {
       date,
       dayEn: dayEn,
-      dayFr: text.daysShort[dayEn], // French day name
+      dayFr: text.daysShort[dayEn],
       attempts: dailyStats[date]?.attempts || 0,
       accuracy: dailyStats[date]?.attempts 
         ? ((dailyStats[date].correct / dailyStats[date].attempts) * 100).toFixed(0)

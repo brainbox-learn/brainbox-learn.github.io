@@ -1,10 +1,11 @@
 import { useProfiles } from '../../hooks/useProfiles';
+import { getLocalDateString } from '../../utils/dateHelpers';
 import { CalendarDot } from '@phosphor-icons/react';
 
 export function TodayStats() {
   const { getMetadata } = useProfiles();
   const metadata = getMetadata();
-  const today = new Date().toISOString().split('T')[0];
+  const today = getLocalDateString();
   const todayStats = metadata.dailyStats?.[today];
   
   if (!todayStats) {
