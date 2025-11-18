@@ -385,6 +385,8 @@ useEffect(() => {
 				getCurrentStats={getCurrentStats}
 				onClose={() => setShowProgress(false)}
 				onStartPracticeMode={startPracticeMode}
+				profileAvatar={currentProfile?.avatar}
+				profileName={currentProfile?.name}
 				wordsByCategory={WORDS_BY_CATEGORY}
 				selectedGrade={selectedGrade} // ADD THIS LINE
 			/>

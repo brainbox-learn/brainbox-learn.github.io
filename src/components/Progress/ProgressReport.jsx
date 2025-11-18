@@ -82,7 +82,9 @@ const THEME_STYLES = {
 const ProgressReport = ({ 
     getCurrentStats, 
     onClose, 
-    onStartPracticeMode
+    onStartPracticeMode,
+    profileAvatar,
+    profileName
 }) => {
     const [selectedTab, setSelectedTab] = useState('vocabulaire');
     const [expandedLevels, setExpandedLevels] = useState([]);
@@ -151,7 +153,8 @@ const ProgressReport = ({
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
                     <h1 className="text-3xl sm:text-4xl font-bold text-grade1-700 flex items-center gap-3">
                         <ChartBar size={48} weight="duotone" className="text-grade2-600" /> 
-                        <span>Progress Report</span>
+                        <span>Progress Report <br/>
+						<span className="text-2xl text-gray-600">{profileName}</span></span>
                     </h1>
                     <button 
                         onClick={onClose} 
