@@ -38,7 +38,12 @@ const FlashCard = ({
                     {/* Front of card - Question */}
                     <div 
                         className="absolute w-full h-full bg-gradient-to-br from-white via-grade1-50 to-grade1-100 rounded-3xl shadow-2xl border-4 border-grade1-200 p-8 flex flex-col items-center justify-center backface-hidden overflow-hidden"
-                        style={{ backfaceVisibility: 'hidden' }}
+                        style={{ 
+							backfaceVisibility: 'hidden',
+							WebkitBackfaceVisibility: 'hidden', // ← Add this
+							transform: 'translateZ(0)' // ← Add this (forces GPU acceleration)
+						}}
+
                     >
                         {/* Background Icons - FRONT */}
                         {backgroundIcons.map(({ Icon, position, style, size }, index) => (

@@ -248,7 +248,7 @@ const QuizHeader = ({
 
             {/* Mobile Menu */}
             {showMobileMenu && (
-                <div className="absolute top-0 left-0 w-full border-t border-white/20 z-10 top-20 sm:w-80 bg-gradient-to-r from-grade1-500 via-grade2-500 to-grade3-500 rounded-3xl shadow-2xl backdrop-blur-sm">
+                <div className="absolute top-0 left-0 w-full border-t border-white/20 z-10 top-20 sm:w-80 bg-gradient-to-r from-grade1-500 via-grade2-500 to-grade3-500 rounded-3xl shadow-2xl backdrop-blur-sm z-20">
                     <section className="sm:hidden space-y-2 px-4 py-4">
                         <h2 className="text-white text-2xl font-bold">Modes</h2>
                         <button 

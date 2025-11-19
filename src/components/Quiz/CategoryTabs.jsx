@@ -259,9 +259,6 @@ const CategoryTabs = ({
                                             </div>
                                             
                                             <div className="flex items-center gap-1">
-                                                {isSelected && (
-                                                    <div className="w-2.5 h-2.5 bg-white rounded-full shadow-lg"></div>
-                                                )}
                                                 <div
                                                     onClick={(e) => handleFilterClick(level.id, e)}
                                                     className={`p-1 rounded transition-colors ${
