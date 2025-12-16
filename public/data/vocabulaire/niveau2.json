@@ -199,6 +199,167 @@
 		  { "id": 374, "french": "un cimetière", "english": "a graveyard" },
 		  { "id": 375, "french": "une pierre tombale", "english": "a tombstone" }
 		]
+	  },
+	  {
+		"id": "numbers-20-29",
+		"name": "Les Nombres 20-29",
+		"nameEnglish": "Numbers 20-29",
+		"icon": "Hash",
+		"unlocked": true,
+		"unlockRequirement": null,
+		"words": [
+		  { "id": 530, "french": "vingt", "english": "twenty" },
+		  { "id": 531, "french": "vingt et un", "english": "twenty-one" },
+		  { "id": 532, "french": "vingt-deux", "english": "twenty-two" },
+		  { "id": 533, "french": "vingt-trois", "english": "twenty-three" },
+		  { "id": 534, "french": "vingt-quatre", "english": "twenty-four" },
+		  { "id": 535, "french": "vingt-cinq", "english": "twenty-five" },
+		  { "id": 536, "french": "vingt-six", "english": "twenty-six" },
+		  { "id": 537, "french": "vingt-sept", "english": "twenty-seven" },
+		  { "id": 538, "french": "vingt-huit", "english": "twenty-eight" },
+		  { "id": 539, "french": "vingt-neuf", "english": "twenty-nine" }
+		]
+	  },
+	  {
+		"id": "numbers-30-39",
+		"name": "Les Nombres 30-39",
+		"nameEnglish": "Numbers 30-39",
+		"icon": "Hash",
+		"unlocked": true,
+		"unlockRequirement": null,
+		"words": [
+		  { "id": 540, "french": "trente", "english": "thirty" },
+		  { "id": 541, "french": "trente et un", "english": "thirty-one" },
+		  { "id": 542, "french": "trente-deux", "english": "thirty-two" },
+		  { "id": 543, "french": "trente-trois", "english": "thirty-three" },
+		  { "id": 544, "french": "trente-quatre", "english": "thirty-four" },
+		  { "id": 545, "french": "trente-cinq", "english": "thirty-five" },
+		  { "id": 546, "french": "trente-six", "english": "thirty-six" },
+		  { "id": 547, "french": "trente-sept", "english": "thirty-seven" },
+		  { "id": 548, "french": "trente-huit", "english": "thirty-eight" },
+		  { "id": 549, "french": "trente-neuf", "english": "thirty-nine" }
+		]
+	  },
+	  {
+		"id": "numbers-40-49",
+		"name": "Les Nombres 40-49",
+		"nameEnglish": "Numbers 40-49",
+		"icon": "Hash",
+		"unlocked": true,
+		"unlockRequirement": null,
+		"words": [
+		  { "id": 550, "french": "quarante", "english": "forty" },
+		  { "id": 551, "french": "quarante et un", "english": "forty-one" },
+		  { "id": 552, "french": "quarante-deux", "english": "forty-two" },
+		  { "id": 553, "french": "quarante-trois", "english": "forty-three" },
+		  { "id": 554, "french": "quarante-quatre", "english": "forty-four" },
+		  { "id": 555, "french": "quarante-cinq", "english": "forty-five" },
+		  { "id": 556, "french": "quarante-six", "english": "forty-six" },
+		  { "id": 557, "french": "quarante-sept", "english": "forty-seven" },
+		  { "id": 558, "french": "quarante-huit", "english": "forty-eight" },
+		  { "id": 559, "french": "quarante-neuf", "english": "forty-nine" }
+		]
+	  },
+	  {
+		"id": "numbers-50-59",
+		"name": "Les Nombres 50-59",
+		"nameEnglish": "Numbers 50-59",
+		"icon": "Hash",
+		"unlocked": true,
+		"unlockRequirement": null,
+		"words": [
+		  { "id": 560, "french": "cinquante", "english": "fifty" },
+		  { "id": 561, "french": "cinquante et un", "english": "fifty-one" },
+		  { "id": 562, "french": "cinquante-deux", "english": "fifty-two" },
+		  { "id": 563, "french": "cinquante-trois", "english": "fifty-three" },
+		  { "id": 564, "french": "cinquante-quatre", "english": "fifty-four" },
+		  { "id": 565, "french": "cinquante-cinq", "english": "fifty-five" },
+		  { "id": 566, "french": "cinquante-six", "english": "fifty-six" },
+		  { "id": 567, "french": "cinquante-sept", "english": "fifty-seven" },
+		  { "id": 568, "french": "cinquante-huit", "english": "fifty-eight" },
+		  { "id": 569, "french": "cinquante-neuf", "english": "fifty-nine" }
+		]
+	  },
+	  {
+		"id": "numbers-60-69",
+		"name": "Les Nombres 60-69",
+		"nameEnglish": "Numbers 60-69",
+		"icon": "Hash",
+		"unlocked": true,
+		"unlockRequirement": null,
+		"words": [
+		  { "id": 570, "french": "soixante", "english": "sixty" },
+		  { "id": 571, "french": "soixante et un", "english": "sixty-one" },
+		  { "id": 572, "french": "soixante-deux", "english": "sixty-two" },
+		  { "id": 573, "french": "soixante-trois", "english": "sixty-three" },
+		  { "id": 574, "french": "soixante-quatre", "english": "sixty-four" },
+		  { "id": 575, "french": "soixante-cinq", "english": "sixty-five" },
+		  { "id": 576, "french": "soixante-six", "english": "sixty-six" },
+		  { "id": 577, "french": "soixante-sept", "english": "sixty-seven" },
+		  { "id": 578, "french": "soixante-huit", "english": "sixty-eight" },
+		  { "id": 579, "french": "soixante-neuf", "english": "sixty-nine" }
+		]
+	  },
+	  {
+		"id": "numbers-70-79",
+		"name": "Les Nombres 70-79",
+		"nameEnglish": "Numbers 70-79",
+		"icon": "Hash",
+		"unlocked": true,
+		"unlockRequirement": null,
+		"words": [
+		  { "id": 580, "french": "soixante-dix", "english": "seventy" },
+		  { "id": 581, "french": "soixante et onze", "english": "seventy-one" },
+		  { "id": 582, "french": "soixante-douze", "english": "seventy-two" },
+		  { "id": 583, "french": "soixante-treize", "english": "seventy-three" },
+		  { "id": 584, "french": "soixante-quatorze", "english": "seventy-four" },
+		  { "id": 585, "french": "soixante-quinze", "english": "seventy-five" },
+		  { "id": 586, "french": "soixante-seize", "english": "seventy-six" },
+		  { "id": 587, "french": "soixante-dix-sept", "english": "seventy-seven" },
+		  { "id": 588, "french": "soixante-dix-huit", "english": "seventy-eight" },
+		  { "id": 589, "french": "soixante-dix-neuf", "english": "seventy-nine" }
+		]
+	  },
+	  {
+		"id": "numbers-80-89",
+		"name": "Les Nombres 80-89",
+		"nameEnglish": "Numbers 80-89",
+		"icon": "Hash",
+		"unlocked": true,
+		"unlockRequirement": null,
+		"words": [
+		  { "id": 590, "french": "quatre-vingts", "english": "eighty" },
+		  { "id": 591, "french": "quatre-vingt-un", "english": "eighty-one" },
+		  { "id": 592, "french": "quatre-vingt-deux", "english": "eighty-two" },
+		  { "id": 593, "french": "quatre-vingt-trois", "english": "eighty-three" },
+		  { "id": 594, "french": "quatre-vingt-quatre", "english": "eighty-four" },
+		  { "id": 595, "french": "quatre-vingt-cinq", "english": "eighty-five" },
+		  { "id": 596, "french": "quatre-vingt-six", "english": "eighty-six" },
+		  { "id": 597, "french": "quatre-vingt-sept", "english": "eighty-seven" },
+		  { "id": 598, "french": "quatre-vingt-huit", "english": "eighty-eight" },
+		  { "id": 599, "french": "quatre-vingt-neuf", "english": "eighty-nine" }
+		]
+	  },
+	  {
+		"id": "numbers-90-100",
+		"name": "Les Nombres 90-100",
+		"nameEnglish": "Numbers 90-100",
+		"icon": "Hash",
+		"unlocked": true,
+		"unlockRequirement": null,
+		"words": [
+		  { "id": 600, "french": "quatre-vingt-dix", "english": "ninety" },
+		  { "id": 601, "french": "quatre-vingt-onze", "english": "ninety-one" },
+		  { "id": 602, "french": "quatre-vingt-douze", "english": "ninety-two" },
+		  { "id": 603, "french": "quatre-vingt-treize", "english": "ninety-three" },
+		  { "id": 604, "french": "quatre-vingt-quatorze", "english": "ninety-four" },
+		  { "id": 605, "french": "quatre-vingt-quinze", "english": "ninety-five" },
+		  { "id": 606, "french": "quatre-vingt-seize", "english": "ninety-six" },
+		  { "id": 607, "french": "quatre-vingt-dix-sept", "english": "ninety-seven" },
+		  { "id": 608, "french": "quatre-vingt-dix-huit", "english": "ninety-eight" },
+		  { "id": 609, "french": "quatre-vingt-dix-neuf", "english": "ninety-nine" },
+		  { "id": 610, "french": "cent", "english": "one hundred" }
+		]
 	  }
 	]
   }
